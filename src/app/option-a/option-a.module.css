@@ -1,0 +1,60 @@
+/* Option A · Story — ported from option-a-story.dc.html <style>. Scoped to this option only. */
+.root {
+  font-family: var(--a-sans), "Plus Jakarta Sans", "Helvetica Neue", Arial, sans-serif;
+  color: #0a0a0a;
+  -webkit-font-smoothing: antialiased;
+}
+.serif {
+  font-family: var(--a-serif), "Instrument Serif", Georgia, serif;
+}
+.it {
+  font-family: var(--a-serif), "Instrument Serif", Georgia, serif;
+  font-style: italic;
+}
+.badge {
+  font-family: var(--a-badge), "Instrument Sans", sans-serif;
+}
+
+.link { transition: opacity 0.25s ease; }
+.link:hover { opacity: 0.5; }
+.pill { transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), background 0.3s ease, color 0.3s ease; }
+.pill:hover { transform: translateY(-3px) rotate(-2deg); }
+.primary:hover { background: #0a0a0a; color: #ffffff; border-color: #0a0a0a; }
+.tag { transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.tag:hover { transform: scale(1.08) rotate(0deg) !important; z-index: 2; }
+.row { transition: padding-left 0.3s ease, color 0.3s ease; }
+.row:hover { padding-left: 20px; }
+.chip { transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease; }
+.chip:hover { transform: translateY(-2px); }
+.ep { transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.ep:hover { transform: translateY(-6px) rotate(-1deg); }
+.face { transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.face:hover { transform: rotate(-6deg) scale(1.05); }
+.reelCard { transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.reelCard:hover { transform: rotate(0deg) scale(1.02); }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-8deg); }
+  50% { transform: translateY(-22px) rotate(4deg); }
+}
+.blob { animation: float 6s ease-in-out infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.spin { animation: spin 18s linear infinite; }
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee { animation: marquee 40s linear infinite; }
+@keyframes bar {
+  0% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+  100% { transform: scaleY(0.3); }
+}
+.eq span { animation: bar 1s ease-in-out infinite; transform-origin: bottom; }
+.eq span:nth-child(2) { animation-delay: 0.15s; }
+.eq span:nth-child(3) { animation-delay: 0.3s; }
+.eq span:nth-child(4) { animation-delay: 0.45s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .blob, .spin, .marquee, .eq span { animation: none; }
+}

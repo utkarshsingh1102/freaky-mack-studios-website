@@ -14,6 +14,7 @@ const flag = (name, fallback) => {
 const base = flag("--base", "http://localhost:3000");
 const out = flag("--out", "shots");
 const thumbs = args.includes("--thumbs");
+const seg = Number(flag("--seg", "0")); // >0: also save the full page in slices of this height
 const routes = args.filter((a) => !a.startsWith("--"));
 const list = routes.length ? routes : ["/", "/option-a/", "/option-b/", "/option-c/", "/option-d/"];
 
@@ -49,6 +50,12 @@ if (thumbs) {
       }));
       const name = (route.replace(/\//g, "") || "index") + `-${width}.png`;
       await page.screenshot({ path: path.join(out, name), fullPage: true });
+      if (seg > 0) {
+        for (let y = 0, n = 1; y < h; y += seg, n++) {
+          const clip = { x: 0, y, width, height: Math.min(seg, h - y) };
+          await page.screenshot({ path: path.join(out, name.replace(".png", `-${String(n).padStart(2, "0")}.png`)), fullPage: true, clip });
+        }
+      }
       const overflow = sw > width;
       if (overflow || errors.length) failed = true;
       console.log(`${name}  height=${h}  scrollWidth=${sw}${overflow ? "  <-- OVERFLOW" : ""}`);
