@@ -1,0 +1,34 @@
+/* Option D · Production squad — ported from option-d-production-squad.dc.html <style>. Scoped to this option only. */
+.root {
+  font-family: var(--d-sans), "Archivo", "Helvetica Neue", Arial, sans-serif;
+  background: #000000;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+.root a { color: inherit; }
+
+.link { transition: opacity 0.2s ease; }
+.link:hover { opacity: 0.6; }
+.img { transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.frame:hover .img { transform: scale(1.04); }
+.row { transition: background 0.2s ease; }
+.row:hover { background: #f4f4f4; }
+
+/* Highlighted title blocks */
+.hl { background: #ffffff; color: #000000; padding: 0 8px; }
+.hlInv { background: #000000; color: #ffffff; padding: 0 8px; }
+
+/* Image placeholder label */
+.ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+.dt { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: rgba(255, 255, 255, 0.6); }
+.dtK { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: rgba(0, 0, 0, 0.5); }
+
+.select option { background: #1a1a1a; color: #ffffff; }
