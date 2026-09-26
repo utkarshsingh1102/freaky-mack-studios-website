@@ -21,6 +21,17 @@ npm run lint
 
 Next.js (App Router) + Tailwind, built as a static export.
 
+## Deploy on Vercel
+
+1. On vercel.com, log in with GitHub → **Add New… → Project** → import `utkarshsingh1102/freaky-mack-studios-website`. If it isn't listed, use **Adjust GitHub App Permissions** to give Vercel access.
+2. Keep the detected defaults: Framework **Next.js**, Root `./`, Build `next build`, Output left blank. Vercel serves the static export.
+3. Optional environment variables:
+   - `NEXT_PUBLIC_FORMSPREE_ENDPOINT`: your Formspree form URL, so enquiries arrive by email.
+   - `NEXT_PUBLIC_PITCH_MODE=off`: hides the option switcher and Option A's picker once the client has chosen.
+4. Click **Deploy**. Every push to `main` redeploys automatically; pushes to other branches get their own preview links.
+
+Node 20.9 or newer is required (set in `package.json` → `engines`).
+
 ## Where things live
 
 - `src/app/option-{a,b,c,d}/`: each option is self-contained, with its own fonts (`layout.tsx`), CSS module (hover states, animations) and `_components/`. Changing one never touches another.
