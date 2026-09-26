@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Freaky Mack Studios — Cinematic (reference layout)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Plus Jakarta Sans','Helvetica Neue',Arial,sans-serif;background:#0b0b0b;color:#f2f2f0;-webkit-font-smoothing:antialiased}
+a{color:#f2f2f0;text-decoration:none}a:hover{color:#ffffff}
+button{font-family:inherit;cursor:pointer}
+.cm-link{transition:opacity .2s ease}.cm-link:hover{opacity:.6}
+.cm-split{transition:border-color .25s ease}.cm-split:hover{border-color:rgba(255,255,255,0.45)}
+.cm-split:hover .cm-arrow{background:#f2f2f0;color:#0b0b0b}
+.cm-arrow{transition:background .25s ease,color .25s ease}
+.cm-img{transition:transform .8s cubic-bezier(.2,.7,.2,1)}.cm-frame:hover .cm-img{transform:scale(1.04)}
+.cm-row{transition:background .2s ease}.cm-row:hover{background:rgba(255,255,255,0.03)}
+.cm-thumb{transition:opacity .25s ease,transform .25s ease}.cm-thumb:hover{transform:translateY(-4px)}
+.cm-bracket{transition:letter-spacing .3s ease}.cm-bracket:hover{letter-spacing:0.2em}
+.vf-tl,.vf-tr,.vf-bl,.vf-br{position:absolute;width:9px;height:9px;pointer-events:none}
+.vf-tl{left:-7px;top:-7px;border-left:1px solid rgba(255,255,255,0.55);border-top:1px solid rgba(255,255,255,0.55)}
+.vf-tr{right:-7px;top:-7px;border-right:1px solid rgba(255,255,255,0.55);border-top:1px solid rgba(255,255,255,0.55)}
+.vf-bl{left:-7px;bottom:-7px;border-left:1px solid rgba(255,255,255,0.55);border-bottom:1px solid rgba(255,255,255,0.55)}
+.vf-br{right:-7px;bottom:-7px;border-right:1px solid rgba(255,255,255,0.55);border-bottom:1px solid rgba(255,255,255,0.55)}
+.dot{position:absolute;width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.7)}
+@keyframes cm-pulse{0%,100%{opacity:.35}50%{opacity:1}}.cm-rec{animation:cm-pulse 1.6s ease-in-out infinite}
+</style>
+</helmet>
+
+<div style="width: 1440px; height: 11820px; box-sizing: border-box; display: flex; flex-direction: column; background: #0b0b0b; color: #f2f2f0; overflow: hidden">
+
+<!-- 1 · HERO (900) -->
+<section id="top" style="position: relative; height: 900px; flex-shrink: 0; overflow: hidden">
+<div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 28%, #4a4234 0%, #25211b 40%, #0b0b0b 85%)"></div>
+<div style="position: absolute; inset: 0; display: flex; align-items: flex-start; justify-content: center; padding-top: 260px; box-sizing: border-box; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.3)">[ SHOWREEL LOOP — FULL-BLEED, MUTED ]</div>
+<div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,11,11,0.35) 0%, rgba(11,11,11,0) 18%, rgba(11,11,11,0) 45%, rgba(11,11,11,0.85) 72%, #0b0b0b 100%)"></div>
+<header style="position: absolute; left: 160px; right: 160px; top: 0; height: 72px; display: flex; align-items: center; justify-content: space-between">
+<a href="#top" class="cm-link" aria-label="Freaky Mack Studios home" style="display: flex; align-items: center; gap: 10px"><img src="../assets/fm-mark-white.png" alt="" style="width: 34px; height: 23px; object-fit: contain"><span style="font-weight: 600; font-size: 14px">Freaky Mack</span></a>
+<nav aria-label="Primary" style="display: flex; align-items: center; gap: 28px; font-size: 12px; font-weight: 500">
+<a href="#work" class="cm-link">Work</a><a href="#about" class="cm-link">Studio</a><a href="#scope" class="cm-link">Services ▾</a><a href="#podcast" class="cm-link">Podcast</a><a href="#crew" class="cm-link">Crew</a>
+</nav>
+<a href="#contact" class="cm-link" style="display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 500">Start a project<span style="width: 1px; height: 18px; background: rgba(255,255,255,0.35)"></span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"></path></svg></a>
+</header>
+<div style="position: absolute; left: 160px; top: 455px; font-size: 11px; line-height: 1.6; color: rgba(255,255,255,0.75)">Film production house<br>Commercial · Narrative · Digital</div>
+<div style="position: absolute; right: 160px; top: 455px; font-size: 11px; line-height: 1.6; color: rgba(255,255,255,0.75); text-align: right">Six years of ad films<br>Now Freaky Mack Studios</div>
+<div style="position: absolute; left: 160px; right: 160px; top: 470px; display: flex; flex-direction: column; align-items: center; gap: 32px">
+<h1 style="margin: 0; font-weight: 500; font-size: 104px; line-height: 1.08; letter-spacing: -0.045em; text-transform: uppercase; text-align: center">Ideas that<br>become films</h1>
+<a href="#reel" class="cm-split" style="display: flex; align-items: stretch; height: 34px; border-radius: 4px; overflow: hidden; border: 1px solid rgba(255,255,255,0.16); background: #1a1a1a; font-size: 12px; font-weight: 500"><span style="padding: 0 14px; display: flex; align-items: center; gap: 8px"><span class="cm-rec" style="width: 6px; height: 6px; border-radius: 50%; background: #f2f2f0"></span>Watch the reel</span><span class="cm-arrow" style="width: 34px; display: flex; align-items: center; justify-content: center; border-left: 1px solid rgba(255,255,255,0.16)"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"></path></svg></span></a>
+</div>
+</section>
+
+<!-- 2 · ABOUT (900) -->
+<section id="about" style="height: 900px; box-sizing: border-box; padding: 120px 160px 120px; display: flex; flex-direction: column; gap: 96px; flex-shrink: 0">
+<div style="display: flex; flex-direction: column; gap: 20px; font-weight: 500; font-size: 88px; line-height: 1.08; letter-spacing: -0.045em; text-transform: uppercase">
+<div style="display: flex; align-items: flex-end; justify-content: center; gap: 40px"><span>About</span><span class="cm-frame" style="position: relative; width: 300px; height: 190px; display: block"><span style="position: absolute; inset: 0; overflow: hidden; display: block"><span class="cm-img" style="display: flex; width: 100%; height: 100%; background: linear-gradient(140deg,#3a352e,#141312); align-items: center; justify-content: center; font-size: 11px; letter-spacing: 0.2em; color: rgba(255,255,255,0.35); font-weight: 500">[ BTS STILL ]</span></span><span class="vf-tl"></span><span class="vf-tr"></span><span class="vf-bl"></span><span class="vf-br"></span></span><span>Our</span></div>
+<div style="display: flex; align-items: center; gap: 28px; justify-content: center"><span style="color: #6e6e6a">Filmmaking</span><span>Story</span></div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 32px; font-size: 13px; line-height: 1.85; color: #a9a9a4; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px">
+<span style="grid-column: 1 / span 3; font-size: 11px; color: #8c8c88">About us</span>
+<p style="grid-column: 6 / span 3; margin: 0">Freaky Mack Studios is a film production house built on six years of advertising filmmaking at Freaky Mack — now evolving into a larger creative studio focused on storytelling across commercial, narrative and digital formats.</p>
+<p style="grid-column: 10 / span 3; margin: 0">Over the years we have made films for McDonald’s, Google, Adidas Originals, Mercedes-Benz, Fila, PC Jewellers, Times of India and many more — bringing strong visual storytelling, production discipline and a filmmaker-led creative approach.</p>
+</div>
+</section>
+
+<!-- 3 · BAND: COMMERCIAL MEETS CINEMA (720) — viewfinder overlay -->
+<section id="reel" style="position: relative; height: 720px; flex-shrink: 0; overflow: hidden">
+<div style="position: absolute; inset: 0; background: linear-gradient(100deg, #3a342c 0%, #26221d 35%, #1a1816 60%, #121110 100%)"></div>
+<div style="position: absolute; left: 160px; top: 50%; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.3)">[ FULL-BLEED STILL — ON SET ]</div>
+<div style="position: absolute; left: 600px; right: 160px; top: 70px; bottom: 70px; border: 1px solid rgba(255,255,255,0.28)">
+<span class="dot" style="left: -2px; top: -2px"></span><span class="dot" style="right: -2px; top: -2px"></span><span class="dot" style="left: -2px; bottom: -2px"></span><span class="dot" style="right: -2px; bottom: -2px"></span>
+<span class="dot" style="left: 33%; bottom: 40px"></span><span class="dot" style="left: 66%; bottom: 40px"></span>
+<h2 style="position: absolute; left: 125px; top: 39px; margin: 0; transform: translateX(-4px); font-weight: 500; font-size: 64px; line-height: 1.08; letter-spacing: -0.045em; text-transform: uppercase; text-align: center">Commercial<br>meets cinema</h2>
+</div>
+<a href="#reel" aria-label="Play the showreel" class="cm-link" style="position: absolute; left: 200px; bottom: 110px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center"><span style="width: 30px; height: 30px; border-radius: 50%; border: 1px dashed rgba(255,255,255,0.6); display: flex; align-items: center; justify-content: center"><svg width="10" height="10" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3 1.5v9l7-4.5z"></path></svg></span></a>
+<span style="position: absolute; left: 160px; bottom: 70px; font-size: 11px; color: rgba(255,255,255,0.65)">Showreel [YEAR] · [DURATION]</span>
+</section>
+
+<!-- 4 · STATEMENT (440) -->
+<section style="height: 440px; box-sizing: border-box; padding: 64px 160px 80px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 32px; align-items: stretch; flex-shrink: 0">
+<div style="grid-column: 1 / span 4; display: flex; flex-direction: column; justify-content: space-between">
+<div style="display: flex; gap: 10px"><span style="width: 80px; height: 64px; background: #2b2824"></span><span style="width: 80px; height: 64px; background: #3a2c2f"></span><span style="width: 80px; height: 64px; background: #2a2226"></span></div>
+<span style="font-size: 11px; color: #8c8c88">Brand films · Music videos · Originals</span>
+</div>
+<div style="grid-column: 6 / span 7; display: flex; flex-direction: column; gap: 32px">
+<p style="margin: 0; font-size: 26px; line-height: 1.45; letter-spacing: -0.02em; font-weight: 500; text-wrap: pretty">We combine the precision of advertising filmmaking with the creative ambition of independent cinema — films made for brands, and films of our own.</p>
+<a href="#about" class="cm-split" style="align-self: flex-start; display: flex; align-items: stretch; height: 34px; border-radius: 4px; overflow: hidden; border: 1px solid rgba(255,255,255,0.16); background: #1a1a1a; font-size: 12px; font-weight: 500"><span style="padding: 0 14px; display: flex; align-items: center">Our story</span><span class="cm-arrow" style="width: 34px; display: flex; align-items: center; justify-content: center; border-left: 1px solid rgba(255,255,255,0.16)"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"></path></svg></span></a>
+</div>
+</section>
+
+<!-- 5 · FEATURED WORK (1500) -->
+<section id="work" style="height: 1500px; box-sizing: border-box; position: relative; flex-shrink: 0">
+<div style="position: absolute; left: 160px; top: 120px; display: flex; flex-direction: column; gap: 28px">
+<h2 style="margin: 0; font-weight: 500; font-size: 64px; line-height: 1.08; letter-spacing: -0.045em; text-transform: uppercase">Featured<br>work</h2>
+<a href="#work" class="cm-split" style="align-self: flex-start; display: flex; align-items: stretch; height: 34px; border-radius: 4px; overflow: hidden; border: 1px solid rgba(255,255,255,0.16); background: #1a1a1a; font-size: 12px; font-weight: 500"><span style="padding: 0 14px; display: flex; align-items: center">View all work</span><span class="cm-arrow" style="width: 34px; display: flex; align-items: center; justify-content: center; border-left: 1px solid rgba(255,255,255,0.16)"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"></path></svg></span></a>
+</div>
+<a href="#work" class="cm-frame" style="position: absolute; left: 660px; top: 190px; width: 190px; display: flex; flex-direction: column; gap: 12px"><span style="position: relative; height: 300px; display: block"><span style="position: absolute; inset: 0; overflow: hidden; display: block"><span class="cm-img" style="display: flex; width: 100%; height: 100%; background: linear-gradient(170deg,#3a4448,#121416); align-items: center; justify-content: center; font-size: 11px; letter-spacing: 0.2em; color: rgba(255,255,255,0.35)">[ STILL ]</span></span><span class="vf-tl"></span><span class="vf-tr"></span><span class="vf-bl"></span><span class="vf-br"></span></span><span style="font-size: 11px">[Project] · Ad film</span></a>
+<a href="#work" class="cm-frame" style="position: absolute; left: 880px; top: 150px; width: 400px; display: flex; flex-direction: column; gap: 12px"><span style="position: relative; height: 440px; display: block"><span style="position: absolute; inset: 0; overflow: hidden; display: block"><span class="cm-img" style="display: flex; width: 100%; height: 100%; background: linear-gradient(200deg,#5a4a3c,#161310); align-items: center; justify-content: center; font-size: 11px; letter-spacing: 0.2em; color: rgba(255,255,255,0.35)">[ STILL ]</span></span><span class="vf-tl"></span><span class="vf-tr"></span><span class="vf-bl"></span><span class="vf-br"></span></span><span style="font-size: 11px">[Project] · Music video</span></a>
+<a href="#work" class="cm-frame" style="position: absolute; left: 160px; top: 720px; width: 600px; display: flex; flex-direction: column; gap: 12px"><span style="position: relative; height: 500px; display: block"><span style="position: absolute; inset: 0; overflow: hidden; display: block"><span class="cm-img" style="display: flex; width: 100%; height: 100%; background: linear-gradient(140deg,#24403f,#0f1716); align-items: center; justify-content: center; font-size: 11px; letter-spacing: 0.2em; color: rgba(255,255,255,0.35)">[ STILL ]</span></span><span class="vf-tl"></span><span class="vf-tr"></span><span class="vf-bl"></span><span class="vf-br"></span></span><span style="font-size: 11px">[Project] · Fashion film</span></a>
+<a href="#work" class="cm-frame" style="position: absolute; left: 880px; top: 900px; width: 190px; display: flex; flex-direction: column; gap: 12px"><span style="position: relative; height: 320px; display: block"><span style="position: absolute; inset: 0; overflow: hidden; display: block"><span class="cm-img" style="display: flex; width: 100%; height: 100%; background: linear-gradient(180deg,#34393f,#121314); align-items: center; justify-content: center; font-size: 11px; letter-spacing: 0.2em; color: rgba(255,255,255,0.35)">[ STILL ]</span></span><span class="vf-tl"></span><span class="vf-tr"></span><span class="vf-bl"></span><span class="vf-br"></span></span><span style="font-size: 11px">[Project] · Documentary</span></a>
+<a href="#work" class="cm-frame" style="position: absolute; left: 1090px; top: 900px; width: 190px; display: flex; flex-direction: column; gap: 12px"><span style="position: relative; height: 320px; display: block"><span style="position: absolute; inset: 0; overflow: hidden; display: block"><span class="cm-img" style="display: flex; width: 100%; height: 100%; background: linear-gradient(160deg,#5c4630,#161210); align-items: center; justify-content: center; font-size: 11px; letter-spacing: 0.2em; color: rgba(255,255,255,0.35)">[ STILL ]</span></span><span class="vf-tl"></span><span class="vf-tr"></span><span class="vf-bl"></span><span class="vf-br"></span></span><span style="font-size: 11px">[Project] · Event film</span></a>
+</section>
+
+<!-- 6 · SCOPE OF WORK (1100) — accordion in a viewfinder box -->
+<section id="scope" style="height: 1100px; box-sizing: border-box; padding: 80px 160px 120px; flex-shrink: 0">
+<div style="position: relative; height: 100%; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.1); padding: 64px 48px; display: flex; flex-direction: column; gap: 72px">
+<span class="dot" style="left: -2px; top: -2px"></span><span class="dot" style="right: -2px; top: -2px"></span><span class="dot" style="left: -2px; bottom: -2px"></span><span class="dot" style="right: -2px; bottom: -2px"></span>
+<h2 style="margin: 0; padding: 0 16px; font-weight: 500; font-size: 72px; line-height: 1.1; letter-spacing: -0.045em; text-transform: uppercase">What we<br><span style="display: block; padding-left: 280px">put on screen</span></h2>
+<div style="align-self: flex-end; width: 560px; display: flex; flex-direction: column">
+<sc-for list="{{scope}}" as="s" hint-placeholder-count="4">
+<div style="border-top: 1px solid rgba(255,255,255,0.1); padding: 0 16px">
+<button type="button" onClick="{{s.toggle}}" class="cm-row" style="width: 100%; height: 64px; padding: 0; display: flex; align-items: center; justify-content: space-between; background: transparent; border: 0; color: #f2f2f0; font-size: 16px; font-weight: 500; text-align: left" aria-label="{{s.title}}"><span>{{s.title}}</span><span style="font-size: 16px; font-weight: 400">{{s.sign}}</span></button>
+<sc-if value="{{s.open}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 0 0 24px; display: flex; flex-direction: column; gap: 14px"><p style="margin: 0; font-size: 12px; line-height: 1.85; color: #a9a9a4">{{s.body}}</p><span style="font-size: 11px; color: #8c8c88">{{s.tags}}</span></div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<!-- 7 · PODCAST BAND (900) — spotlight overlay -->
+<section id="podcast" style="position: relative; height: 900px; flex-shrink: 0; overflow: hidden">
+<div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 52% 52%, #4a3b2e 0%, #2a221c 35%, #120f0d 75%)"></div>
+<div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.3)">[ FULL-BLEED STILL — PODCAST SET ]</div>
+<div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(11,11,11,0.55) 0%, rgba(11,11,11,0) 45%), linear-gradient(180deg, rgba(11,11,11,0.6) 0%, rgba(11,11,11,0) 20%, rgba(11,11,11,0) 70%, rgba(11,11,11,0.7) 100%)"></div>
+<h2 style="position: absolute; left: 160px; top: 150px; margin: 0; font-weight: 500; font-size: 64px; line-height: 1.08; letter-spacing: -0.045em; text-transform: uppercase">Voices,<br>on the record</h2>
+<div style="position: absolute; right: 160px; top: 150px; display: flex; align-items: center; gap: 10px" aria-hidden="true"><span style="width: 14px; height: 14px; border: 1px solid rgba(255,255,255,0.6)"></span><span style="width: 22px; height: 1px; background: rgba(255,255,255,0.6)"></span><span style="width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.6)"></span></div>
+<div style="position: absolute; left: 160px; bottom: 120px; width: 380px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: center; gap: 10px; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.7)"><span style="background: #f2f2f0; color: #0b0b0b; padding: 3px 8px; border-radius: 2px; font-weight: 700">Podcast</span>Freaky Mack Originals</div>
+<span style="font-size: 26px; font-weight: 500; letter-spacing: -0.02em">[Latest episode title]</span>
+<span style="width: 72px; height: 1px; background: rgba(255,255,255,0.5)"></span>
+<span style="font-size: 12px; line-height: 1.85; color: rgba(255,255,255,0.72)">Episode [NN] · [DURATION]. Conversations with the filmmakers, creators and people behind the work.</span>
+</div>
+<a href="https://youtube.com" class="cm-bracket" style="position: absolute; right: 160px; bottom: 120px; padding: 12px 22px; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase"><span class="vf-tl" style="left: 0; top: 0"></span><span class="vf-tr" style="right: 0; top: 0"></span><span class="vf-bl" style="left: 0; bottom: 0"></span><span class="vf-br" style="right: 0; bottom: 0"></span>Watch on YouTube</a>
+</section>
+
+<!-- 8 · TESTIMONIALS (1100) — overlaid quote + numbered thumbs -->
+<section aria-label="Client stories" style="height: 1100px; box-sizing: border-box; padding: 120px 160px 120px; display: flex; flex-direction: column; gap: 56px; flex-shrink: 0">
+<div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 32px; height: 560px">
+<div style="grid-column: 1 / span 5; display: flex; flex-direction: column; justify-content: space-between">
+<span style="font-size: 11px; color: #8c8c88">Client stories</span>
+<div style="display: flex; flex-direction: column; gap: 16px"><span style="font-size: 11px; color: #8c8c88">{{active.no}} / 07</span><h2 style="margin: 0; font-weight: 500; font-size: 52px; line-height: 1.1; letter-spacing: -0.045em; text-transform: uppercase">Brands we’ve<br>told stories<br>with</h2></div>
+</div>
+<div class="cm-frame" style="grid-column: 6 / span 7; position: relative; overflow: hidden">
+<div class="cm-img" style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 22%, #6a7078 0%, #2a2d31 30%, #111213 70%); display: flex; align-items: center; justify-content: center; font-size: 11px; letter-spacing: 0.2em; color: rgba(255,255,255,0.35)">[ STILL — {{active.name}} ]</div>
+<div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,11,11,0) 45%, rgba(11,11,11,0.85) 100%)"></div>
+<div style="position: absolute; left: 28px; bottom: 28px; display: flex; flex-direction: column; gap: 8px"><span style="font-size: 44px; line-height: 0.6; color: rgba(255,255,255,0.7)">“</span><span style="font-size: 12px; font-weight: 600">[Name]</span><span style="font-size: 11px; color: rgba(255,255,255,0.65)">[Role] · {{active.name}}</span></div>
+<p style="position: absolute; right: 28px; bottom: 28px; margin: 0; width: 300px; font-size: 13px; line-height: 1.65; text-align: right; font-weight: 500">{{active.quote}}</p>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{brands}}" as="b" hint-placeholder-count="7">
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 10px; color: #8c8c88">{{b.no}}</span><button type="button" onClick="{{b.pick}}" class="cm-thumb" style="{{b.style}}">{{b.name}}</button></div>
+</sc-for>
+</div>
+</section>
+
+<!-- 9 · PHILOSOPHY BAND (700) -->
+<section style="position: relative; height: 700px; flex-shrink: 0; overflow: hidden">
+<div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 60%, #2a2626 0%, #151313 45%, #0b0b0b 90%)"></div>
+<div style="position: absolute; right: 200px; top: 90px; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.25)">[ FULL-BLEED STILL — CAMERA ]</div>
+<span style="position: absolute; left: 160px; top: 100px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #8c8c88">What we believe</span>
+<h2 style="position: absolute; left: 240px; top: 96px; margin: 0; font-weight: 500; font-size: 52px; line-height: 1.1; letter-spacing: -0.045em; text-transform: uppercase">How we<br>see a frame</h2>
+<div style="position: absolute; left: 160px; right: 160px; bottom: 110px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 28px"><div style="display: flex; align-items: flex-start; gap: 10px"><span style="font-size: 10px; color: #8c8c88; padding-top: 6px">01</span><span style="font-size: 48px; font-weight: 500; letter-spacing: -0.05em; line-height: 1">Precision</span></div><div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 11px; font-weight: 600">Advertising discipline</span><span style="font-size: 11px; line-height: 1.8; color: #a9a9a4; max-width: 280px">Six years of commercial filmmaking — on time, on brief, on brand.</span></div></div>
+<div style="display: flex; flex-direction: column; gap: 28px"><div style="display: flex; align-items: flex-start; gap: 10px"><span style="font-size: 10px; color: #8c8c88; padding-top: 6px">02</span><span style="font-size: 48px; font-weight: 500; letter-spacing: -0.05em; line-height: 1">Appetite</span></div><div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 11px; font-weight: 600">Independent ambition</span><span style="font-size: 11px; line-height: 1.8; color: #a9a9a4; max-width: 280px">The creative hunger of independent cinema, brought to every brief.</span></div></div>
+<div style="display: flex; flex-direction: column; gap: 28px"><div style="display: flex; align-items: flex-start; gap: 10px"><span style="font-size: 10px; color: #8c8c88; padding-top: 6px">03</span><span style="font-size: 48px; font-weight: 500; letter-spacing: -0.05em; line-height: 1">Story</span></div><div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 11px; font-weight: 600">Ideas first</span><span style="font-size: 11px; line-height: 1.8; color: #a9a9a4; max-width: 280px">A home for filmmakers, creators and ideas that deserve to become films.</span></div></div>
+</div>
+</section>
+
+<!-- 10 · TIMELINE (800) -->
+<section style="height: 800px; box-sizing: border-box; padding: 120px 160px; display: flex; flex-direction: column; gap: 72px; flex-shrink: 0">
+<div style="display: flex; justify-content: space-between; align-items: flex-start"><h2 style="margin: 0; font-weight: 500; font-size: 52px; line-height: 1.1; letter-spacing: -0.045em; text-transform: uppercase">From agency<br>to studio</h2><span style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; color: #8c8c88" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 9L9 3M4 3h5v5"></path></svg></span></div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; align-items: end">
+<div style="height: 250px; box-sizing: border-box; padding: 18px; background: #1b1b1a; display: flex; flex-direction: column; justify-content: space-between"><div style="display: flex; justify-content: space-between; font-size: 10px; color: #8c8c88"><span style="width: 10px; height: 10px; border: 1px solid #8c8c88"></span><span>Chapter 01</span></div><div style="display: flex; flex-direction: column; gap: 10px"><span style="font-size: 22px; font-weight: 500">[YEAR]</span><span style="font-size: 11px; line-height: 1.8; color: #a9a9a4">Freaky Mack begins as an advertising outfit, making films for brands.</span><span style="font-size: 10px; color: #8c8c88">▣ Freaky Mack</span></div></div>
+<div style="height: 290px; box-sizing: border-box; padding: 18px; background: #1b1b1a; display: flex; flex-direction: column; justify-content: space-between"><div style="display: flex; justify-content: space-between; font-size: 10px; color: #8c8c88"><span style="width: 10px; height: 10px; border: 1px solid #8c8c88"></span><span>Chapter 02</span></div><div style="display: flex; flex-direction: column; gap: 10px"><span style="font-size: 22px; font-weight: 500">[YEAR]</span><span style="font-size: 11px; line-height: 1.8; color: #a9a9a4">McDonald’s, Google and Adidas Originals come on board.</span><span style="font-size: 10px; color: #8c8c88">▣ Brand films</span></div></div>
+<div style="height: 330px; box-sizing: border-box; padding: 18px; background: #1b1b1a; display: flex; flex-direction: column; justify-content: space-between"><div style="display: flex; justify-content: space-between; font-size: 10px; color: #8c8c88"><span style="width: 10px; height: 10px; border: 1px solid #8c8c88"></span><span>Chapter 03</span></div><div style="display: flex; flex-direction: column; gap: 10px"><span style="font-size: 22px; font-weight: 500">[YEAR]</span><span style="font-size: 11px; line-height: 1.8; color: #a9a9a4">Mercedes-Benz, Fila, PC Jewellers, Times of India — and many more.</span><span style="font-size: 10px; color: #8c8c88">▣ Growing roster</span></div></div>
+<div style="height: 370px; box-sizing: border-box; padding: 18px; background: #1b1b1a; display: flex; flex-direction: column; justify-content: space-between"><div style="display: flex; justify-content: space-between; font-size: 10px; color: #8c8c88"><span style="width: 10px; height: 10px; border: 1px solid #8c8c88"></span><span>Chapter 04</span></div><div style="display: flex; flex-direction: column; gap: 10px"><span style="font-size: 22px; font-weight: 500">2026</span><span style="font-size: 11px; line-height: 1.8; color: #a9a9a4">Freaky Mack Studios — originals, series, documentaries and the podcast, alongside brand work.</span><span style="font-size: 10px; color: #8c8c88">▣ Freaky Mack Studios</span></div></div>
+</div>
+</section>
+
+<!-- 11 · CREW (1300) -->
+<section id="crew" style="height: 1300px; box-sizing: border-box; padding: 100px 160px 120px; display: flex; flex-direction: column; gap: 56px; flex-shrink: 0">
+<div style="display: flex; justify-content: space-between; align-items: flex-start"><h2 style="margin: 0; font-weight: 500; font-size: 52px; line-height: 1.1; letter-spacing: -0.045em; text-transform: uppercase">The crew<br>behind the frame</h2><span style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; color: #8c8c88" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 9L9 3M4 3h5v5"></path></svg></span></div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px 8px">
+<sc-for list="{{crew}}" as="c" hint-placeholder-count="8">
+<div class="cm-frame" style="display: flex; flex-direction: column; gap: 10px"><div style="height: 360px; overflow: hidden"><div class="cm-img" style="width: 100%; height: 100%; background: {{c.bg}}; display: flex; align-items: center; justify-content: center; font-size: 11px; letter-spacing: 0.2em; color: rgba(255,255,255,0.4)">[ PORTRAIT ]</div></div><div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; font-weight: 500">{{c.name}}</span><span style="font-size: 11px; color: #8c8c88">{{c.role}}</span></div></div>
+</sc-for>
+</div>
+</section>
+
+<!-- 12 · CTA BAND (820) -->
+<section id="contact" style="position: relative; height: 820px; flex-shrink: 0; overflow: hidden">
+<div style="position: absolute; inset: 0; background: linear-gradient(115deg, #4a4540 0%, #2c2a28 40%, #1b1a19 70%, #121110 100%)"></div>
+<div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.3)">[ FULL-BLEED STILL — CAMERA GEAR ]</div>
+<div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,11,11,0.4) 0%, rgba(11,11,11,0) 40%, rgba(11,11,11,0.6) 100%)"></div>
+<h2 style="position: absolute; left: 160px; top: 110px; margin: 0; font-weight: 500; font-size: 80px; line-height: 1.08; letter-spacing: -0.045em; text-transform: uppercase">Got a story?<br>Let’s shoot it.</h2>
+<div style="position: absolute; right: 160px; top: 118px; display: flex; gap: 14px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.7)"><span>Brief</span><span>·</span><span>Shoot</span><span>·</span><span>Cut</span></div>
+<span style="position: absolute; left: 160px; bottom: 110px; font-size: 11px; color: rgba(255,255,255,0.75)">Now booking · [MONTH] [YEAR]</span>
+<div style="position: absolute; right: 160px; bottom: 110px; width: 380px; display: flex; flex-direction: column; gap: 24px">
+<p style="margin: 0; font-size: 12px; line-height: 1.85; color: rgba(255,255,255,0.85)">Ad film, music video, fashion film, documentary or something that doesn’t have a name yet — tell us the idea and we’ll set up a call.</p>
+<div style="display: flex; gap: 28px"><a href="mailto:freakymackstudios@gmail.com" class="cm-link" style="font-size: 12px; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.8); padding-bottom: 3px">Get in touch</a><a href="https://wa.me/919711542274" class="cm-link" style="font-size: 12px; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.4); padding-bottom: 3px; color: rgba(255,255,255,0.8)">WhatsApp us</a></div>
+</div>
+</section>
+
+<!-- 13 · FOOTER (640) -->
+<footer style="height: 640px; box-sizing: border-box; padding: 64px 160px 32px; display: flex; flex-direction: column; gap: 56px; flex-shrink: 0">
+<div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 32px">
+<div style="grid-column: 1 / span 4; display: flex; flex-direction: column; gap: 16px"><a href="#top" class="cm-link" style="display: flex; align-items: center; gap: 10px"><img src="../assets/fm-mark-white.png" alt="" style="width: 40px; height: 27px; object-fit: contain"><span style="font-weight: 600; font-size: 20px">Freaky Mack</span></a><p style="margin: 0; font-size: 11px; line-height: 1.8; color: #8c8c88; max-width: 280px">A home for filmmakers, creators and ideas that deserve to become films.</p></div>
+<div style="grid-column: 7 / span 3; display: flex; flex-direction: column; gap: 10px; font-size: 12px"><span style="font-size: 10px; color: #8c8c88; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px">Contact</span><a href="mailto:freakymackstudios@gmail.com" class="cm-link">freakymackstudios@gmail.com</a><a href="tel:+919711542274" class="cm-link">+91 97115 42274</a><span style="font-size: 10px; color: #8c8c88; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; margin-top: 12px">Studio</span><span>[STUDIO ADDRESS], [CITY]</span></div>
+<div style="grid-column: 10 / span 3; display: flex; flex-direction: column; gap: 10px; font-size: 12px"><span style="font-size: 10px; color: #8c8c88; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px">Working hours</span><span>[DAYS]</span><span>[HOURS]</span></div>
+</div>
+<div style="position: relative; border: 1px solid rgba(255,255,255,0.1); padding: 28px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 32px">
+<span class="dot" style="left: -2px; top: -2px"></span><span class="dot" style="right: -2px; top: -2px"></span><span class="dot" style="left: -2px; bottom: -2px"></span><span class="dot" style="right: -2px; bottom: -2px"></span>
+<div style="grid-column: 1 / span 5; display: flex; flex-direction: column"><span style="font-size: 10px; color: #8c8c88; padding-bottom: 12px">Stay connected</span>
+<a href="https://instagram.com" class="cm-link" style="display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px">Instagram<span>↗</span></a>
+<a href="https://youtube.com" class="cm-link" style="display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px">YouTube<span>↗</span></a>
+<a href="https://vimeo.com" class="cm-link" style="display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px">Vimeo<span>↗</span></a>
+<a href="https://linkedin.com" class="cm-link" style="display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px">LinkedIn<span>↗</span></a>
+</div>
+<div style="grid-column: 8 / span 2; display: flex; flex-direction: column; gap: 8px; font-size: 12px"><span style="font-size: 10px; color: #8c8c88; padding-bottom: 4px">Pages</span><a href="#work" class="cm-link">Work</a><a href="#about" class="cm-link">Studio</a><a href="#scope" class="cm-link">Services</a><a href="#contact" class="cm-link">Contact</a></div>
+<div style="grid-column: 10 / span 3; display: flex; flex-direction: column; gap: 8px; font-size: 12px"><span style="font-size: 10px; color: #8c8c88; padding-bottom: 4px">Explore</span><a href="#podcast" class="cm-link">Podcast</a><a href="#crew" class="cm-link">Crew</a><a href="#reel" class="cm-link">Showreel</a></div>
+</div>
+<div style="display: flex; justify-content: space-between; font-size: 10px; color: #8c8c88"><span>© 2026 Freaky Mack Studios</span><a href="#top" class="cm-link" style="color: #8c8c88">Back to top ↑</a></div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":11820}}'>
+class Component extends DCLogic {
+constructor(props) { super(props); this.state = { open: 0, brand: 0 }; }
+renderVals() {
+const s = this.state;
+const scopeRaw = [
+{ title: 'Brand & ad films', body: 'Commercials and brand films for TV, digital and cinema — six years of work for names like McDonald’s, Google, Adidas Originals and Mercedes-Benz.', tags: 'Ad films · Event films' },
+{ title: 'Music & fashion films', body: 'Music videos for artists and labels, and campaign films for fashion brands — made with the eye of a filmmaker.', tags: 'Music videos · Fashion films' },
+{ title: 'Documentaries & originals', body: 'Documentaries, short films and web series — our own slate of original stories, alongside films for brands and cultural platforms.', tags: 'Documentaries · Short films · Web series' },
+{ title: 'Podcast, YouTube & post', body: 'Studio-produced episodes for our own channel, plus edit, grade, sound and finishing for productions that need a post house.', tags: 'Podcast · YouTube · Post-production' }
+];
+const scope = scopeRaw.map((x, i) => ({ ...x, open: s.open === i, sign: s.open === i ? '−' : '+', toggle: () => this.setState({ open: s.open === i ? -1 : i }) }));
+const names = ['McDonald’s', 'Google', 'Adidas Originals', 'Mercedes-Benz', 'Fila', 'PC Jewellers', 'Times of India'];
+const tints = ['#2a2d31', '#262320', '#2d2a2f', '#2a2622', '#3a2a26', '#2c2621', '#4a3320'];
+const brands = names.map((n, i) => ({
+name: n,
+no: String(i + 1).padStart(2, '0'),
+pick: () => this.setState({ brand: i }),
+style: 'width: 100%; height: 120px; border: 0; outline: ' + (s.brand === i ? '1px solid #f2f2f0' : 'none') + '; outline-offset: 3px; background: linear-gradient(170deg,' + tints[i] + ',#111213); color: ' + (s.brand === i ? '#ffffff' : '#a9a9a4') + '; font-size: 12px; font-weight: 500; padding: 0 10px; opacity: ' + (s.brand === i ? '1' : '0.75')
+}));
+const active = { name: names[s.brand], no: String(s.brand + 1).padStart(2, '0'), quote: '[Testimonial from ' + names[s.brand] + ' — two or three lines, shared with permission.]' };
+const bgs = ['linear-gradient(170deg,#6a5f52,#2a2520)', 'linear-gradient(170deg,#5f5a55,#262320)', 'linear-gradient(170deg,#6b6660,#2c2926)', 'linear-gradient(170deg,#55595e,#222426)'];
+const crew = [{ name: 'Izaan Khan', role: 'Founder & Creative Producer' }].concat(Array.from({ length: 7 }, () => ({ name: '[Name]', role: '[Role]' }))).map((c, i) => ({ ...c, bg: bgs[i % 4] }));
+return { scope, brands, active, crew };
+}
+}
+</script>
+</body>
+</html>
