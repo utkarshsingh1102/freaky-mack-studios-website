@@ -77,6 +77,27 @@ const tests = {
     check(await page.getByRole("dialog", { name: "Showreel" }).isVisible(), "band play button opens the reel modal");
     await page.getByRole("button", { name: "Close ✕" }).click();
   },
+  async d(page) {
+    check((await page.getByRole("form", { name: "Start a project" }).count()) === 0, "enquiry fields hidden until a format is picked");
+    await page.getByLabel("What are we making?").selectOption("Music video");
+    check(await page.getByRole("form", { name: "Start a project" }).isVisible(), "picking a format opens the enquiry form");
+    const placeholder = await page.getByLabel("The brief").getAttribute("placeholder");
+    check(/music video/.test(placeholder), `brief prompt uses the format ("${placeholder}")`);
+    const href = await page.locator("footer a[href^='mailto:']").first().getAttribute("href");
+    check(decodeURIComponent(href).includes("Enquiry — Music video"), "footer email carries the format as subject");
+    const cta = await page.locator("#contact a[href^='mailto:']").first().getAttribute("href");
+    check(decodeURIComponent(cta).includes("Enquiry — Music video"), "CTA links carry the format as subject");
+    await page.getByRole("button", { name: "Cancel" }).click();
+    check((await page.getByRole("form", { name: "Start a project" }).count()) === 0, "Cancel resets the select and closes the form");
+
+    const onTop = await page.locator("#contact a", { hasText: "Let’s make" }).evaluate((el) => {
+      el.scrollIntoView({ block: "center", behavior: "instant" });
+      const r = el.getBoundingClientRect();
+      const hit = document.elementFromPoint(r.right - 20, r.top + r.height / 2);
+      return el.contains(hit);
+    });
+    check(onTop, "“[ Let’s make” sits above the reel still");
+  },
 };
 
 async function touchSwipe(page) {
