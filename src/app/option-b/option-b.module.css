@@ -1,0 +1,48 @@
+/* Option B · Split & filmstrip — ported from option-b-split-filmstrip.dc.html <style>. Scoped to this option only. */
+.root {
+  font-family: var(--b-sans), "Plus Jakarta Sans", "Helvetica Neue", Arial, sans-serif;
+  background: #ffffff;
+  color: #0a0a0a;
+  -webkit-font-smoothing: antialiased;
+}
+.serif { font-family: var(--b-serif), "Instrument Serif", Georgia, serif; }
+.it { font-family: var(--b-serif), "Instrument Serif", Georgia, serif; font-style: italic; }
+
+.link { transition: opacity 0.25s ease; }
+.link:hover { opacity: 0.5; }
+.pill { transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), background 0.3s ease, color 0.3s ease; }
+.pill:hover { transform: translateY(-3px) rotate(-2deg); }
+.primary:hover { background: #ffffff; color: #0a0a0a; }
+.card { transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.card:hover { transform: translateY(-8px) rotate(-1deg); }
+.row { transition: padding-left 0.3s ease; }
+.row:hover { padding-left: 20px; }
+.face { transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.face:hover { transform: translateY(-10px) rotate(-4deg); z-index: 2; }
+.reel { transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.reel:hover { transform: rotate(0deg) scale(1.02); }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-8deg); }
+  50% { transform: translateY(-22px) rotate(4deg); }
+}
+.blob { animation: float 6s ease-in-out infinite; }
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee { animation: marquee 40s linear infinite; }
+
+/* Filmstrip: native horizontal scroll (swipe on touch), mouse-drag on desktop, no visible scrollbar. */
+.strip {
+  scrollbar-width: none;
+  cursor: grab;
+  overscroll-behavior-x: contain;
+}
+.strip::-webkit-scrollbar { display: none; }
+.dragging { cursor: grabbing; scroll-snap-type: none !important; user-select: none; }
+.dragging a { pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .blob, .marquee { animation: none; }
+}

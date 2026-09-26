@@ -1,0 +1,70 @@
+import { CONTACT } from "@/shared/config";
+import { useEnquiryForm } from "@/shared/enquiry";
+import s from "../option-a.module.css";
+import { CHAPTER, PX } from "./theme";
+
+const FIELD = "rounded-[12px] border border-[#d0d0cc] bg-white px-[16px] text-[16px] text-[#0a0a0a] [font-family:inherit]";
+const LABEL = "text-[13px] font-medium text-[#3a3a3a]";
+
+/** Chapter 06: contact + enquiry form (shared submit handler). */
+export function Contact() {
+  const { onSubmit, status, message } = useEnquiryForm();
+  return (
+    <section
+      id="contact"
+      className={`grid shrink-0 grid-cols-1 pb-[96px] lg:grid-cols-12 lg:gap-x-[32px] lg:pb-[140px] ${PX}`}
+    >
+      <div className="flex flex-col gap-[24px] lg:col-span-7 lg:gap-[32px]">
+        <div className={`${s.it} ${CHAPTER}`}>Chapter 06 — Your turn</div>
+        <h2 className="m-0 text-[clamp(46px,6.111vw,88px)] leading-[1] font-extrabold tracking-[-0.035em] text-balance">
+          Got a story? <span className={`${s.it} font-normal tracking-normal normal-case`}>Let’s shoot it.</span>
+        </h2>
+        <a
+          href={`mailto:${CONTACT.email}`}
+          className={`${s.link} self-start border-b-[3px] border-[var(--accent)] pb-[6px] text-[19px] font-medium tracking-[-0.01em] break-all sm:text-[22px] lg:text-[26px]`}
+        >
+          {CONTACT.email}
+        </a>
+        <a href={CONTACT.whatsapp} className={`${s.link} self-start text-[16px] text-[#3a3a3a]`}>
+          or WhatsApp us · {CONTACT.phone} ↗
+        </a>
+      </div>
+      <form
+        onSubmit={onSubmit}
+        aria-label="Start a project"
+        className="mt-[48px] flex flex-col gap-[20px] rounded-[28px] bg-[#f4f4f1] p-[24px] [transform:rotate(1deg)] sm:p-[36px] lg:col-span-5 lg:col-start-8 lg:mt-[96px]"
+      >
+        <div className="flex flex-col gap-[8px]">
+          <label htmlFor="fm-name" className={LABEL}>Your name</label>
+          <input id="fm-name" name="name" type="text" required placeholder="Hi, I’m…" className={`${FIELD} h-[52px]`} />
+        </div>
+        <div className="flex flex-col gap-[8px]">
+          <label htmlFor="fm-email" className={LABEL}>Email</label>
+          <input id="fm-email" name="email" type="email" required placeholder="you@brand.com" className={`${FIELD} h-[52px]`} />
+        </div>
+        <div className="flex flex-col gap-[8px]">
+          <label htmlFor="fm-brief" className={LABEL}>The story so far</label>
+          <textarea
+            id="fm-brief"
+            name="brief"
+            rows={4}
+            placeholder="Format, timeline, budget range — whatever you have."
+            className={`${FIELD} resize-y py-[14px]`}
+          />
+        </div>
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          className={`${s.pill} ${s.primary} h-[56px] self-start rounded-full border border-[var(--accent)] bg-[var(--accent)] px-[28px] text-[15px] font-semibold text-[var(--on-accent)]`}
+        >
+          Send it over
+        </button>
+        {message && (
+          <p role="status" className="m-0 text-[14px] text-[#3a3a3a]">
+            {message}
+          </p>
+        )}
+      </form>
+    </section>
+  );
+}
