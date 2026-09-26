@@ -58,6 +58,25 @@ const tests = {
     await page.keyboard.press("Escape");
     check((await page.getByRole("dialog").count()) === 0, "Escape closes the modal");
   },
+  async c(page) {
+    const toggles = page.locator("#scope button[aria-expanded]");
+    check((await page.locator("#scope").getByText("Ad films · Event films").count()) === 1, "first service open by default");
+    await toggles.nth(2).click();
+    check(await page.getByText("Documentaries · Short films · Web series").isVisible(), "clicking a service opens it");
+    check((await page.locator("#scope").getByText("Ad films · Event films").count()) === 0, "…and closes the previous one");
+    check((await toggles.nth(2).innerText()).includes("−"), "open row shows −");
+    await toggles.nth(2).click();
+    check((await page.locator("#scope [id^=scope-]").count()) === 0, "clicking the open service closes it");
+
+    await page.getByRole("button", { name: "Fila" }).click();
+    check(await page.getByText("[ STILL — Fila ]").isVisible(), "brand tile swaps the still");
+    check(await page.getByText("[Testimonial from Fila — two or three lines, shared with permission.]").isVisible(), "…and the quote");
+    check(await page.getByText("05 / 07").isVisible(), "…and the counter");
+
+    await page.getByRole("button", { name: "Play the showreel" }).click();
+    check(await page.getByRole("dialog", { name: "Showreel" }).isVisible(), "band play button opens the reel modal");
+    await page.getByRole("button", { name: "Close ✕" }).click();
+  },
 };
 
 async function touchSwipe(page) {
