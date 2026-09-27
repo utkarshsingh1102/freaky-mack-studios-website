@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FM_LOGO_WHITE } from "@/shared/assets";
-import { CONTACT } from "@/shared/config";
+import { CONTACT, SOCIAL } from "@/shared/config";
 import s from "./site.module.css";
 import { PX } from "./ui";
 
@@ -34,10 +34,10 @@ export function SiteFooter() {
           </div>
           <div className="flex flex-col gap-[12px] text-[15px]">
             <div className={HEAD}>Follow</div>
-            <a href="https://instagram.com" className={s.link}>Instagram</a>
-            <a href="https://youtube.com" className={s.link}>YouTube</a>
-            <a href="https://vimeo.com" className={s.link}>Vimeo</a>
-            <a href="https://linkedin.com" className={s.link}>LinkedIn</a>
+            <a href={SOCIAL.instagram} className={s.link}>Instagram</a>
+            <a href={SOCIAL.youtube} className={s.link}>YouTube</a>
+            <a href={SOCIAL.vimeo} className={s.link}>Vimeo</a>
+            <a href={SOCIAL.linkedin} className={s.link}>LinkedIn</a>
           </div>
           <div className="col-span-2 flex flex-col gap-[12px] text-[15px]">
             <div className={HEAD}>Say hello</div>

@@ -19,8 +19,18 @@ export function Kicker({ children, className = "" }: { children: ReactNode; clas
 }
 
 /** Section label: "Credits", "The story so far"… (italic serif, 26px at 1440). */
-export function Label({ children, className = "", size = "text-[20px] lg:text-[26px]" }: { children: ReactNode; className?: string; size?: string }) {
-  return <span className={`${s.it} ${size} text-[var(--muted-2)] ${className}`}>{children}</span>;
+export function Label({
+  children,
+  className = "",
+  size = "text-[20px] lg:text-[26px]",
+  color = "text-[var(--muted-2)]",
+}: {
+  children: ReactNode;
+  className?: string;
+  size?: string;
+  color?: string;
+}) {
+  return <span className={`${s.it} ${size} ${color} ${className}`}>{children}</span>;
 }
 
 /** Page H1: Plus Jakarta 800, uppercase, 88px at 1440 (96px on some boards). */

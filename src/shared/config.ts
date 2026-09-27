@@ -25,3 +25,13 @@ export const REEL = {
   poster: "",
   fullEmbedUrl: "",
 };
+
+/** Social profiles. The client still owes the real handles, so these point at the platforms for now. */
+export const SOCIAL = {
+  instagram: "https://instagram.com",
+  youtube: "https://youtube.com",
+  vimeo: "https://vimeo.com",
+  linkedin: "https://linkedin.com",
+  founderInstagram: "https://instagram.com",
+  founderLinkedin: "https://linkedin.com",
+};
