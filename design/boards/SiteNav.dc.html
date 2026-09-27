@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Site navigation</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<header style="width: 1440px; height: 96px; box-sizing: border-box; padding: 0 96px; display: flex; align-items: center; justify-content: space-between; background: #ffffff; color: #0a0a0a; font-family: 'Plus Jakarta Sans', 'Helvetica Neue', Arial, sans-serif">
+<a href="Main.dc.html" aria-label="Freaky Mack Studios home" style="display: flex; align-items: center; gap: 14px; color: #0a0a0a; text-decoration: none">
+<img src="../../assets/brand/fm-mark-white.png" alt="" style="width: 48px; height: 32px; object-fit: contain; filter: invert(1)">
+<span style="font-weight: 800; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase">Freaky Mack</span>
+</a>
+<nav aria-label="Main" style="display: flex; align-items: center; gap: 32px; font-size: 15px; font-weight: 500">
+<sc-for list="{{items}}" as="it" hint-placeholder-count="4">
+<a href="{{it.href}}" style="{{it.style}}"><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #6b6b6b">{{it.no}}</span>{{it.label}}</a>
+</sc-for>
+</nav>
+<a href="Contact.dc.html" style="height: 46px; box-sizing: border-box; padding: 0 22px; display: flex; align-items: center; background: {{ctaBg}}; color: {{ctaFg}}; border: 1px solid {{ctaBg}}; border-radius: 999px; font-size: 14px; font-weight: 600; text-decoration: none">Start a project</a>
+</header>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"active":{"editor":"enum","options":["","work","studio","originals","people","contact"],"default":""},"accent":{"editor":"color","default":"#1F3BFF"},"onAccent":{"editor":"color","default":"#ffffff"},"$preview":{"width":1440,"height":96}}'>
+class Component extends DCLogic {
+renderVals() {
+const active = this.props.active ?? '';
+const accent = this.props.accent ?? '#1F3BFF';
+const onAccent = this.props.onAccent ?? '#ffffff';
+const base = [
+{ key: 'work', no: '01', label: 'Work', href: 'Work.dc.html' },
+{ key: 'studio', no: '02', label: 'Studio', href: 'Studio.dc.html' },
+{ key: 'originals', no: '03', label: 'Originals', href: 'Originals.dc.html' },
+{ key: 'people', no: '04', label: 'People', href: 'People.dc.html' }
+];
+const items = base.map(it => ({
+...it,
+style: 'display: flex; align-items: baseline; gap: 6px; color: #0a0a0a; text-decoration: none; padding-bottom: 4px; border-bottom: 2px solid ' + (active === it.key ? accent : 'transparent')
+}));
+const onContact = active === 'contact';
+return { items, accent, ctaBg: onContact ? '#0a0a0a' : accent, ctaFg: onContact ? '#ffffff' : onAccent };
+}
+}
+</script>
+</body>
+</html>

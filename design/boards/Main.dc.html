@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Freaky Mack Studios — Home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Plus Jakarta Sans','Helvetica Neue',Arial,sans-serif;background:#ffffff;color:#0a0a0a;-webkit-font-smoothing:antialiased}
+a{color:#0a0a0a;text-decoration:none}a:hover{color:#000000}
+button{font-family:inherit;cursor:pointer}
+.fm-link{transition:opacity .25s ease}.fm-link:hover{opacity:.5}
+.fm-pill{transition:transform .3s cubic-bezier(.2,.7,.2,1),background .3s ease,color .3s ease}.fm-pill:hover{transform:translateY(-3px) rotate(-2deg)}
+.fm-primary:hover{background:#0a0a0a;color:#ffffff;border-color:#0a0a0a}
+.fm-tag{transition:transform .35s cubic-bezier(.2,.7,.2,1)}.fm-tag:hover{transform:scale(1.08) rotate(0deg)!important;z-index:2}
+.fm-row{transition:padding-left .3s ease,color .3s ease}.fm-row:hover{padding-left:20px}
+.fm-chip{transition:background .25s ease,color .25s ease,transform .25s ease}.fm-chip:hover{transform:translateY(-2px)}
+.fm-ep{transition:transform .4s cubic-bezier(.2,.7,.2,1)}.fm-ep:hover{transform:translateY(-6px) rotate(-1deg)}
+.fm-face{transition:transform .4s cubic-bezier(.2,.7,.2,1)}.fm-face:hover{transform:rotate(-6deg) scale(1.05)}
+.fm-reel-card{transition:transform .5s cubic-bezier(.2,.7,.2,1)}.fm-reel-card:hover{transform:rotate(0deg) scale(1.02)}
+@keyframes fm-float{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-22px) rotate(4deg)}}
+.fm-blob{animation:fm-float 6s ease-in-out infinite}
+@keyframes fm-spin{to{transform:rotate(360deg)}}
+.fm-spin{animation:fm-spin 18s linear infinite}
+@keyframes fm-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.fm-marquee{animation:fm-marquee 40s linear infinite}
+@keyframes fm-bar{0%{transform:scaleY(.3)}50%{transform:scaleY(1)}100%{transform:scaleY(.3)}}
+.fm-eq span{animation:fm-bar 1s ease-in-out infinite;transform-origin:bottom}
+.fm-eq span:nth-child(2){animation-delay:.15s}.fm-eq span:nth-child(3){animation-delay:.3s}.fm-eq span:nth-child(4){animation-delay:.45s}
+</style>
+</helmet>
+
+<div style="width: 1440px; height: 8160px; box-sizing: border-box; display: flex; flex-direction: column; background: {{ground}}; color: #0a0a0a; overflow: hidden; position: relative">
+
+<!-- NAV -->
+<header style="height: 96px; box-sizing: border-box; padding: 0 96px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0">
+<a href="#top" class="fm-link" aria-label="Freaky Mack Studios home" style="display: flex; align-items: center; gap: 14px">
+<img src="../../assets/brand/fm-mark-white.png" alt="" style="width: 48px; height: 32px; object-fit: contain; filter: invert(1)">
+<span style="font-family: 'Plus Jakarta Sans', 'Helvetica Neue', sans-serif; font-weight: 800; letter-spacing: -0.03em; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase">Freaky Mack</span>
+</a>
+<nav aria-label="Chapters" style="display: flex; align-items: center; gap: 32px; font-size: 15px; font-weight: 500">
+<a href="Work.dc.html" class="fm-link" style="display: flex; align-items: baseline; gap: 6px"><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #6b6b6b">01</span>Work</a>
+<a href="Studio.dc.html" class="fm-link" style="display: flex; align-items: baseline; gap: 6px"><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #6b6b6b">02</span>Studio</a>
+<a href="Originals.dc.html" class="fm-link" style="display: flex; align-items: baseline; gap: 6px"><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #6b6b6b">03</span>Originals</a>
+<a href="People.dc.html" class="fm-link" style="display: flex; align-items: baseline; gap: 6px"><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #6b6b6b">04</span>People</a>
+</nav>
+<a href="Contact.dc.html" class="fm-pill fm-primary" style="height: 46px; box-sizing: border-box; padding: 0 22px; display: flex; align-items: center; background: {{accent}}; color: {{onAccent}}; border: 1px solid {{accent}}; border-radius: 999px; font-size: 14px; font-weight: 600">Start a project</a>
+</header>
+
+<!-- CHAPTER 00 — HERO -->
+<section id="top" style="box-sizing: border-box; padding: 140px 96px 120px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 40px; flex-shrink: 0; position: relative">
+<img src="../../assets/brand/fm-mark-white.png" alt="" class="fm-blob" style="position: absolute; left: 148px; top: 96px; width: 168px; height: 112px; object-fit: contain; filter: invert(1); opacity: 0.9">
+<div style="position: absolute; right: 160px; top: 150px; width: 128px; height: 128px; border-radius: 50%; background: {{accent}}" class="fm-spin" aria-hidden="true">
+<svg viewBox="0 0 128 128" width="128" height="128"><defs><path id="fm-circ" d="M64,64 m-50,0 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0"></path></defs><text style="font-family: 'Instrument Sans', sans-serif; font-size: 11.5px; letter-spacing: 0.22em; text-transform: uppercase; fill: {{onAccent}}; font-weight: 600"><textPath href="#fm-circ">Films for brands · Films of our own · </textPath></text></svg>
+</div>
+<div style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 22px; letter-spacing: 0.08em; text-transform: uppercase; color: #6b6b6b">Chapter 00 — Once upon a brief</div>
+<h1 style="margin: 0; font-family: 'Plus Jakarta Sans', 'Helvetica Neue', sans-serif; font-weight: 800; letter-spacing: -0.03em; font-size: 96px; line-height: 0.98; text-transform: uppercase; max-width: 1200px; text-wrap: balance">We make <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: 0.01em; font-size: 104px; color: {{accent}}">films</span> that people actually finish watching.</h1>
+<p style="margin: 0; font-size: 16px; line-height: 1.7; letter-spacing: 0.06em; text-transform: uppercase; max-width: 640px; color: #3a3a3a">A film production house born from six years of advertising — now telling stories for brands, music, fashion and ourselves.</p>
+<div style="display: flex; align-items: center; gap: 20px; margin-top: 8px">
+<button type="button" onClick="{{toggleReel}}" class="fm-pill fm-primary" style="height: 60px; box-sizing: border-box; padding: 0 30px 0 22px; display: flex; align-items: center; gap: 14px; background: #0a0a0a; color: #ffffff; border: 1px solid #0a0a0a; border-radius: 999px; font-size: 15px; font-weight: 600">
+<span style="width: 26px; height: 26px; border-radius: 50%; background: {{accent}}; display: flex; align-items: center; justify-content: center"><svg width="11" height="11" viewBox="0 0 12 12" fill="{{onAccent}}" aria-hidden="true"><path d="M3 1.5v9l7-4.5z"></path></svg></span>
+{{reelLabel}}
+</button>
+<a href="#ch1" class="fm-link" style="font-size: 15px; font-weight: 500; border-bottom: 2px solid {{accent}}; padding-bottom: 3px">or scroll the story ↓</a>
+</div>
+</section>
+
+<!-- REEL: small tilted card, or opened full-width band -->
+<section id="reel" aria-label="Showreel" style="box-sizing: border-box; padding: 0 96px 160px; display: flex; justify-content: center; flex-shrink: 0">
+<sc-if value="{{reelOpen}}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{toggleReel}}" aria-label="Close the reel" style="width: 1296px; height: 730px; box-sizing: border-box; border: 0; padding: 0; background: #0d0d0d; color: #ffffff; position: relative; overflow: hidden; border-radius: 28px; text-align: left">
+<div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 55%, #2c2c2c 0%, #121212 55%, #0a0a0a 100%)"></div>
+<div style="position: absolute; inset: 24px; border: 1px dashed rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.45)">[ FULL SHOWREEL — EMBED, SOUND ON ]</div>
+<div style="position: absolute; left: 40px; bottom: 36px; display: flex; align-items: center; gap: 14px; font-size: 14px; font-weight: 500"><span class="fm-eq" style="display: flex; gap: 3px; height: 18px; align-items: flex-end"><span style="width: 3px; height: 18px; background: #ffffff; display: block"></span><span style="width: 3px; height: 18px; background: #ffffff; display: block"></span><span style="width: 3px; height: 18px; background: #ffffff; display: block"></span><span style="width: 3px; height: 18px; background: #ffffff; display: block"></span></span>Now playing · Showreel [YEAR]</div>
+<div style="position: absolute; right: 40px; bottom: 36px; font-size: 13px; color: rgba(255,255,255,0.7)">click anywhere to close</div>
+</button>
+</sc-if>
+<sc-if value="{{reelClosed}}" hint-placeholder-val="{{ true }}">
+<button type="button" onClick="{{toggleReel}}" class="fm-reel-card" aria-label="Open the showreel" style="width: 760px; height: 428px; box-sizing: border-box; border: 0; padding: 0; background: #0d0d0d; color: #ffffff; position: relative; overflow: hidden; border-radius: 24px; transform: rotate(-2.5deg); box-shadow: 0 30px 80px rgba(0,0,0,0.18); text-align: left">
+<div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 55%, #2c2c2c 0%, #121212 55%, #0a0a0a 100%)"></div>
+<div style="position: absolute; inset: 18px; border: 1px dashed rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.45)">[ 10–15 SEC LOOP, MUTED ]</div>
+<div style="position: absolute; left: 32px; bottom: 28px; display: flex; align-items: center; gap: 14px"><span style="width: 52px; height: 52px; border-radius: 50%; background: {{accent}}; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 12 12" fill="{{onAccent}}" aria-hidden="true"><path d="M3 1.5v9l7-4.5z"></path></svg></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 600">Showreel</span><span style="font-size: 13px; color: rgba(255,255,255,0.65)">tap to open · [DURATION]</span></span></div>
+<span style="position: absolute; right: -6px; top: 22px; transform: rotate(6deg); background: {{accent}}; color: {{onAccent}}; font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 20px; padding: 6px 18px; border-radius: 999px">new!</span>
+</button>
+</sc-if>
+</section>
+
+<!-- CHAPTER 01 — THE WORK (hover to preview) -->
+<section id="ch1" style="box-sizing: border-box; padding: 40px 96px 180px; display: flex; flex-direction: column; gap: 96px; flex-shrink: 0">
+<div style="display: flex; flex-direction: column; gap: 20px; max-width: 900px">
+<div style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 26px; color: #6b6b6b">Chapter 01 — Six years of saying yes to brands</div>
+<h2 style="margin: 0; font-family: 'Plus Jakarta Sans', 'Helvetica Neue', sans-serif; font-weight: 800; letter-spacing: -0.03em; font-size: 64px; line-height: 1.04; text-wrap: balance">Hover a title. Meet the film.</h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 32px; align-items: start">
+<ul style="grid-column: 1 / span 6; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; border-top: 1px solid #0a0a0a">
+<sc-for list="{{projects}}" as="p" hint-placeholder-count="6">
+<li onMouseEnter="{{p.enter}}" class="fm-row" style="{{p.rowStyle}}">
+<a href="Project.dc.html" style="display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 26px 0; color: inherit">
+<span style="display: flex; align-items: baseline; gap: 18px"><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 18px; color: #6b6b6b">{{p.no}}</span><span style="font-size: 34px; font-weight: 600; letter-spacing: -0.02em">{{p.title}}</span></span>
+<span style="font-size: 14px; color: #5c5c5c; white-space: nowrap">{{p.meta}}</span>
+</a>
+</li>
+</sc-for>
+</ul>
+<div style="grid-column: 8 / span 5; display: flex; flex-direction: column; gap: 18px; position: relative">
+<div style="height: 560px; border-radius: 24px; overflow: hidden; position: relative; transform: rotate(2deg); box-shadow: 0 30px 70px rgba(0,0,0,0.14); background: {{preview.bg}}">
+<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #ffffff">[ STILL — {{preview.title}} ]</div>
+<div style="position: absolute; left: 24px; top: 24px; background: {{accent}}; color: {{onAccent}}; border-radius: 999px; padding: 8px 16px; font-size: 13px; font-weight: 600">{{preview.meta}}</div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; padding: 0 8px">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 24px">{{preview.title}}</span>
+<a href="Project.dc.html" class="fm-link" style="font-size: 14px; font-weight: 600; border-bottom: 1px solid #0a0a0a; padding-bottom: 3px">Open project →</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CLIENT SCATTER -->
+<section aria-label="Clients" style="box-sizing: border-box; padding: 0 96px 180px; display: flex; flex-direction: column; gap: 40px; align-items: center; flex-shrink: 0">
+<div style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 26px; color: #6b6b6b; text-align: center">…and the brands that trusted us with the yes</div>
+<div style="position: relative; width: 1296px; height: 300px">
+<span class="fm-tag" style="position: absolute; left: 40px; top: 30px; transform: rotate(-6deg); border: 1px solid #0a0a0a; border-radius: 999px; padding: 14px 26px; font-size: 22px; font-weight: 600; background: #ffffff">McDonald’s</span>
+<span class="fm-tag" style="position: absolute; left: 300px; top: 120px; transform: rotate(4deg); border: 1px solid #0a0a0a; border-radius: 999px; padding: 14px 26px; font-size: 22px; font-weight: 600; background: {{accent}}; color: {{onAccent}}; border-color: {{accent}}">Google</span>
+<span class="fm-tag" style="position: absolute; left: 470px; top: 10px; transform: rotate(-3deg); border: 1px solid #0a0a0a; border-radius: 999px; padding: 14px 26px; font-size: 22px; font-weight: 600; background: #ffffff">Adidas Originals</span>
+<span class="fm-tag" style="position: absolute; left: 720px; top: 150px; transform: rotate(7deg); border: 1px solid #0a0a0a; border-radius: 999px; padding: 14px 26px; font-size: 22px; font-weight: 600; background: #ffffff">Mercedes-Benz</span>
+<span class="fm-tag" style="position: absolute; left: 860px; top: 20px; transform: rotate(-8deg); border: 1px solid #0a0a0a; border-radius: 999px; padding: 14px 26px; font-size: 22px; font-weight: 600; background: {{accent}}; color: {{onAccent}}; border-color: {{accent}}">Fila</span>
+<span class="fm-tag" style="position: absolute; left: 1010px; top: 130px; transform: rotate(3deg); border: 1px solid #0a0a0a; border-radius: 999px; padding: 14px 26px; font-size: 22px; font-weight: 600; background: #ffffff">PC Jewellers</span>
+<span class="fm-tag" style="position: absolute; left: 150px; top: 220px; transform: rotate(-2deg); border: 1px solid #0a0a0a; border-radius: 999px; padding: 14px 26px; font-size: 22px; font-weight: 600; background: #ffffff">Times of India</span>
+<span class="fm-tag" style="position: absolute; left: 560px; top: 235px; transform: rotate(5deg); border: 1px dashed #0a0a0a; border-radius: 999px; padding: 14px 26px; font-size: 22px; font-weight: 500; background: #ffffff; color: #5c5c5c">+ many more</span>
+</div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section aria-label="What clients say" style="box-sizing: border-box; padding: 0 96px 180px; display: flex; flex-direction: column; gap: 48px; flex-shrink: 0">
+<div style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 26px; color: #6b6b6b">…and what they said afterwards</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-items: start">
+<figure class="fm-ep" style="margin: 0; background: #f4f4f1; border-radius: 28px; padding: 44px 44px 36px; display: flex; flex-direction: column; gap: 28px; transform: rotate(-1deg)">
+<blockquote style="margin: 0; font-family: 'Instrument Serif', Georgia, serif; font-size: 34px; line-height: 1.25; letter-spacing: -0.01em; text-wrap: pretty">“[Client testimonial — two or three lines in their own words.]”</blockquote>
+<figcaption style="display: flex; align-items: center; gap: 14px"><span style="width: 44px; height: 44px; border-radius: 50%; background: #dcdcd8"></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 600">[Name]</span><span style="font-size: 13px; color: #5c5c5c">[Role], [Brand]</span></span></figcaption>
+</figure>
+<figure class="fm-ep" style="margin: 0; background: #0a0a0a; color: #ffffff; border-radius: 28px; padding: 44px 44px 36px; display: flex; flex-direction: column; gap: 28px; transform: rotate(1.5deg); margin-top: 56px">
+<blockquote style="margin: 0; font-family: 'Instrument Serif', Georgia, serif; font-size: 34px; line-height: 1.25; letter-spacing: -0.01em; text-wrap: pretty">“[Client testimonial — two or three lines in their own words.]”</blockquote>
+<figcaption style="display: flex; align-items: center; gap: 14px"><span style="width: 44px; height: 44px; border-radius: 50%; background: #3a3a3a"></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 600">[Name]</span><span style="font-size: 13px; color: rgba(255,255,255,0.65)">[Role], [Brand]</span></span></figcaption>
+</figure>
+</div>
+</section>
+
+<!-- CHAPTER 02 — SENTENCE BUILDER -->
+<section id="ch3" style="box-sizing: border-box; padding: 0 96px 180px; display: flex; flex-direction: column; gap: 56px; flex-shrink: 0">
+<div style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 26px; color: #6b6b6b">Chapter 02 — Say it out loud</div>
+<p style="margin: 0; font-family: 'Plus Jakarta Sans', 'Helvetica Neue', sans-serif; font-weight: 800; letter-spacing: -0.03em; font-size: 68px; line-height: 1.15; max-width: 1248px; text-wrap: balance">You need <span style="display: inline-block; background: {{accent}}; color: {{onAccent}}; padding: 0 28px; border-radius: 999px; transform: rotate(-1.5deg)">{{fmtLabel}}</span> for <span style="display: inline-block; border: 3px solid {{accent}}; padding: 0 28px; border-radius: 999px; transform: rotate(1.5deg)">{{whoLabel}}</span>. We do that.</p>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<div style="font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: #5c5c5c">Pick a format</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<sc-for list="{{formats}}" as="f" hint-placeholder-count="8">
+<button type="button" onClick="{{f.pick}}" class="fm-chip" style="{{f.style}}">{{f.name}}</button>
+</sc-for>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 18px">
+<div style="font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: #5c5c5c">Pick who it’s for</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<sc-for list="{{audiences}}" as="a" hint-placeholder-count="5">
+<button type="button" onClick="{{a.pick}}" class="fm-chip" style="{{a.style}}">{{a.name}}</button>
+</sc-for>
+</div>
+</div>
+</div>
+<a href="Contact.dc.html" class="fm-link" style="align-self: flex-start; font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 30px; border-bottom: 1px solid #0a0a0a; padding-bottom: 4px">Sounds right? Tell us the rest →</a>
+</section>
+
+<!-- SERVICES TICKER -->
+<section aria-label="Services" style="box-sizing: border-box; margin: 0 0 180px; border-top: 1px solid #0a0a0a; border-bottom: 1px solid #0a0a0a; height: 84px; display: flex; align-items: center; overflow: hidden; flex-shrink: 0">
+<div class="fm-marquee" style="display: flex; gap: 40px; align-items: center; white-space: nowrap; width: max-content; font-size: 26px; font-weight: 600; letter-spacing: -0.01em; padding-left: 96px">
+<span>Ad films</span><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #6b6b6b">&amp;</span><span>Music videos</span><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #6b6b6b">&amp;</span><span>Fashion films</span><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #6b6b6b">&amp;</span><span>Event films</span><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #6b6b6b">&amp;</span><span>Documentaries</span><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #6b6b6b">&amp;</span><span>Short films &amp; web series</span><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #6b6b6b">&amp;</span><span>Podcast &amp; YouTube</span><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #6b6b6b">&amp;</span><span>Post-production</span><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #6b6b6b">&amp;</span>
+<span>Ad films</span><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #6b6b6b">&amp;</span><span>Music videos</span><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #6b6b6b">&amp;</span><span>Fashion films</span><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #6b6b6b">&amp;</span><span>Event films</span><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #6b6b6b">&amp;</span><span>Documentaries</span><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #6b6b6b">&amp;</span><span>Short films &amp; web series</span><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #6b6b6b">&amp;</span><span>Podcast &amp; YouTube</span><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #6b6b6b">&amp;</span><span>Post-production</span><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #6b6b6b">&amp;</span>
+</div>
+</section>
+
+<!-- CHAPTER 03 — THE TURN (dark interlude) -->
+<section style="box-sizing: border-box; margin: 0 96px 180px; padding: 120px 96px; background: #0a0a0a; color: #ffffff; border-radius: 40px; display: flex; flex-direction: column; gap: 40px; flex-shrink: 0; position: relative; overflow: hidden">
+<img src="../../assets/brand/fm-mark-white.png" alt="" style="position: absolute; right: -60px; bottom: -40px; width: 560px; height: 396px; object-fit: contain; opacity: 0.12; transform: rotate(-12deg)">
+<div style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 26px; color: rgba(255,255,255,0.65)">Chapter 03 — Then we got greedy for our own stories</div>
+<p style="margin: 0; font-family: 'Plus Jakarta Sans', 'Helvetica Neue', sans-serif; font-weight: 800; letter-spacing: -0.03em; font-size: 56px; line-height: 1.08; max-width: 900px; text-wrap: balance">Advertising taught us precision. Cinema gave us the appetite.</p>
+<p style="margin: 0; font-size: 20px; line-height: 1.6; max-width: 640px; color: rgba(255,255,255,0.78)">Freaky Mack Studios develops commercial and fashion films, music videos, documentaries, digital series and original narratives — a slate of our own work alongside films for brands and cultural platforms. A home for filmmakers, creators and ideas that deserve to become films.</p>
+<a href="Studio.dc.html" class="fm-pill" style="align-self: flex-start; height: 52px; box-sizing: border-box; padding: 0 26px; display: flex; align-items: center; background: {{accent}}; color: {{onAccent}}; border-radius: 999px; font-size: 14px; font-weight: 600">Read the studio story</a>
+</section>
+
+<!-- CHAPTER 04 — ORIGINALS & PODCAST (click to play) -->
+<section id="ch4" style="box-sizing: border-box; padding: 0 96px 180px; display: flex; flex-direction: column; gap: 64px; flex-shrink: 0">
+<div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<div style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 26px; color: #6b6b6b">Chapter 04 — Voices, on the record</div>
+<h2 style="margin: 0; font-family: 'Plus Jakarta Sans', 'Helvetica Neue', sans-serif; font-weight: 800; letter-spacing: -0.03em; font-size: 64px; line-height: 1.04">The podcast</h2>
+</div>
+<a href="https://youtube.com" class="fm-pill" style="height: 52px; box-sizing: border-box; padding: 0 24px; display: flex; align-items: center; gap: 10px; border: 1px solid #0a0a0a; border-radius: 999px; font-size: 14px; font-weight: 600">Watch on YouTube ↗</a>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; align-items: start">
+<sc-for list="{{episodes}}" as="e" hint-placeholder-count="3">
+<button type="button" onClick="{{e.play}}" class="fm-ep" style="{{e.style}}">
+<div style="height: 300px; border-radius: 20px; overflow: hidden; position: relative; background: {{e.bg}}">
+<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #ffffff">[ EPISODE ART ]</div>
+<sc-if value="{{e.playing}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 20px; bottom: 20px; display: flex; align-items: center; gap: 12px; background: {{accent}}; color: {{onAccent}}; border-radius: 999px; padding: 10px 18px 10px 14px; font-size: 13px; font-weight: 600"><span class="fm-eq" style="display: flex; gap: 3px; height: 14px; align-items: flex-end"><span style="width: 3px; height: 14px; background: {{onAccent}}; display: block"></span><span style="width: 3px; height: 14px; background: {{onAccent}}; display: block"></span><span style="width: 3px; height: 14px; background: {{onAccent}}; display: block"></span><span style="width: 3px; height: 14px; background: {{onAccent}}; display: block"></span></span>Now playing</div>
+</sc-if>
+<sc-if value="{{e.paused}}" hint-placeholder-val="{{ true }}">
+<span style="position: absolute; left: 20px; bottom: 20px; width: 48px; height: 48px; border-radius: 50%; background: {{accent}}; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 12 12" fill="{{onAccent}}" aria-hidden="true"><path d="M3 1.5v9l7-4.5z"></path></svg></span>
+</sc-if>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 0 6px">
+<span style="font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: #5c5c5c">{{e.no}} · {{e.len}}</span>
+<span style="font-size: 22px; font-weight: 600; line-height: 1.3">{{e.title}}</span>
+</div>
+</button>
+</sc-for>
+</div>
+</section>
+
+<!-- CHAPTER 05 — PEOPLE -->
+<section id="ch5" style="box-sizing: border-box; padding: 0 96px 180px; display: flex; flex-direction: column; align-items: center; gap: 64px; flex-shrink: 0">
+<div style="display: flex; flex-direction: column; gap: 20px; align-items: center; text-align: center">
+<div style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 26px; color: #6b6b6b">Chapter 05 — The humans behind the camera</div>
+<h2 style="margin: 0; font-family: 'Plus Jakarta Sans', 'Helvetica Neue', sans-serif; font-weight: 800; letter-spacing: -0.03em; font-size: 64px; line-height: 1.04; max-width: 900px">Small crew. Big appetite.</h2>
+</div>
+<div style="display: flex; gap: 48px; align-items: flex-end">
+<div class="fm-face" style="display: flex; flex-direction: column; align-items: center; gap: 16px"><div style="width: 200px; height: 240px; border-radius: 120px 120px 24px 24px; background: #e8e8e5; display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #5c5c5c; text-align: center">[ PHOTO ]</div><span style="transform: rotate(-3deg); border: 1px solid #0a0a0a; border-radius: 999px; padding: 8px 16px; font-size: 15px; font-weight: 600; background: #ffffff">Izaan Khan · Founder</span></div>
+<div class="fm-face" style="display: flex; flex-direction: column; align-items: center; gap: 16px; margin-bottom: 40px"><div style="width: 200px; height: 240px; border-radius: 24px 24px 120px 120px; background: #dcdcd8; display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #5c5c5c; text-align: center">[ PHOTO ]</div><span style="transform: rotate(2deg); border: 1px solid #0a0a0a; border-radius: 999px; padding: 8px 16px; font-size: 15px; font-weight: 600; background: #ffffff">[Name] · [Role]</span></div>
+<div class="fm-face" style="display: flex; flex-direction: column; align-items: center; gap: 16px"><div style="width: 200px; height: 240px; border-radius: 120px; background: #e8e8e5; display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #5c5c5c; text-align: center">[ PHOTO ]</div><span style="transform: rotate(-2deg); border: 1px solid #0a0a0a; border-radius: 999px; padding: 8px 16px; font-size: 15px; font-weight: 600; background: #ffffff">[Name] · [Role]</span></div>
+<div class="fm-face" style="display: flex; flex-direction: column; align-items: center; gap: 16px; margin-bottom: 24px"><div style="width: 200px; height: 240px; border-radius: 24px; background: #dcdcd8; display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #5c5c5c; text-align: center">[ PHOTO ]</div><span style="transform: rotate(4deg); border: 1px solid #0a0a0a; border-radius: 999px; padding: 8px 16px; font-size: 15px; font-weight: 600; background: #ffffff">[Name] · [Role]</span></div>
+</div>
+<a href="People.dc.html" class="fm-link" style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 26px; border-bottom: 1px solid #0a0a0a; padding-bottom: 4px">Meet everyone →</a>
+</section>
+
+<!-- CHAPTER 06 — YOUR TURN -->
+<section id="contact" style="box-sizing: border-box; padding: 0 96px 140px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 32px; flex-shrink: 0">
+<div style="grid-column: 1 / span 7; display: flex; flex-direction: column; gap: 32px">
+<div style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 26px; color: #6b6b6b">Chapter 06 — Your turn</div>
+<h2 style="margin: 0; font-family: 'Plus Jakarta Sans', 'Helvetica Neue', sans-serif; font-weight: 800; letter-spacing: -0.035em; font-size: 88px; line-height: 1; text-wrap: balance">Got a story? <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; text-transform: none; letter-spacing: 0">Let’s shoot it.</span></h2>
+<a href="mailto:freakymackstudios@gmail.com" class="fm-link" style="font-size: 26px; font-weight: 500; letter-spacing: -0.01em; border-bottom: 3px solid {{accent}}; padding-bottom: 6px; align-self: flex-start">freakymackstudios@gmail.com</a>
+<a href="https://wa.me/919711542274" class="fm-link" style="font-size: 16px; color: #3a3a3a; align-self: flex-start">or WhatsApp us · +91 97115 42274 ↗</a>
+</div>
+<form style="grid-column: 8 / span 5; display: flex; flex-direction: column; gap: 20px; margin-top: 96px; background: #f4f4f1; border-radius: 28px; padding: 36px; box-sizing: border-box; transform: rotate(1deg)" aria-label="Start a project">
+<div style="display: flex; flex-direction: column; gap: 8px"><label for="fm-name" style="font-size: 13px; font-weight: 500; color: #3a3a3a">Your name</label><input id="fm-name" type="text" placeholder="Hi, I’m…" style="height: 52px; box-sizing: border-box; padding: 0 16px; background: #ffffff; border: 1px solid #d0d0cc; color: #0a0a0a; font-family: inherit; font-size: 16px; border-radius: 12px"></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><label for="fm-email" style="font-size: 13px; font-weight: 500; color: #3a3a3a">Email</label><input id="fm-email" type="email" placeholder="you@brand.com" style="height: 52px; box-sizing: border-box; padding: 0 16px; background: #ffffff; border: 1px solid #d0d0cc; color: #0a0a0a; font-family: inherit; font-size: 16px; border-radius: 12px"></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><label for="fm-brief" style="font-size: 13px; font-weight: 500; color: #3a3a3a">The story so far</label><textarea id="fm-brief" rows="4" placeholder="Format, timeline, budget range — whatever you have." style="box-sizing: border-box; padding: 14px 16px; background: #ffffff; border: 1px solid #d0d0cc; color: #0a0a0a; font-family: inherit; font-size: 16px; border-radius: 12px; resize: vertical"></textarea></div>
+<a href="Thanks.dc.html" class="fm-pill fm-primary" style="height: 56px; box-sizing: border-box; padding: 0 28px; display: flex; align-items: center; background: {{accent}}; border: 1px solid {{accent}}; color: {{onAccent}}; border-radius: 999px; font-size: 15px; font-weight: 600; align-self: flex-start">Send it over</a>
+</form>
+</section>
+
+<!-- FOOTER -->
+<footer style="box-sizing: border-box; padding: 64px 96px 40px; border-top: 1px solid #0a0a0a; display: flex; flex-direction: column; gap: 56px; flex-shrink: 0; margin-top: auto">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 20px; max-width: 360px">
+<img src="../../assets/brand/fm-logo-white.png" alt="Freaky Mack Studios" style="width: 150px; height: 118px; object-fit: contain; filter: invert(1)">
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #5c5c5c">A home for filmmakers, creators and ideas that deserve to become films.</p>
+</div>
+<div style="display: flex; gap: 96px">
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px"><div style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 18px; color: #6b6b6b; margin-bottom: 6px">Chapters</div><a href="Work.dc.html" class="fm-link">Work</a><a href="Studio.dc.html" class="fm-link">Studio</a><a href="Originals.dc.html" class="fm-link">Originals &amp; podcast</a><a href="People.dc.html" class="fm-link">People</a><a href="Contact.dc.html" class="fm-link">Start a project</a></div>
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px"><div style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 18px; color: #6b6b6b; margin-bottom: 6px">Follow</div><a href="https://instagram.com" class="fm-link">Instagram</a><a href="https://youtube.com" class="fm-link">YouTube</a><a href="https://vimeo.com" class="fm-link">Vimeo</a><a href="https://linkedin.com" class="fm-link">LinkedIn</a></div>
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px"><div style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 18px; color: #6b6b6b; margin-bottom: 6px">Say hello</div><a href="mailto:freakymackstudios@gmail.com" class="fm-link">freakymackstudios@gmail.com</a><a href="tel:+919711542274" class="fm-link">+91 97115 42274</a><a href="https://wa.me/919711542274" class="fm-link">WhatsApp</a><span style="color: #5c5c5c">[STUDIO ADDRESS], [CITY]</span></div>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #5c5c5c; border-top: 1px solid #e4e4e0; padding-top: 24px">
+<span>© 2026 Freaky Mack Studios. All rights reserved.</span>
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 16px">The end. For now.</span>
+<span style="display: flex; gap: 16px"><a href="Privacy.dc.html" class="fm-link" style="color: #5c5c5c">Privacy</a><a href="Terms.dc.html" class="fm-link" style="color: #5c5c5c">Terms</a><a href="#top" class="fm-link" style="color: #5c5c5c">Back to the top ↑</a></span>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#1F3BFF","options":["#1F3BFF","#E8FF3A","#FF8A00","#FF7A9E"],"section":"Theme"},"onAccent":{"editor":"color","default":"#ffffff","options":["#ffffff","#0a0a0a"],"section":"Theme"},"ground":{"editor":"color","default":"#ffffff","options":["#ffffff","#fbfbf9","#f6f6f2"],"section":"Theme"},"$preview":{"width":1440,"height":8160}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { reelOpen: false, hovered: 0, fmt: 0, who: 0, playing: -1 };
+}
+renderVals() {
+const s = this.state;
+const accent = this.props.accent ?? '#1F3BFF';
+const onAccent = this.props.onAccent ?? '#ffffff';
+const rawProjects = [
+{ title: '[Project title]', meta: '[Client] · Ad film', bg: 'linear-gradient(160deg,#3a3a3a,#111)' },
+{ title: '[Project title]', meta: '[Artist] · Music video', bg: 'linear-gradient(200deg,#5a5a58,#1a1a1a)' },
+{ title: '[Project title]', meta: '[Brand] · Fashion film', bg: 'linear-gradient(140deg,#2a2a2a,#6a6a66)' },
+{ title: '[Project title]', meta: '[Subject] · Documentary', bg: 'linear-gradient(220deg,#444,#0e0e0e)' },
+{ title: '[Project title]', meta: '[Client] · Event film', bg: 'linear-gradient(120deg,#777773,#222)' },
+{ title: '[Project title]', meta: '[Client] · Web series', bg: 'linear-gradient(180deg,#303030,#8a8a86)' }
+];
+const projects = rawProjects.map((p, i) => ({
+...p,
+no: String(i + 1).padStart(2, '0'),
+enter: () => this.setState({ hovered: i }),
+rowStyle: 'border-bottom: 1px solid #d6d6d2; color: ' + (s.hovered === i ? '#0a0a0a' : '#7a7a7a') + '; padding-left: ' + (s.hovered === i ? '20px' : '0')
+}));
+const preview = rawProjects[s.hovered] || rawProjects[0];
+const fmtNames = ['an ad film', 'a music video', 'a fashion film', 'an event film', 'a documentary', 'a short film', 'a web series', 'a podcast'];
+const whoNames = ['a brand', 'an agency', 'a music label', 'a fashion label', 'a face on screen'];
+const chip = (on) => 'height: 48px; padding: 0 20px; border-radius: 999px; font-size: 16px; font-weight: 500; border: 1px solid ' + (on ? accent : '#0a0a0a') + '; background: ' + (on ? accent : '#ffffff') + '; color: ' + (on ? onAccent : '#0a0a0a');
+const formats = fmtNames.map((n, i) => ({ name: n.replace(/^an? /, ''), pick: () => this.setState({ fmt: i }), style: chip(s.fmt === i) }));
+const audiences = whoNames.map((n, i) => ({ name: n.replace(/^an? /, ''), pick: () => this.setState({ who: i }), style: chip(s.who === i) }));
+const rawEps = [
+{ no: 'Episode [NN]', len: '[DURATION]', title: '[Episode title]', bg: 'linear-gradient(160deg,#3a3a3a,#111)' },
+{ no: 'Episode [NN]', len: '[DURATION]', title: '[Episode title]', bg: 'linear-gradient(200deg,#5a5a58,#1a1a1a)' },
+{ no: 'Episode [NN]', len: '[DURATION]', title: '[Episode title]', bg: 'linear-gradient(140deg,#2a2a2a,#6a6a66)' }
+];
+const episodes = rawEps.map((e, i) => ({
+...e,
+playing: s.playing === i,
+paused: s.playing !== i,
+play: () => this.setState({ playing: s.playing === i ? -1 : i }),
+style: 'display: flex; flex-direction: column; gap: 18px; text-align: left; border: 0; padding: 0; background: transparent; color: #0a0a0a; transform: rotate(' + (i === 1 ? '1.5deg' : (i === 0 ? '-1.5deg' : '0.5deg')) + '); margin-top: ' + (i === 1 ? '48px' : '0')
+}));
+return {
+ground: this.props.ground ?? '#ffffff', accent, onAccent,
+reelOpen: s.reelOpen,
+reelClosed: !s.reelOpen,
+reelLabel: s.reelOpen ? 'Close the reel' : 'Press play',
+toggleReel: () => this.setState({ reelOpen: !s.reelOpen }),
+projects, preview, formats, audiences, episodes,
+fmtLabel: fmtNames[s.fmt],
+whoLabel: whoNames[s.who]
+};
+}
+}
+</script>
+</body>
+</html>

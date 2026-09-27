@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Freaky Mack Studios — Page not found</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Plus Jakarta Sans','Helvetica Neue',Arial,sans-serif;background:#ffffff;color:#0a0a0a;-webkit-font-smoothing:antialiased}
+a{color:#0a0a0a;text-decoration:none}a:hover{color:#000000}
+.fm-pill{transition:transform .3s cubic-bezier(.2,.7,.2,1)}.fm-pill:hover{transform:translateY(-3px) rotate(-2deg)}
+@keyframes fm-float{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-22px) rotate(4deg)}}
+.fm-blob{animation:fm-float 6s ease-in-out infinite}
+</style>
+</helmet>
+
+<div id="top" style="width: 1440px; height: 1374px; box-sizing: border-box; display: flex; flex-direction: column; background: #ffffff; color: #0a0a0a; overflow: hidden; position: relative">
+<dc-import name="SiteNav" active="" hint-size="1440px,96px"></dc-import>
+
+<section style="box-sizing: border-box; padding: 140px 96px 140px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 32px; flex-shrink: 0; position: relative">
+<span aria-hidden="true" style="position: absolute; left: 50%; top: 40px; transform: translateX(-50%); font-weight: 800; font-size: 420px; line-height: 1; letter-spacing: -0.06em; color: #f1f1ee">404</span>
+<img src="../../assets/brand/fm-mark-white.png" alt="" class="fm-blob" style="position: relative; width: 180px; height: 120px; object-fit: contain; filter: invert(1)">
+<div style="position: relative; font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 22px; letter-spacing: 0.08em; text-transform: uppercase; color: #6b6b6b">Error 404 — scene missing</div>
+<h1 style="position: relative; margin: 0; font-weight: 800; letter-spacing: -0.03em; font-size: 88px; line-height: 0.98; text-transform: uppercase; max-width: 1000px; text-wrap: balance"><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: 0.01em; font-size: 96px; color: {{accent}}">Cut!</span> This scene didn’t make the edit.</h1>
+<p style="position: relative; margin: 0; font-size: 16px; line-height: 1.7; letter-spacing: 0.06em; text-transform: uppercase; max-width: 560px; color: #3a3a3a">The page you’re looking for has moved or never existed. Let’s get you back on set.</p>
+<div style="position: relative; display: flex; gap: 16px; margin-top: 8px">
+<a href="Main.dc.html" class="fm-pill" style="height: 56px; box-sizing: border-box; padding: 0 28px; display: flex; align-items: center; background: {{accent}}; color: {{onAccent}}; border-radius: 999px; font-size: 15px; font-weight: 600">Back to the start</a>
+<a href="Work.dc.html" class="fm-pill" style="height: 56px; box-sizing: border-box; padding: 0 28px; display: flex; align-items: center; border: 1px solid #0a0a0a; border-radius: 999px; font-size: 15px; font-weight: 600">See the work</a>
+</div>
+</section>
+
+<div style="margin-top: auto"><dc-import name="SiteFooter" hint-size="1440px,424px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#1F3BFF","options":["#1F3BFF","#0a0a0a"],"section":"Theme"},"onAccent":{"editor":"color","default":"#ffffff","options":["#ffffff","#0a0a0a"],"section":"Theme"},"$preview":{"width":1440,"height":1374}}'>
+class Component extends DCLogic {
+renderVals() {
+return { accent: this.props.accent ?? '#1F3BFF', onAccent: this.props.onAccent ?? '#ffffff' };
+}
+}
+</script>
+</body>
+</html>

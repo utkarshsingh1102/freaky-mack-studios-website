@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Freaky Mack Studios — Originals</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Plus Jakarta Sans','Helvetica Neue',Arial,sans-serif;background:#ffffff;color:#0a0a0a;-webkit-font-smoothing:antialiased}
+a{color:#0a0a0a;text-decoration:none}a:hover{color:#000000}
+button{font-family:inherit;cursor:pointer}
+.fm-link{transition:opacity .25s ease}.fm-link:hover{opacity:.5}
+.fm-pill{transition:transform .3s cubic-bezier(.2,.7,.2,1)}.fm-pill:hover{transform:translateY(-3px) rotate(-2deg)}
+.fm-card{transition:transform .4s cubic-bezier(.2,.7,.2,1)}.fm-card:hover{transform:translateY(-8px) rotate(0deg)!important}
+.fm-ep-row{transition:background .2s ease}.fm-ep-row:hover{background:#f4f4f1}
+@keyframes fm-bar{0%{transform:scaleY(.3)}50%{transform:scaleY(1)}100%{transform:scaleY(.3)}}
+.fm-eq span{animation:fm-bar 1s ease-in-out infinite;transform-origin:bottom}
+.fm-eq span:nth-child(2){animation-delay:.15s}.fm-eq span:nth-child(3){animation-delay:.3s}.fm-eq span:nth-child(4){animation-delay:.45s}
+@keyframes fm-float{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-22px) rotate(4deg)}}
+.fm-blob{animation:fm-float 6s ease-in-out infinite}
+</style>
+</helmet>
+
+<div id="top" style="width: 1440px; height: 3800px; box-sizing: border-box; display: flex; flex-direction: column; background: #ffffff; color: #0a0a0a; overflow: hidden; position: relative">
+<dc-import name="SiteNav" active="originals" hint-size="1440px,96px"></dc-import>
+
+<!-- HERO -->
+<section style="box-sizing: border-box; padding: 120px 96px 96px; display: flex; flex-direction: column; gap: 32px; flex-shrink: 0; position: relative">
+<img src="../../assets/brand/fm-mark-white.png" alt="" class="fm-blob" style="position: absolute; right: 160px; top: 120px; width: 150px; height: 100px; object-fit: contain; filter: invert(1)">
+<div style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 22px; letter-spacing: 0.08em; text-transform: uppercase; color: #6b6b6b">Chapter 03 — Originals</div>
+<h1 style="margin: 0; font-weight: 800; letter-spacing: -0.03em; font-size: 88px; line-height: 0.98; text-transform: uppercase; max-width: 1000px; text-wrap: balance">Films of our <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: 0.01em; font-size: 96px; color: {{accent}}">own</span>.</h1>
+<p style="margin: 0; font-size: 16px; line-height: 1.7; letter-spacing: 0.06em; text-transform: uppercase; max-width: 680px; color: #3a3a3a">Between briefs we make our own — short films, web series, documentaries and a podcast. A home for filmmakers, creators and ideas that deserve to become films.</p>
+</section>
+
+<!-- PODCAST FEATURE -->
+<section id="podcast" aria-label="The podcast" style="box-sizing: border-box; padding: 0 96px 120px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 32px; align-items: center; flex-shrink: 0">
+<button type="button" onClick="{{featured.play}}" aria-label="{{featured.aria}}" style="grid-column: 1 / span 7; height: 460px; box-sizing: border-box; border: 0; padding: 0; background: #0d0d0d; color: #ffffff; position: relative; overflow: hidden; border-radius: 28px; transform: rotate(-1deg); text-align: left; box-shadow: 0 30px 80px rgba(0,0,0,0.16)">
+<div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, #2c2c2c 0%, #121212 60%, #0a0a0a 100%)"></div>
+<div style="position: absolute; inset: 20px; border: 1px dashed rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.45)">[ LATEST EPISODE — YOUTUBE EMBED ]</div>
+<sc-if value="{{featured.paused}}" hint-placeholder-val="{{ true }}">
+<span style="position: absolute; left: 32px; bottom: 32px; width: 64px; height: 64px; border-radius: 50%; background: {{accent}}; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 12 12" fill="{{onAccent}}" aria-hidden="true"><path d="M3 1.5v9l7-4.5z"></path></svg></span>
+</sc-if>
+<sc-if value="{{featured.playing}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 32px; bottom: 32px; display: flex; align-items: center; gap: 12px; background: {{accent}}; color: {{onAccent}}; border-radius: 999px; padding: 12px 20px 12px 16px; font-size: 14px; font-weight: 600"><span class="fm-eq" style="display: flex; gap: 3px; height: 16px; align-items: flex-end"><span style="width: 3px; height: 16px; background: {{onAccent}}; display: block"></span><span style="width: 3px; height: 16px; background: {{onAccent}}; display: block"></span><span style="width: 3px; height: 16px; background: {{onAccent}}; display: block"></span><span style="width: 3px; height: 16px; background: {{onAccent}}; display: block"></span></span>Now playing</div>
+</sc-if>
+<span style="position: absolute; right: -4px; top: 24px; transform: rotate(6deg); background: #ffffff; color: #0a0a0a; font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 20px; padding: 6px 18px; border-radius: 999px">latest</span>
+</button>
+<div style="grid-column: 9 / span 4; display: flex; flex-direction: column; gap: 20px">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 24px; color: #6b6b6b">The Freaky Mack Podcast</span>
+<h2 style="margin: 0; font-weight: 800; letter-spacing: -0.03em; font-size: 44px; line-height: 1.08">[Latest episode title]</h2>
+<span style="font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: #5c5c5c">Episode [NN] · with [Guest] · [Duration]</span>
+<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #3a3a3a">[Two lines on what this episode is about.]</p>
+<div style="display: flex; gap: 14px; margin-top: 8px"><a href="https://youtube.com" class="fm-pill" style="height: 52px; box-sizing: border-box; padding: 0 24px; display: flex; align-items: center; background: {{accent}}; color: {{onAccent}}; border-radius: 999px; font-size: 14px; font-weight: 600">Subscribe on YouTube ↗</a></div>
+</div>
+</section>
+
+<!-- EPISODE LIST -->
+<section aria-label="All episodes" style="box-sizing: border-box; padding: 0 96px 180px; display: flex; flex-direction: column; gap: 32px; flex-shrink: 0">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 26px; color: #6b6b6b">Every episode</span>
+<ul style="list-style: none; margin: 0; padding: 0; border-top: 1px solid #0a0a0a">
+<sc-for list="{{episodes}}" as="e" hint-placeholder-count="6">
+<li style="border-bottom: 1px solid #d6d6d2">
+<button type="button" onClick="{{e.play}}" class="fm-ep-row" style="width: 100%; box-sizing: border-box; display: grid; grid-template-columns: 80px 1fr 240px 120px 64px; gap: 24px; align-items: center; padding: 22px 12px; border: 0; background: transparent; color: #0a0a0a; text-align: left">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 20px; color: #6b6b6b">{{e.no}}</span>
+<span style="font-size: 24px; font-weight: 600; letter-spacing: -0.01em">{{e.title}}</span>
+<span style="font-size: 15px; color: #5c5c5c">with [Guest]</span>
+<span style="font-size: 15px; color: #5c5c5c">[Duration]</span>
+<span style="{{e.btnStyle}}"><sc-if value="{{e.on}}" hint-placeholder-val="{{ false }}"><svg width="14" height="14" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3 1.5h2v9H3zM7 1.5h2v9H7z"></path></svg></sc-if><sc-if value="{{e.off}}" hint-placeholder-val="{{ true }}"><svg width="14" height="14" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3 1.5v9l7-4.5z"></path></svg></sc-if></span>
+</button>
+</li>
+</sc-for>
+</ul>
+</section>
+
+<!-- SLATE -->
+<section aria-label="The slate" style="box-sizing: border-box; padding: 0 96px 180px; display: flex; flex-direction: column; gap: 56px; flex-shrink: 0">
+<div style="display: flex; flex-direction: column; gap: 16px"><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 26px; color: #6b6b6b">On the slate</span><h2 style="margin: 0; font-weight: 800; letter-spacing: -0.03em; font-size: 64px; line-height: 1.04">What we’re making for ourselves.</h2></div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; align-items: start">
+<a href="Project.dc.html" class="fm-card" style="display: flex; flex-direction: column; gap: 18px; transform: rotate(-1.5deg)"><div style="height: 420px; border-radius: 24px; position: relative; background: linear-gradient(160deg,#3a3a3a,#111); display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.8)">[ POSTER ]<span style="position: absolute; left: 18px; top: 18px; transform: rotate(-4deg); background: #ffffff; color: #0a0a0a; border-radius: 999px; padding: 6px 14px; font-size: 13px; font-weight: 600; letter-spacing: 0; text-transform: none">Short film</span><span style="position: absolute; right: 18px; bottom: 18px; background: {{accent}}; color: {{onAccent}}; border-radius: 999px; padding: 6px 14px; font-size: 12px; font-weight: 600; letter-spacing: 0; text-transform: none">[Status]</span></div><span style="font-size: 24px; font-weight: 600">[Title]</span><span style="font-size: 15px; line-height: 1.5; color: #5c5c5c">[One-line logline.]</span></a>
+<a href="Project.dc.html" class="fm-card" style="display: flex; flex-direction: column; gap: 18px; transform: rotate(1.2deg); margin-top: 56px"><div style="height: 420px; border-radius: 24px; position: relative; background: linear-gradient(200deg,#5a5a58,#1a1a1a); display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.8)">[ POSTER ]<span style="position: absolute; left: 18px; top: 18px; transform: rotate(-4deg); background: #ffffff; color: #0a0a0a; border-radius: 999px; padding: 6px 14px; font-size: 13px; font-weight: 600; letter-spacing: 0; text-transform: none">Web series</span><span style="position: absolute; right: 18px; bottom: 18px; background: {{accent}}; color: {{onAccent}}; border-radius: 999px; padding: 6px 14px; font-size: 12px; font-weight: 600; letter-spacing: 0; text-transform: none">[Status]</span></div><span style="font-size: 24px; font-weight: 600">[Title]</span><span style="font-size: 15px; line-height: 1.5; color: #5c5c5c">[One-line logline.]</span></a>
+<a href="Project.dc.html" class="fm-card" style="display: flex; flex-direction: column; gap: 18px; transform: rotate(-0.6deg)"><div style="height: 420px; border-radius: 24px; position: relative; background: linear-gradient(140deg,#2a2a2a,#6a6a66); display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.8)">[ POSTER ]<span style="position: absolute; left: 18px; top: 18px; transform: rotate(-4deg); background: #ffffff; color: #0a0a0a; border-radius: 999px; padding: 6px 14px; font-size: 13px; font-weight: 600; letter-spacing: 0; text-transform: none">Documentary</span><span style="position: absolute; right: 18px; bottom: 18px; background: {{accent}}; color: {{onAccent}}; border-radius: 999px; padding: 6px 14px; font-size: 12px; font-weight: 600; letter-spacing: 0; text-transform: none">[Status]</span></div><span style="font-size: 24px; font-weight: 600">[Title]</span><span style="font-size: 15px; line-height: 1.5; color: #5c5c5c">[One-line logline.]</span></a>
+</div>
+</section>
+
+<!-- PITCH US -->
+<section style="box-sizing: border-box; margin: 0 96px 140px; padding: 96px; background: #0a0a0a; color: #ffffff; border-radius: 40px; display: flex; justify-content: space-between; align-items: center; gap: 48px; flex-shrink: 0; position: relative; overflow: hidden">
+<img src="../../assets/brand/fm-mark-white.png" alt="" style="position: absolute; right: 260px; bottom: -80px; width: 420px; height: 279px; object-fit: contain; opacity: 0.1; transform: rotate(-12deg)">
+<div style="display: flex; flex-direction: column; gap: 16px; max-width: 760px"><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 24px; color: rgba(255,255,255,0.65)">Filmmaker? Creator? Got an idea?</span><span style="font-weight: 800; letter-spacing: -0.03em; font-size: 56px; line-height: 1.05">Some ideas deserve to become films. Pitch us yours.</span></div>
+<a href="Contact.dc.html" class="fm-pill" style="flex-shrink: 0; height: 60px; box-sizing: border-box; padding: 0 30px; display: flex; align-items: center; background: {{accent}}; color: {{onAccent}}; border-radius: 999px; font-size: 15px; font-weight: 600">Pitch an idea</a>
+</section>
+
+<div style="margin-top: auto"><dc-import name="SiteFooter" hint-size="1440px,424px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#1F3BFF","options":["#1F3BFF","#0a0a0a"],"section":"Theme"},"onAccent":{"editor":"color","default":"#ffffff","options":["#ffffff","#0a0a0a"],"section":"Theme"},"$preview":{"width":1440,"height":3800}}'>
+class Component extends DCLogic {
+constructor(props) { super(props); this.state = { playing: -1 }; }
+renderVals() {
+const s = this.state;
+const accent = this.props.accent ?? '#1F3BFF';
+const onAccent = this.props.onAccent ?? '#ffffff';
+const toggle = (i) => () => this.setState({ playing: s.playing === i ? -1 : i });
+const featured = { playing: s.playing === 0, paused: s.playing !== 0, play: toggle(0), aria: s.playing === 0 ? 'Pause the latest episode' : 'Play the latest episode' };
+const episodes = [1, 2, 3, 4, 5, 6].map((n, i) => {
+const on = s.playing === i;
+return {
+no: 'Ep. ' + String(7 - n).padStart(2, '0'),
+title: i === 0 ? '[Latest episode title]' : '[Episode title]',
+play: toggle(i),
+on: on, off: !on,
+btnStyle: 'width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; background: ' + (on ? accent : '#ffffff') + '; color: ' + (on ? onAccent : '#0a0a0a') + '; border: 1px solid ' + (on ? accent : '#0a0a0a')
+};
+});
+return { accent, onAccent, featured, episodes };
+}
+}
+</script>
+</body>
+</html>
