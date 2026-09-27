@@ -1,7 +1,7 @@
-// Screenshots + layout checks with the preinstalled Chromium.
-// Usage: node scripts/shoot.mjs [route ...] [--out dir] [--thumbs] [--base http://localhost:3000]
-//   default: full-page shots at 1440 and 390 for each route, plus a horizontal-overflow check.
-//   --thumbs: 1440×900 hero shots into public/thumbs/option-*.jpg for the index cards.
+// Full-page screenshots + layout checks with the preinstalled Chromium.
+// Usage: node scripts/shoot.mjs [route ...] [--out dir] [--seg 1500] [--base http://localhost:3000]
+//   Routes may carry the pitch query, e.g. "/?theme=dark&accent=grey".
+//   Shoots each route at 1440 and 390, fails on horizontal overflow or console errors.
 import { chromium } from "playwright";
 import fs from "node:fs";
 import path from "node:path";
@@ -13,55 +13,40 @@ const flag = (name, fallback) => {
 };
 const base = flag("--base", "http://localhost:3000");
 const out = flag("--out", "shots");
-const thumbs = args.includes("--thumbs");
 const seg = Number(flag("--seg", "0")); // >0: also save the full page in slices of this height
 const routes = args.filter((a) => !a.startsWith("--"));
-const list = routes.length ? routes : ["/", "/option-a/", "/option-b/", "/option-c/", "/option-d/"];
+const list = routes.length ? routes : ["/", "/?theme=dark"];
+const slug = (r) => r.replace(/^\/+|\/+$/g, "").replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "") || "home";
 
 const browser = await chromium.launch();
 let failed = false;
-
-if (thumbs) {
-  fs.mkdirSync("public/thumbs", { recursive: true });
-  for (const l of ["a", "b", "c", "d"]) {
-    const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
-    await page.goto(`${base}/option-${l}/`, { waitUntil: "networkidle" });
-    await page.addStyleTag({ content: 'nav[aria-label="Homepage options"],[data-pitch-only]{display:none!important}' });
+fs.mkdirSync(out, { recursive: true });
+for (const route of list) {
+  for (const width of [1440, 390]) {
+    const page = await browser.newPage({ viewport: { width, height: width === 390 ? 844 : 900 } });
+    const errors = [];
+    page.on("pageerror", (e) => errors.push(String(e)));
+    page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
+    await page.goto(`${base}${route}`, { waitUntil: "networkidle" });
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.waitForTimeout(600);
-    await page.screenshot({ path: `public/thumbs/option-${l}.jpg`, type: "jpeg", quality: 82 });
-    await page.close();
-    console.log(`thumb option-${l}`);
-  }
-} else {
-  fs.mkdirSync(out, { recursive: true });
-  for (const route of list) {
-    for (const width of [1440, 390]) {
-      const page = await browser.newPage({ viewport: { width, height: width === 390 ? 844 : 900 } });
-      const errors = [];
-      page.on("pageerror", (e) => errors.push(String(e)));
-      page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
-      await page.goto(`${base}${route}`, { waitUntil: "networkidle" });
-      await page.emulateMedia({ reducedMotion: "reduce" });
-      await page.waitForTimeout(500);
-      const { sw, h } = await page.evaluate(() => ({
-        sw: document.documentElement.scrollWidth,
-        h: document.documentElement.scrollHeight,
-      }));
-      const name = (route.replace(/\//g, "") || "index") + `-${width}.png`;
-      await page.screenshot({ path: path.join(out, name), fullPage: true });
-      if (seg > 0) {
-        for (let y = 0, n = 1; y < h; y += seg, n++) {
-          const clip = { x: 0, y, width, height: Math.min(seg, h - y) };
-          await page.screenshot({ path: path.join(out, name.replace(".png", `-${String(n).padStart(2, "0")}.png`)), fullPage: true, clip });
-        }
+    const { sw, h } = await page.evaluate(() => ({
+      sw: document.documentElement.scrollWidth,
+      h: document.documentElement.scrollHeight,
+    }));
+    const name = `${slug(route)}-${width}.png`;
+    await page.screenshot({ path: path.join(out, name), fullPage: true });
+    if (seg > 0) {
+      for (let y = 0, n = 1; y < h; y += seg, n++) {
+        const clip = { x: 0, y, width, height: Math.min(seg, h - y) };
+        await page.screenshot({ path: path.join(out, name.replace(".png", `-${String(n).padStart(2, "0")}.png`)), fullPage: true, clip });
       }
-      const overflow = sw > width;
-      if (overflow || errors.length) failed = true;
-      console.log(`${name}  height=${h}  scrollWidth=${sw}${overflow ? "  <-- OVERFLOW" : ""}`);
-      for (const e of errors) console.log(`   error: ${e}`);
-      await page.close();
     }
+    const overflow = sw > width;
+    if (overflow || errors.length) failed = true;
+    console.log(`${name}  height=${h}  scrollWidth=${sw}${overflow ? "  <-- OVERFLOW" : ""}`);
+    for (const e of errors) console.log(`   error: ${e}`);
+    await page.close();
   }
 }
 await browser.close();
