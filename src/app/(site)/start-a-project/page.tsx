@@ -46,7 +46,7 @@ export default function StartAProjectPage() {
         </RevealItem>
       </Reveal>
 
-      <section className={`grid grid-cols-1 items-start gap-y-[56px] pb-[96px] lg:pb-[160px] xl:grid-cols-12 xl:gap-x-[32px] ${PX}`}>
+      <section className={`grid grid-cols-1 items-start gap-y-[72px] pb-[96px] lg:pb-[160px] xl:grid-cols-12 xl:gap-x-[32px] ${PX}`}>
         <Reveal onMount delay={0.45} from={{ y: 70 }} duration={1} className="xl:col-span-8">
           <EnquiryForm />
         </Reveal>
@@ -56,8 +56,8 @@ export default function StartAProjectPage() {
           stagger={0.14}
           delay={0.6}
           onMount
-          className="grid grid-cols-1 items-start gap-[40px] md:grid-cols-2 xl:col-span-4 xl:col-start-9 xl:flex xl:flex-col xl:gap-[48px] xl:pt-[16px]">
-          <RevealItem className="flex flex-col gap-[16px]">
+          className="grid grid-cols-1 items-start gap-[48px] md:grid-cols-2 xl:col-span-4 xl:col-start-9 xl:flex xl:flex-col xl:gap-[64px] xl:pt-[64px]">
+          <RevealItem className="flex flex-col gap-[20px]">
             <Label size="text-[20px] lg:text-[24px]">Rather talk?</Label>
             <a
               href={`mailto:${CONTACT.email}`}
@@ -72,7 +72,7 @@ export default function StartAProjectPage() {
               Call · {CONTACT.phone}
             </a>
           </RevealItem>
-          <RevealItem className="flex flex-col gap-[12px]">
+          <RevealItem className="flex flex-col gap-[16px]">
             <Label size="text-[20px] lg:text-[24px]">The studio</Label>
             <address className="text-[17px] leading-[1.6] not-italic lg:text-[18px]">
               [Studio address]
@@ -81,9 +81,9 @@ export default function StartAProjectPage() {
             </address>
           </RevealItem>
           <RevealItem from={{ y: 60 }} className="md:col-span-2 md:max-w-[520px] xl:max-w-none">
-          <div className="flex flex-col gap-[22px] rounded-[28px] border border-[var(--ink)] p-[28px] [transform:rotate(1.5deg)] lg:p-[32px]">
+          <div className="flex flex-col gap-[28px] rounded-[28px] border border-[var(--ink)] p-[32px] [transform:rotate(1.5deg)] lg:p-[40px]">
             <Label size="text-[20px] lg:text-[24px]">What happens next</Label>
-            <ol className="m-0 flex list-none flex-col gap-[22px] p-0">
+            <ol className="m-0 flex list-none flex-col gap-[26px] p-0">
               {NEXT_STEPS.map((t, i) => (
                 <li key={t} className="flex items-baseline gap-[16px]">
                   <span className="text-[26px] font-extrabold text-[var(--accent-text)]">{String(i + 1).padStart(2, "0")}</span>

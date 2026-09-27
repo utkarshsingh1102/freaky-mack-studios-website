@@ -16,6 +16,7 @@ export function ChipGroup({
   value,
   onChange,
   size = "md",
+  gap = "gap-[10px]",
 }: {
   label?: string;
   labelledBy?: string;
@@ -23,6 +24,8 @@ export function ChipGroup({
   value: string;
   onChange: (id: string) => void;
   size?: "md" | "lg";
+  /** Space between chips. */
+  gap?: string;
 }) {
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
   const index = Math.max(0, options.findIndex((o) => o.id === value));
@@ -43,7 +46,7 @@ export function ChipGroup({
 
   const h = size === "lg" ? "h-[42px] px-[16px] text-[14px] lg:h-[46px] lg:px-[18px] lg:text-[15px]" : "h-[42px] px-[16px] text-[14px] lg:h-[44px] lg:px-[18px] lg:text-[15px]";
   return (
-    <div role="radiogroup" aria-label={label} aria-labelledby={labelledBy} onKeyDown={onKeyDown} className="flex flex-wrap gap-[10px]">
+    <div role="radiogroup" aria-label={label} aria-labelledby={labelledBy} onKeyDown={onKeyDown} className={`flex flex-wrap ${gap}`}>
       {options.map((o, i) => {
         const on = i === index;
         return (

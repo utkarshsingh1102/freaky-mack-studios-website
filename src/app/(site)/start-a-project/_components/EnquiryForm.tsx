@@ -13,10 +13,10 @@ const FMT_OPTS = FORMATS.map((f) => ({ id: f.id, label: bare(f.phrase) }));
 const WHO_OPTS = AUDIENCES.map((a) => ({ id: a.id, label: bare(a.phrase) }));
 
 const FIELD =
-  "rounded-[12px] border border-[var(--field-line)] bg-[var(--field-bg)] px-[16px] text-[16px] text-[var(--ink)] [font-family:inherit]";
-const LABEL = "text-[13px] font-medium text-[var(--ink-2)]";
+  "rounded-[12px] border border-[var(--field-line)] bg-[var(--field-bg)] px-[18px] text-[16px] text-[var(--ink)] [font-family:inherit]";
+const LABEL = "text-[14px] font-medium text-[var(--ink-2)]";
 const ERR = "m-0 text-[13px] text-[var(--error)]";
-const LEGEND = "mb-[14px] p-0 text-[13px] tracking-[0.2em] text-[var(--muted)] uppercase";
+const LEGEND = "mb-[18px] p-0 lg:mb-[22px] text-[13px] tracking-[0.2em] text-[var(--muted)] uppercase";
 
 /** The query string, read without a Suspense boundary: "" while prerendering, the real one after hydration. */
 const noop = () => () => {};
@@ -65,9 +65,9 @@ export function EnquiryForm() {
       onSubmit={onSubmit}
       noValidate
       aria-label="Start a project"
-      className="flex flex-col gap-[36px] rounded-[24px] bg-[var(--surface)] p-[22px] sm:p-[32px] lg:gap-[40px] lg:rounded-[32px] lg:p-[48px]"
+      className="flex flex-col gap-[44px] rounded-[24px] bg-[var(--surface)] p-[24px] sm:p-[40px] lg:gap-[56px] lg:rounded-[32px] lg:p-[64px]"
     >
-      <p className="m-0 text-[26px] leading-[1.3] font-extrabold tracking-[-0.03em] md:text-[34px] lg:text-[40px]" aria-live="polite">
+      <p className="m-0 text-[26px] leading-[1.45] font-extrabold tracking-[-0.03em] md:text-[34px] lg:text-[40px]" aria-live="polite">
         You need{" "}
         <span className="inline-block rounded-full bg-[var(--accent)] px-[14px] text-[var(--on-accent)] [transform:rotate(-1.5deg)] lg:px-[20px]">
           <Swap text={f.phrase} />
@@ -81,26 +81,26 @@ export function EnquiryForm() {
 
       <fieldset className="m-0 border-0 p-0">
         <legend id="q-fmt" className={LEGEND}>01 · What are we making?</legend>
-        <ChipGroup labelledBy="q-fmt" options={FMT_OPTS} value={fmt} onChange={pick("fmt")} />
+        <ChipGroup labelledBy="q-fmt" options={FMT_OPTS} value={fmt} onChange={pick("fmt")} gap="gap-[12px]" />
       </fieldset>
       <fieldset className="m-0 border-0 p-0">
         <legend id="q-who" className={LEGEND}>02 · Who’s it for?</legend>
-        <ChipGroup labelledBy="q-who" options={WHO_OPTS} value={who} onChange={pick("who")} />
+        <ChipGroup labelledBy="q-who" options={WHO_OPTS} value={who} onChange={pick("who")} gap="gap-[12px]" />
       </fieldset>
-      <div className="grid grid-cols-1 gap-[36px] md:grid-cols-2 md:gap-[32px]">
-        <fieldset className="m-0 border-0 p-0">
-          <legend id="q-when" className={LEGEND}>03 · When?</legend>
-          <ChipGroup labelledBy="q-when" options={WHENS} value={when} onChange={pick("when")} />
-        </fieldset>
-        <fieldset className="m-0 border-0 p-0">
-          <legend id="q-budget" className={LEGEND}>04 · Budget range</legend>
-          <ChipGroup labelledBy="q-budget" options={BUDGETS} value={budget} onChange={pick("budget")} />
-        </fieldset>
-      </div>
+      {/* One question per row (side by side, their chips wrapped onto three lines). */}
+      <fieldset className="m-0 border-0 p-0">
+        <legend id="q-when" className={LEGEND}>03 · When?</legend>
+        <ChipGroup labelledBy="q-when" options={WHENS} value={when} onChange={pick("when")} gap="gap-[12px]" />
+      </fieldset>
+      <fieldset className="m-0 border-0 p-0">
+        <legend id="q-budget" className={LEGEND}>04 · Budget range</legend>
+        <ChipGroup labelledBy="q-budget" options={BUDGETS} value={budget} onChange={pick("budget")} gap="gap-[12px]" />
+      </fieldset>
 
-      <div className="grid grid-cols-1 gap-[20px] md:grid-cols-2">
+      {/* The contact fields sit apart from the questions above, below a hairline. */}
+      <div className="grid grid-cols-1 gap-x-[24px] gap-y-[28px] border-t border-[var(--line)] pt-[44px] md:grid-cols-2 lg:pt-[56px]">
         {FIELDS.map((fd) => (
-          <div key={fd.id} className="flex flex-col gap-[8px]">
+          <div key={fd.id} className="flex flex-col gap-[10px]">
             <label htmlFor={fd.id} className={LABEL}>
               {fd.label} {fd.optional && <span className="text-[var(--muted-2)]">{fd.optional}</span>}
             </label>
@@ -113,12 +113,12 @@ export function EnquiryForm() {
               aria-invalid={!!err(fd.name)}
               aria-describedby={err(fd.name) ? `${fd.id}-err` : undefined}
               placeholder={fd.placeholder}
-              className={`${FIELD} h-[52px]`}
+              className={`${FIELD} h-[56px]`}
             />
             {err(fd.name) && <p id={`${fd.id}-err`} className={ERR}>{err(fd.name)}</p>}
           </div>
         ))}
-        <div className="flex flex-col gap-[8px] md:col-span-2">
+        <div className="flex flex-col gap-[10px] md:col-span-2">
           <label htmlFor="c-brief" className={LABEL}>The story so far</label>
           <textarea
             id="c-brief"
@@ -128,20 +128,20 @@ export function EnquiryForm() {
             aria-invalid={!!errors.brief}
             aria-describedby={errors.brief ? "c-brief-err" : undefined}
             placeholder="The idea, where it will run, anything you already have."
-            className={`${FIELD} resize-y py-[14px]`}
+            className={`${FIELD} resize-y py-[16px]`}
           />
           {errors.brief && <p id="c-brief-err" className={ERR}>{errors.brief}</p>}
         </div>
-        <div className="flex flex-col gap-[8px] md:col-span-2">
+        <div className="flex flex-col gap-[10px] md:col-span-2">
           <label htmlFor="c-links" className={LABEL}>
             Links <span className="text-[var(--muted-2)]">(decks, references, moodboards — optional)</span>
           </label>
-          <input id="c-links" name="links" type="url" placeholder="https://" className={`${FIELD} h-[52px]`} />
+          <input id="c-links" name="links" type="url" placeholder="https://" className={`${FIELD} h-[56px]`} />
         </div>
       </div>
 
       <div className="flex flex-col items-start justify-between gap-[24px] md:flex-row md:items-center">
-        <p className="m-0 max-w-[420px] text-[13px] leading-[1.6] text-[var(--muted)]">
+        <p className="m-0 max-w-[420px] text-[14px] leading-[1.6] text-[var(--muted)]">
           By sending this you agree to our{" "}
           <Link href="/privacy" className={`${s.link} border-b border-[var(--muted)] text-[var(--ink-2)]`}>
             privacy policy
