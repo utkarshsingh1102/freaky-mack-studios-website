@@ -1,9 +1,21 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { EASE } from "@/components/motion/Reveal";
 import { NAV_ITEMS, activeFor } from "./nav-items";
+
+const MotionLink = motion.create(Link);
+
+/** The panel fades down into place and its links follow one after another. */
+const PANEL = {
+  hidden: { opacity: 0, y: -16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: EASE, staggerChildren: 0.05, delayChildren: 0.08 } },
+  exit: { opacity: 0, y: -10, transition: { duration: 0.2 } },
+};
+const ITEM = { hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: EASE } } };
 
 /** Below lg the nav collapses into this menu button + full-screen panel (CLAUDE.md → Responsive). */
 export function MobileMenu({ serifClass }: { serifClass: string }) {
@@ -45,8 +57,14 @@ export function MobileMenu({ serifClass }: { serifClass: string }) {
           {open ? <path d="M3 3l10 10M13 3L3 13" /> : <path d="M2 5h12M2 11h12" />}
         </svg>
       </button>
+      <AnimatePresence>
       {open && (
-        <div
+        <motion.div
+          key="menu"
+          variants={PANEL}
+          initial="hidden"
+          animate="show"
+          exit="exit"
           id="fm-menu"
           role="dialog"
           aria-modal="true"
@@ -55,7 +73,8 @@ export function MobileMenu({ serifClass }: { serifClass: string }) {
         >
           <nav aria-label="Main" className="flex flex-col border-t border-[var(--ink)]">
             {NAV_ITEMS.map((it) => (
-              <Link
+              <MotionLink
+                variants={ITEM}
                 key={it.key}
                 href={it.href}
                 onClick={() => setOpenOn(null)}
@@ -65,18 +84,20 @@ export function MobileMenu({ serifClass }: { serifClass: string }) {
                 <span className={`${serifClass} text-[20px] font-normal tracking-normal text-[var(--muted-2)]`}>{it.no}</span>
                 {it.label}
                 {active === it.key && <span className="ml-auto h-[10px] w-[10px] self-center rounded-full bg-[var(--accent)]" />}
-              </Link>
+              </MotionLink>
             ))}
           </nav>
-          <Link
+          <MotionLink
+            variants={ITEM}
             href="/start-a-project"
             onClick={() => setOpenOn(null)}
             className="mt-[32px] flex h-[56px] items-center justify-center rounded-full border border-[var(--accent)] bg-[var(--accent)] text-[16px] font-semibold text-[var(--on-accent)]"
           >
             Start a project
-          </Link>
-        </div>
+          </MotionLink>
+        </motion.div>
       )}
+      </AnimatePresence>
     </>
   );
 }

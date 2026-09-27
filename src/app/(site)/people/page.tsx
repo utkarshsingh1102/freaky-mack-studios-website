@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { CONTACT, SOCIAL } from "@/shared/config";
 import { InverseSlab, pillAccent } from "@/components/site/blocks";
 import { DraggableMark } from "@/components/motion/DraggableMark";
+import { Reveal, RevealItem } from "@/components/motion/Reveal";
+import { ScrollIn } from "@/components/motion/ScrollIn";
 import s from "@/components/site/site.module.css";
 import { AccentWord, H1, H2, Intro, Kicker, Label, PX } from "@/components/site/ui";
 import { COLLABORATORS, CREW } from "@/content/people";
@@ -26,56 +28,82 @@ export default function PeoplePage() {
   return (
     <>
       <section
-        className={`relative flex flex-col items-center gap-[24px] pt-[88px] pb-[72px] text-center lg:gap-[32px] lg:pt-[120px] lg:pb-[120px] ${PX}`}
+        className={`relative pt-[88px] pb-[72px] text-center lg:pt-[120px] lg:pb-[120px] ${PX}`}
       >
         <DraggableMark className="absolute top-[16px] left-[20px] h-[56px] w-[84px] lg:top-[24px] lg:left-[40px] xl:top-[110px] xl:left-[170px] xl:h-[100px] xl:w-[150px]" imgClassName={`${s.blob} ${s.logo}`} />
-        <Kicker>Chapter 04 — The humans behind the camera</Kicker>
-        <H1 className="max-w-[1000px]">
-          Small crew. Big <AccentWord>appetite</AccentWord>.
-        </H1>
-        <Intro className="max-w-[760px]">The filmmakers, producers and editors behind every Freaky Mack film.</Intro>
+        <Reveal onMount stagger={0.12} delay={0.1} className="flex flex-col items-center gap-[24px] lg:gap-[32px]">
+          <RevealItem>
+            <Kicker>Chapter 04 — The humans behind the camera</Kicker>
+          </RevealItem>
+          <RevealItem from={{ y: 60, blur: 8 }} duration={1.1} className="flex flex-col items-center">
+            <H1 className="max-w-[1000px]">
+              Small crew. Big <AccentWord>appetite</AccentWord>.
+            </H1>
+          </RevealItem>
+          <RevealItem className="flex flex-col items-center">
+            <Intro className="max-w-[760px]">The filmmakers, producers and editors behind every Freaky Mack film.</Intro>
+          </RevealItem>
+        </Reveal>
       </section>
 
       <section aria-label="Founder" className={`grid grid-cols-1 items-center gap-y-[56px] lg:grid-cols-12 lg:gap-x-[32px] ${SECTION}`}>
         <div className="relative mx-auto w-full max-w-[480px] lg:col-span-5 lg:max-w-none">
+          {/* The portrait straightens and grows into place; the role sticker pops on after it. */}
+          <ScrollIn scale={0.88} rotate={-5} y={70}>
           <div
             className="flex h-[440px] items-center justify-center rounded-[200px_200px_28px_28px] text-[12px] tracking-[0.2em] text-[var(--muted)] uppercase [transform:rotate(-2deg)] md:h-[540px] lg:h-[620px] lg:rounded-[260px_260px_32px_32px]"
             style={{ background: "var(--portrait)" }}
           >
             [ Portrait — Izaan ]
           </div>
-          <span className="absolute right-[-8px] bottom-[40px] rounded-full bg-[var(--accent)] px-[18px] py-[8px] text-[14px] font-semibold text-[var(--on-accent)] [transform:rotate(5deg)] lg:right-[-20px] lg:bottom-[48px] lg:px-[22px] lg:py-[10px] lg:text-[16px]">
-            Founder &amp; Creative Producer
-          </span>
+          </ScrollIn>
+          <Reveal
+            from={{ scale: 0.3, rotate: -25, y: 0 }}
+            delay={0.35}
+            amount={0.6}
+            className="absolute right-[-8px] bottom-[40px] lg:right-[-20px] lg:bottom-[48px]"
+          >
+            <span className="block rounded-full bg-[var(--accent)] px-[18px] py-[8px] text-[14px] font-semibold text-[var(--on-accent)] [transform:rotate(5deg)] lg:px-[22px] lg:py-[10px] lg:text-[16px]">
+              Founder &amp; Creative Producer
+            </span>
+          </Reveal>
         </div>
-        <div className="flex flex-col gap-[24px] lg:col-span-6 lg:col-start-7 lg:gap-[28px]">
-          <Label>Meet the founder</Label>
+        <Reveal stagger={0.12} amount={0.25} className="flex flex-col gap-[24px] lg:col-span-6 lg:col-start-7 lg:gap-[28px]">
+          <RevealItem>
+            <Label>Meet the founder</Label>
+          </RevealItem>
+          <RevealItem>
           <h2 className="m-0 text-[48px] leading-[1] font-extrabold tracking-[-0.03em] uppercase md:text-[60px] lg:text-[72px]">
             Izaan Khan
           </h2>
+          </RevealItem>
+          <RevealItem>
           <blockquote className={`${s.serif} m-0 text-[26px] leading-[1.25] tracking-[-0.01em] lg:text-[34px]`}>
             “[A line from Izaan on why he started Freaky Mack Studios.]”
           </blockquote>
-          <p className="m-0 text-[17px] leading-[1.65] text-[var(--ink-2)] lg:text-[18px]">
+          </RevealItem>
+          <RevealItem as="p" className="m-0 text-[17px] leading-[1.65] text-[var(--ink-2)] lg:text-[18px]">
             [Two or three lines of bio — how he got into film, six years at Freaky Mack, what he wants the studio to
             make next.]
-          </p>
-          <div className="flex gap-[20px] text-[15px] font-semibold">
+          </RevealItem>
+          <RevealItem className="flex gap-[20px] text-[15px] font-semibold">
             <a href={SOCIAL.founderInstagram} className={`${s.link} border-b border-[var(--ink)] pb-[3px]`}>Instagram ↗</a>
             <a href={SOCIAL.founderLinkedin} className={`${s.link} border-b border-[var(--ink)] pb-[3px]`}>LinkedIn ↗</a>
-          </div>
-        </div>
+          </RevealItem>
+        </Reveal>
       </section>
 
       <section aria-label="The crew" className={`flex flex-col gap-[48px] lg:gap-[64px] ${SECTION}`}>
-        <div className="flex flex-col gap-[16px]">
+        <Reveal className="flex flex-col gap-[16px]">
           <Label>The crew</Label>
           <h2 className={H2}>Faces behind the frames.</h2>
-        </div>
-        <ul className="m-0 grid list-none grid-cols-2 items-end gap-x-[16px] gap-y-[40px] p-0 md:grid-cols-4 md:gap-x-[24px] lg:gap-x-[32px] lg:gap-y-[56px]">
+        </Reveal>
+        <Reveal as="ul" stagger={0.08} amount={0.15} className="m-0 grid list-none grid-cols-2 items-end gap-x-[16px] gap-y-[40px] p-0 md:grid-cols-4 md:gap-x-[24px] lg:gap-x-[32px] lg:gap-y-[56px]">
           {CREW.map((c, i) => (
-            <li
+            <RevealItem
+              as="li"
               key={i}
+              from={{ y: 70 }}
               className={`${s.face} flex flex-col items-center gap-[16px] md:mb-[var(--lift)]`}
               style={{ ["--lift" as string]: `${c.lift}px` }}
             >
@@ -95,13 +123,13 @@ export default function PeoplePage() {
               >
                 {c.name} · {c.role}
               </span>
-            </li>
+            </RevealItem>
           ))}
-        </ul>
+        </Reveal>
       </section>
 
       <section aria-label="Collaborators" className={`grid grid-cols-1 items-start gap-y-[36px] lg:grid-cols-12 lg:gap-x-[32px] ${SECTION}`}>
-        <div className="flex flex-col gap-[16px] lg:col-span-5">
+        <Reveal className="flex flex-col gap-[16px] lg:col-span-5">
           <Label>The wider crew</Label>
           <h2 className="m-0 text-[34px] leading-[1.08] font-extrabold tracking-[-0.03em] md:text-[42px] lg:text-[48px]">
             Every film brings its own crew.
@@ -109,18 +137,26 @@ export default function PeoplePage() {
           <p className="m-0 text-[17px] leading-[1.65] text-[var(--ink-2)] lg:text-[18px]">
             [One line on the directors, cinematographers and editors Freaky Mack works with project by project.]
           </p>
-        </div>
-        <ul className="m-0 flex list-none flex-wrap gap-[12px] p-0 lg:col-span-6 lg:col-start-7 lg:gap-[14px] lg:pt-[12px]">
+        </Reveal>
+        {/* The role chips pop in one after another; each chip keeps its tilt inside the animated item. */}
+        <Reveal
+          as="ul"
+          stagger={0.06}
+          delay={0.1}
+          amount={0.3}
+          className="m-0 flex list-none flex-wrap gap-[12px] p-0 lg:col-span-6 lg:col-start-7 lg:gap-[14px] lg:pt-[12px]"
+        >
           {COLLABORATORS.map((c) => (
-            <li
-              key={c.label}
+            <RevealItem as="li" key={c.label} from={{ y: 30, scale: 0.6, rotate: c.tilt * 4 }} className="flex">
+            <span
               className={`${s.chipTilt} rounded-full border px-[18px] py-[10px] text-[16px] font-medium lg:px-[22px] lg:py-[12px] lg:text-[18px] ${CHIP[c.style ?? "plain"]}`}
               style={{ transform: `rotate(${c.tilt}deg)` }}
             >
               {c.label}
-            </li>
+            </span>
+            </RevealItem>
           ))}
-        </ul>
+        </Reveal>
       </section>
 
       <InverseSlab

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { FM_MARK_WHITE } from "@/shared/assets";
+import { Reveal, RevealItem } from "@/components/motion/Reveal";
+import { ScrollIn } from "@/components/motion/ScrollIn";
 import { YourTurnCta } from "@/components/site/blocks";
 import s from "@/components/site/site.module.css";
 import { AccentWord, H1, H2, Intro, Kicker, Label, MX, PX } from "@/components/site/ui";
@@ -24,10 +26,19 @@ const TONE = {
 export default function StudioPage() {
   return (
     <>
-      <section className={`flex flex-col gap-[24px] pt-[64px] pb-[56px] lg:gap-[32px] lg:pt-[120px] lg:pb-[88px] ${PX}`}>
-        <Kicker>Chapter 02 — The studio</Kicker>
+      <Reveal
+        as="section"
+        onMount
+        stagger={0.12}
+        delay={0.1}
+        className={`flex flex-col gap-[24px] pt-[64px] pb-[56px] lg:gap-[32px] lg:pt-[120px] lg:pb-[88px] ${PX}`}
+      >
+        <RevealItem>
+          <Kicker>Chapter 02 — The studio</Kicker>
+        </RevealItem>
         {/* Two lines from tablet up, one sentence each. "Advertising taught us precision." is 17.7em wide,
             so the size tracks the column width (1248px at 1440 → 68px) instead of the board's 88px. */}
+        <RevealItem from={{ y: 60, blur: 8 }} duration={1.1}>
         <H1
           balance={false}
           className="md:text-[min(68px,calc((100vw-80px)/18.2))] lg:text-[min(68px,calc((100vw-192px)/18.2))]"
@@ -39,65 +50,83 @@ export default function StudioPage() {
             <AccentWord size="text-[clamp(44px,6.667vw,96px)] md:text-[1.09em]">appetite</AccentWord>.
           </span>
         </H1>
-        <Intro className="max-w-[760px]">
-          A film production house built on six years of advertising filmmaking — now a studio for commercial, narrative
-          and digital stories.
-        </Intro>
-      </section>
+        </RevealItem>
+        <RevealItem>
+          <Intro className="max-w-[760px]">
+            A film production house built on six years of advertising filmmaking — now a studio for commercial,
+            narrative and digital stories.
+          </Intro>
+        </RevealItem>
+      </Reveal>
 
       <section className={`relative pb-[96px] lg:pb-[160px] ${PX}`}>
+        {/* The still straightens and grows into place as it scrolls in; the sticker pops on after it. */}
+        <ScrollIn scale={0.9} rotate={-4} y={80}>
         <div
           className="flex h-[320px] items-center justify-center rounded-[24px] px-[24px] text-center text-[12px] tracking-[0.22em] text-white/60 uppercase shadow-[0_30px_80px_rgba(0,0,0,0.14)] [transform:rotate(-1deg)] md:h-[460px] lg:h-[600px] lg:rounded-[32px]"
           style={{ background: "radial-gradient(ellipse at 45% 50%, #4a4a48 0%, #1a1a1a 60%, #0a0a0a 100%)" }}
         >
           [ On set — behind the scenes still ]
         </div>
-        <span
-          className={`${s.it} absolute top-[-18px] right-[36px] rounded-full bg-[var(--accent)] px-[18px] py-[6px] text-[18px] text-[var(--on-accent)] [transform:rotate(5deg)] lg:top-[-22px] lg:right-[150px] lg:px-[22px] lg:py-[8px] lg:text-[22px]`}
+        </ScrollIn>
+        <Reveal
+          from={{ scale: 0.3, rotate: 30, y: 0 }}
+          delay={0.3}
+          amount={0.5}
+          className="absolute top-[-18px] right-[36px] lg:top-[-22px] lg:right-[150px]"
         >
-          on set, [Year]
-        </span>
+          <span
+            className={`${s.it} block rounded-full bg-[var(--accent)] px-[18px] py-[6px] text-[18px] text-[var(--on-accent)] [transform:rotate(5deg)] lg:px-[22px] lg:py-[8px] lg:text-[22px]`}
+          >
+            on set, [Year]
+          </span>
+        </Reveal>
       </section>
 
       <section className={`grid grid-cols-1 gap-y-[24px] lg:grid-cols-12 lg:gap-x-[32px] ${SECTION}`}>
-        <Label className="lg:col-span-3">The story so far</Label>
-        <div className="flex flex-col gap-[24px] lg:col-span-8 lg:col-start-5 lg:gap-[28px]">
-          <p className="m-0 text-[26px] leading-[1.2] font-extrabold tracking-[-0.02em] text-pretty md:text-[32px] lg:text-[38px]">
+        <Reveal className="lg:col-span-3">
+          <Label>The story so far</Label>
+        </Reveal>
+        <Reveal stagger={0.14} className="flex flex-col gap-[24px] lg:col-span-8 lg:col-start-5 lg:gap-[28px]">
+          <RevealItem as="p" className="m-0 text-[26px] leading-[1.2] font-extrabold tracking-[-0.02em] text-pretty md:text-[32px] lg:text-[38px]">
             Freaky Mack Studios is built on six years of advertising filmmaking at Freaky Mack — now a larger creative
             studio focused on storytelling across commercial, narrative and digital formats.
-          </p>
-          <p className="m-0 text-[18px] leading-[1.65] text-[var(--ink-2)] lg:text-[20px]">
+          </RevealItem>
+          <RevealItem as="p" className="m-0 text-[18px] leading-[1.65] text-[var(--ink-2)] lg:text-[20px]">
             We’ve made films for McDonald’s, Google, Adidas Originals, Mercedes-Benz, Fila, PC Jewellers, Times of India
             and many more — bringing strong visual storytelling, production discipline and a filmmaker-led creative
             approach.
-          </p>
-          <p className="m-0 text-[18px] leading-[1.65] text-[var(--ink-2)] lg:text-[20px]">
+          </RevealItem>
+          <RevealItem as="p" className="m-0 text-[18px] leading-[1.65] text-[var(--ink-2)] lg:text-[20px]">
             Today we develop and produce commercial and fashion films, music videos, documentaries, digital series and
             original narratives. We combine the precision of advertising filmmaking with the creative ambition of
             independent cinema — building a slate of our own work alongside films for brands and cultural platforms.
-          </p>
-        </div>
+          </RevealItem>
+        </Reveal>
       </section>
 
       <section aria-label="Timeline" className={`flex flex-col gap-[40px] lg:gap-[56px] ${SECTION}`}>
-        <div className="flex flex-col gap-[16px]">
+        <Reveal className="flex flex-col gap-[16px]">
           <Label>Told in chapters</Label>
           <h2 className={H2}>From agency to studio.</h2>
-        </div>
-        <ol className="m-0 grid list-none grid-cols-1 items-end gap-[24px] p-0 md:grid-cols-2 xl:grid-cols-4">
+        </Reveal>
+        {/* The chapters rise one after another, like a staircase; each card keeps its tilt inside the animated item. */}
+        <Reveal as="ol" stagger={0.12} amount={0.2} className="m-0 grid list-none grid-cols-1 items-end gap-[24px] p-0 md:grid-cols-2 xl:grid-cols-4">
           {TIMELINE.map((t) => (
-            <li
-              key={t.label}
+            <RevealItem as="li" key={t.label} from={{ y: 90 }} className="flex flex-col">
+            <div
               className={`${s.card} ${TONE[t.tone].card} flex min-h-[220px] flex-col justify-between gap-[40px] rounded-[24px] p-[28px] xl:h-[var(--h)] xl:min-h-0`}
               style={{ transform: `rotate(${t.tilt}deg)`, ["--h" as string]: `${t.h}px` }}
             >
               <span className={`${s.it} text-[20px] ${TONE[t.tone].label}`}>{t.label}</span>
               <span className="text-[20px] leading-[1.35] font-semibold">{t.text}</span>
-            </li>
+            </div>
+            </RevealItem>
           ))}
-        </ol>
+        </Reveal>
       </section>
 
+      <ScrollIn scale={0.9} y={0} endAt="start 35%">
       <section
         aria-label="What we believe"
         className={`relative mb-[96px] flex flex-col gap-[40px] overflow-hidden rounded-[28px] bg-[var(--inv-bg)] px-[28px] py-[56px] text-[var(--inv-ink)] lg:mb-[180px] lg:gap-[64px] lg:rounded-[40px] lg:p-[96px] ${MX}`}
@@ -107,82 +136,101 @@ export default function StudioPage() {
           alt=""
           className={`${s.logoOnInverse} pointer-events-none absolute top-[-40px] right-[-60px] h-[200px] w-[300px] object-contain opacity-10 [transform:rotate(12deg)] lg:h-[305px] lg:w-[460px]`}
         />
-        <Label className="relative" color="text-[var(--inv-muted)]">What we believe</Label>
-        <div className="relative grid grid-cols-1 gap-[40px] md:grid-cols-3 lg:gap-[48px]">
+        <Reveal className="relative">
+          <Label color="text-[var(--inv-muted)]">What we believe</Label>
+        </Reveal>
+        <Reveal stagger={0.14} delay={0.1} className="relative grid grid-cols-1 gap-[40px] md:grid-cols-3 lg:gap-[48px]">
           {BELIEFS.map((b) => (
-            <div key={b.no} className="flex flex-col gap-[16px]">
+            <RevealItem key={b.no} from={{ y: 50 }} className="flex flex-col gap-[16px]">
               <span className={`${s.it} text-[20px] text-[var(--inv-muted)]`}>{b.no}</span>
               <span className="text-[36px] font-extrabold tracking-[-0.03em] lg:text-[44px]">{b.title}</span>
               <span className="text-[17px] leading-[1.6] text-[var(--inv-soft)]">{b.text}</span>
-            </div>
+            </RevealItem>
           ))}
-        </div>
+        </Reveal>
       </section>
+      </ScrollIn>
 
       <section aria-label="What we make" className={`grid grid-cols-1 gap-y-[40px] xl:grid-cols-12 xl:gap-x-[32px] ${SECTION}`}>
-        <div className="flex flex-col gap-[16px] xl:col-span-4">
+        <Reveal className="flex flex-col gap-[16px] xl:col-span-4">
           <Label>What we make</Label>
           <h2 className="m-0 text-[36px] leading-[1.05] font-extrabold tracking-[-0.03em] text-balance md:text-[48px] lg:text-[56px]">
             Eight ways a brief becomes a film.
           </h2>
-        </div>
-        <ol className="m-0 list-none border-t border-[var(--ink)] p-0 xl:col-span-7 xl:col-start-6">
+        </Reveal>
+        <Reveal as="ol" stagger={0.06} amount={0.15} className="m-0 list-none border-t border-[var(--ink)] p-0 xl:col-span-7 xl:col-start-6">
           {SERVICES.map((sv, i) => (
-            <li
+            <RevealItem
+              as="li"
+              from={{ x: 50, y: 0 }}
+              duration={0.7}
               key={sv.name}
               className={`${s.row} grid grid-cols-[36px_1fr] items-baseline gap-x-[12px] gap-y-[6px] border-b border-[var(--line)] py-[20px] md:grid-cols-[48px_1fr_1.3fr] md:gap-[16px] lg:py-[22px]`}
             >
               <span className={`${s.it} text-[18px] text-[var(--muted-2)]`}>{String(i + 1).padStart(2, "0")}</span>
               <span className="text-[21px] font-semibold lg:text-[24px]">{sv.name}</span>
               <span className="col-start-2 text-[15px] text-[var(--muted)] md:col-start-auto">{sv.text}</span>
-            </li>
+            </RevealItem>
           ))}
-        </ol>
+        </Reveal>
       </section>
 
       <section aria-label="How we work" className={`flex flex-col gap-[40px] lg:gap-[56px] ${SECTION}`}>
-        <div className="flex flex-col gap-[16px]">
+        <Reveal className="flex flex-col gap-[16px]">
           <Label>How we work</Label>
           <h2 className={H2}>One team, brief to final cut.</h2>
-        </div>
-        <ol className="m-0 grid list-none grid-cols-1 items-start gap-[24px] p-0 md:grid-cols-3 lg:gap-[32px]">
+        </Reveal>
+        <Reveal as="ol" stagger={0.14} amount={0.2} className="m-0 grid list-none grid-cols-1 items-start gap-[24px] p-0 md:grid-cols-3 lg:gap-[32px]">
           {PROCESS.map((p) => (
-            <li
-              key={p.no}
-              className={`${s.card} flex flex-col gap-[20px] rounded-[28px] border border-[var(--ink)] p-[28px] lg:p-[36px] ${p.lift ? "md:mt-[40px]" : ""}`}
+            <RevealItem as="li" key={p.no} from={{ y: 80 }} className={p.lift ? "md:mt-[40px]" : ""}>
+            <div
+              className={`${s.card} flex flex-col gap-[20px] rounded-[28px] border border-[var(--ink)] p-[28px] lg:p-[36px]`}
               style={{ transform: `rotate(${p.tilt}deg)` }}
             >
               <span className="text-[48px] font-extrabold tracking-[-0.04em] text-[var(--accent-text)] lg:text-[56px]">{p.no}</span>
               <span className="text-[22px] font-bold lg:text-[24px]">{p.title}</span>
               <span className="text-[16px] leading-[1.6] text-[var(--ink-2)]">{p.text}</span>
-            </li>
+            </div>
+            </RevealItem>
           ))}
-        </ol>
+        </Reveal>
       </section>
 
       <section aria-label="Clients" className={`flex flex-col items-center gap-[32px] lg:gap-[40px] ${SECTION}`}>
-        <Label>Films made for</Label>
-        <ul className="m-0 flex list-none flex-wrap justify-center gap-[14px] p-0 xl:relative xl:block xl:h-[300px] xl:w-full xl:max-w-[1248px]">
+        <Reveal>
+          <Label>Films made for</Label>
+        </Reveal>
+        {/* The stickers pop in one after another. The item carries the board position; the sticker inside keeps its tilt. */}
+        <Reveal
+          as="ul"
+          stagger={0.07}
+          delay={0.1}
+          amount={0.3}
+          className="m-0 flex list-none flex-wrap justify-center gap-[14px] p-0 xl:relative xl:block xl:h-[300px] xl:w-full xl:max-w-[1248px]"
+        >
           {CLIENT_TAGS.map((c) => (
-            <li
+            <RevealItem
+              as="li"
               key={c.name}
-              className={`${s.tag} rounded-full border px-[20px] py-[10px] text-[18px] lg:px-[26px] lg:py-[14px] lg:text-[22px] xl:absolute xl:top-[var(--t)] xl:left-[var(--l)] ${
+              from={{ y: 40, scale: 0.6, rotate: c.rot * 3 }}
+              className="flex xl:absolute xl:top-[var(--t)] xl:left-[var(--l)]"
+              style={{ ["--l" as string]: `${(c.left / 1248) * 100}%`, ["--t" as string]: `${c.top}px` }}
+            >
+            <span
+              className={`${s.tag} relative rounded-full border px-[20px] py-[10px] text-[18px] lg:px-[26px] lg:py-[14px] lg:text-[22px] ${
                 c.accent
                   ? "border-[var(--accent)] bg-[var(--accent)] font-semibold text-[var(--on-accent)]"
                   : c.more
                     ? "border-dashed border-[var(--ink)] bg-[var(--pill-bg)] font-medium text-[var(--muted)]"
                     : "border-[var(--ink)] bg-[var(--pill-bg)] font-semibold"
               }`}
-              style={{
-                transform: `rotate(${c.rot}deg)`,
-                ["--l" as string]: `${(c.left / 1248) * 100}%`,
-                ["--t" as string]: `${c.top}px`,
-              }}
+              style={{ transform: `rotate(${c.rot}deg)` }}
             >
               {c.name}
-            </li>
+            </span>
+            </RevealItem>
           ))}
-        </ul>
+        </Reveal>
       </section>
 
       <YourTurnCta />

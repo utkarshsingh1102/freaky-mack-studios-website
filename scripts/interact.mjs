@@ -125,6 +125,9 @@ await page.goto(`${base}/work/`, { waitUntil: "networkidle" });
 const cards = page.locator('a[href^="/work/project-"]');
 const allCount = await cards.count();
 await page.getByRole("radio", { name: "Music videos" }).click();
+await page.waitForTimeout(900); // leaving cards animate out, the rest glide into place
+const settled = await page.evaluate(() => [...document.querySelectorAll('a[href^="/work/project-"]')].map((a) => getComputedStyle(a.parentElement).opacity));
+check(settled.every((o) => o === "1"), `filtered cards settle fully visible (${settled.join(", ")})`);
 check((await cards.count()) === 2 && (await page.getByText("2 films · [NN] in total").isVisible()), `Music videos filter shows 2 of ${allCount}`);
 await page.keyboard.press("ArrowRight");
 check((await page.getByRole("radio", { name: "Fashion films" }).getAttribute("aria-checked")) === "true", "arrow key moves the filter");
@@ -155,9 +158,11 @@ await page.getByRole("link", { name: /Tell us the rest/ }).click();
 await page.waitForURL(/start-a-project/);
 await page.waitForTimeout(300);
 check((await page.getByRole("radio", { name: "music video" }).getAttribute("aria-checked")) === "true" && (await page.getByRole("radio", { name: "agency" }).getAttribute("aria-checked")) === "true", `homepage sentence pre-fills the form (${new URL(page.url()).search})`);
+await page.waitForTimeout(700); // sentence words settle
 const summary = () => page.locator("form p").first().innerText().then((x) => x.replace(/\s+/g, " "));
 check(/You need a music video for an agency, as soon as possible\./.test(await summary()), `live sentence → "${await summary()}"`);
 await page.getByRole("radio", { name: "Flexible" }).click();
+await page.waitForTimeout(700); // the phrase swaps with a fade
 check(/whenever it’s right\./.test(await summary()), "When chip updates the sentence");
 await page.getByRole("radio", { name: "music video" }).focus();
 await page.keyboard.press("ArrowRight");
@@ -207,7 +212,10 @@ await phone.goto(`${base}/work/`, { waitUntil: "networkidle" });
 await phone.getByRole("button", { name: "Open menu" }).click();
 const menu = phone.locator("#fm-menu");
 check(await menu.isVisible(), "menu opens");
+await phone.waitForTimeout(600);
+check((await menu.evaluate((el) => getComputedStyle(el).opacity)) === "1", "menu panel animates fully in");
 await phone.keyboard.press("Escape");
+await menu.waitFor({ state: "detached", timeout: 2000 }).catch(() => {});
 check(!(await menu.isVisible()), "Esc closes the menu");
 await phone.getByRole("button", { name: "Open menu" }).click();
 await menu.getByRole("link", { name: /Originals/ }).click();
@@ -269,6 +277,40 @@ console.log("Motion (homepage)");
   await np.goto(`${base}/`, { waitUntil: "load" });
   const hidden = await np.evaluate(() => [...document.querySelectorAll("[data-reveal]")].filter((el) => getComputedStyle(el).opacity !== "1").length);
   check(hidden === 0, `without JavaScript every section is visible (${hidden} hidden)`);
+  await nojs.close();
+}
+
+console.log("Motion (other pages)");
+{
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  const sp = await ctx.newPage();
+  sp.on("pageerror", (e) => errors.push(String(e)));
+  // A section below the fold starts hidden and reveals when scrolled to (Studio's process cards).
+  await sp.goto(`${base}/studio/`, { waitUntil: "networkidle" });
+  await sp.waitForTimeout(1200);
+  const card = sp.locator('section[aria-label="How we work"] li').first();
+  const o1 = await card.evaluate((el) => getComputedStyle(el).opacity);
+  await card.scrollIntoViewIfNeeded();
+  await sp.waitForTimeout(1500);
+  const o2 = await card.evaluate((el) => getComputedStyle(el).opacity);
+  const tilt = await card.evaluate((el) => getComputedStyle(el.firstElementChild).transform);
+  check(o1 === "0" && o2 === "1" && tilt !== "none", `Studio cards reveal on scroll and keep their tilt (opacity ${o1} → ${o2})`);
+  // The hero plays in on load.
+  await sp.goto(`${base}/people/`, { waitUntil: "networkidle" });
+  await sp.waitForTimeout(1800);
+  const h1 = await sp.evaluate(() => getComputedStyle(document.querySelector("h1").closest("[data-reveal]")).opacity);
+  check(h1 === "1", "People hero plays in on load");
+  await ctx.close();
+  // Without JavaScript nothing is hidden on any page.
+  const nojs = await browser.newContext({ viewport: { width: 1440, height: 900 }, javaScriptEnabled: false });
+  const np = await nojs.newPage();
+  const hiddenOn = [];
+  for (const r of ["/work/", "/work/project-01/", "/studio/", "/originals/", "/people/", "/start-a-project/", "/thanks/", "/privacy/", "/missing-page/"]) {
+    await np.goto(`${base}${r}`, { waitUntil: "load" });
+    const n = await np.evaluate(() => [...document.querySelectorAll("[data-reveal]")].filter((el) => getComputedStyle(el).opacity !== "1").length);
+    if (n) hiddenOn.push(`${r}: ${n}`);
+  }
+  check(hiddenOn.length === 0, `without JavaScript every page is fully visible${hiddenOn.length ? ` (${hiddenOn.join(", ")})` : ""}`);
   await nojs.close();
 }
 

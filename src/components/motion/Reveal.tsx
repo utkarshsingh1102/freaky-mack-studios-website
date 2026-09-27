@@ -10,19 +10,30 @@ const TAGS = {
   div: motion.div,
   section: motion.section,
   header: motion.header,
+  nav: motion.nav,
   footer: motion.footer,
   ul: motion.ul,
+  ol: motion.ol,
+  aside: motion.aside,
   li: motion.li,
   p: motion.p,
   span: motion.span,
 } as const;
 type Tag = keyof typeof TAGS;
 
-type From = { y?: number; x?: number; scale?: number; rotate?: number };
+type From = { y?: number; x?: number; scale?: number; rotate?: number; blur?: number };
 
-const variantsFor = ({ y = 36, x = 0, scale = 1, rotate = 0 }: From, duration: number, delay: number): Variants => ({
-  hidden: { opacity: 0, y, x, scale, rotate },
-  show: { opacity: 1, y: 0, x: 0, scale: 1, rotate: 0, transition: { duration, delay, ease: EASE } },
+const variantsFor = ({ y = 36, x = 0, scale = 1, rotate = 0, blur = 0 }: From, duration: number, delay: number): Variants => ({
+  hidden: { opacity: 0, y, x, scale, rotate, ...(blur ? { filter: `blur(${blur}px)` } : {}) },
+  show: {
+    opacity: 1,
+    y: 0,
+    x: 0,
+    scale: 1,
+    rotate: 0,
+    ...(blur ? { filter: "blur(0px)" } : {}),
+    transition: { duration, delay, ease: EASE },
+  },
 });
 
 type BaseProps = Omit<HTMLMotionProps<"div">, "children" | "initial" | "animate" | "whileInView" | "variants"> & {

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Reveal, RevealItem } from "@/components/motion/Reveal";
+import { ScrollIn } from "@/components/motion/ScrollIn";
 import s from "@/components/site/site.module.css";
 import { Label, MX, PX } from "@/components/site/ui";
 import { PROJECTS, getProject, nextProject, projectHref } from "@/content/projects";
@@ -31,84 +33,109 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
-      <div className={`flex items-center justify-between gap-4 pt-[28px] text-[14px] lg:pt-[40px] ${PX}`}>
+      <Reveal onMount from={{ y: -12 }} duration={0.7} className={`flex items-center justify-between gap-4 pt-[28px] text-[14px] lg:pt-[40px] ${PX}`}>
         <Link href="/work" className={`${s.link} font-semibold`}>
           ← All work
         </Link>
         <span className={`${s.it} text-[16px] text-[var(--muted-2)] lg:text-[18px]`}>Film [NN] of [NN]</span>
-      </div>
+      </Reveal>
 
-      <section className={`flex flex-col gap-[24px] pt-[48px] pb-[48px] lg:gap-[28px] lg:pt-[80px] lg:pb-[64px] ${PX}`}>
-        <div className="flex flex-wrap items-center gap-[14px]">
+      <Reveal
+        as="section"
+        onMount
+        stagger={0.12}
+        delay={0.15}
+        className={`flex flex-col gap-[24px] pt-[48px] pb-[48px] lg:gap-[28px] lg:pt-[80px] lg:pb-[64px] ${PX}`}
+      >
+        <RevealItem className="flex flex-wrap items-center gap-[14px]">
           <span className="rounded-full bg-[var(--accent)] px-[18px] py-[8px] text-[14px] font-semibold text-[var(--on-accent)] [transform:rotate(-3deg)]">
             {p.category}
           </span>
           <span className={`${s.it} text-[17px] tracking-[0.08em] text-[var(--muted-2)] uppercase lg:text-[22px]`}>
             {p.who} · {p.year}
           </span>
-        </div>
+        </RevealItem>
+        <RevealItem from={{ y: 60, blur: 8 }} duration={1.1}>
         <h1 className="m-0 max-w-[1150px] text-[clamp(44px,6.667vw,96px)] leading-[0.98] font-extrabold tracking-[-0.03em] text-balance uppercase">
           {p.title}
         </h1>
-        <p className="m-0 max-w-[720px] text-[18px] leading-[1.5] text-[var(--ink-2)] lg:text-[22px]">{p.logline}</p>
-      </section>
+        </RevealItem>
+        <RevealItem as="p" className="m-0 max-w-[720px] text-[18px] leading-[1.5] text-[var(--ink-2)] lg:text-[22px]">
+          {p.logline}
+        </RevealItem>
+      </Reveal>
 
       <section aria-label="Film" className={`pb-[96px] lg:pb-[140px] ${PX}`}>
-        <FilmPlayer videoUrl={p.videoUrl} duration={p.duration} />
+        {/* The player grows and straightens into place as it scrolls in. */}
+        <ScrollIn scale={0.88} rotate={-2} y={70}>
+          <FilmPlayer videoUrl={p.videoUrl} duration={p.duration} />
+        </ScrollIn>
       </section>
 
       <section className={`grid grid-cols-1 gap-y-[56px] pb-[96px] lg:grid-cols-12 lg:gap-x-[32px] lg:pb-[160px] ${PX}`}>
-        <div className="flex flex-col gap-[20px] lg:col-span-4">
-          <Label>Credits</Label>
+        <Reveal stagger={0.05} amount={0.15} className="flex flex-col gap-[20px] lg:col-span-4">
+          <RevealItem>
+            <Label>Credits</Label>
+          </RevealItem>
           <dl className="m-0 flex flex-col border-t border-[var(--ink)]">
             {p.credits.map((c) => (
-              <div key={c.role} className="flex justify-between gap-[16px] border-b border-[var(--line)] py-[16px] text-[15px]">
+              <RevealItem key={c.role} from={{ y: 16 }} duration={0.6} className="flex justify-between gap-[16px] border-b border-[var(--line)] py-[16px] text-[15px]">
                 <dt className="text-[var(--muted)]">{c.role}</dt>
                 <dd className="m-0 text-right font-semibold">{c.who}</dd>
-              </div>
+              </RevealItem>
             ))}
           </dl>
-        </div>
-        <div className="flex flex-col gap-[40px] lg:col-span-7 lg:col-start-6 lg:gap-[56px]">
-          <div className="flex flex-col gap-[16px]">
+        </Reveal>
+        <Reveal stagger={0.15} amount={0.2} className="flex flex-col gap-[40px] lg:col-span-7 lg:col-start-6 lg:gap-[56px]">
+          <RevealItem className="flex flex-col gap-[16px]">
             <Label>The brief</Label>
             <p className="m-0 text-[21px] leading-[1.45] font-medium tracking-[-0.01em] lg:text-[26px]">{p.brief}</p>
-          </div>
-          <div className="flex flex-col gap-[16px]">
+          </RevealItem>
+          <RevealItem className="flex flex-col gap-[16px]">
             <Label>The idea</Label>
             <p className="m-0 text-[17px] leading-[1.6] text-[var(--ink-2)] lg:text-[20px]">{p.idea}</p>
-          </div>
-          <div className="flex flex-col gap-[16px]">
+          </RevealItem>
+          <RevealItem className="flex flex-col gap-[16px]">
             <Label>On screen</Label>
             <p className="m-0 text-[17px] leading-[1.6] text-[var(--ink-2)] lg:text-[20px]">{p.onScreen}</p>
-          </div>
-        </div>
+          </RevealItem>
+        </Reveal>
       </section>
 
       <section aria-label="Stills" className={`flex flex-col gap-[32px] pb-[96px] lg:gap-[48px] lg:pb-[160px] ${PX}`}>
-        <Label>Frames from the film</Label>
+        <Reveal>
+          <Label>Frames from the film</Label>
+        </Reveal>
+        {/* Stills settle in with a little depth: the wide frame grows, the pair comes in from each side. */}
+        <ScrollIn scale={0.92} y={90}>
         <div
           className={`${s.still} flex h-[240px] items-center justify-center rounded-[20px] text-[12px] tracking-[0.2em] text-white/80 uppercase md:h-[420px] lg:h-[620px] lg:rounded-[28px]`}
           style={{ background: wide.bg, transform: "rotate(-0.8deg)" }}
         >
           {wide.label}
         </div>
+        </ScrollIn>
         <div className="grid grid-cols-1 items-start gap-[32px] md:grid-cols-2 lg:gap-[40px]">
+          <Reveal from={{ x: -70, y: 30 }} duration={1}>
           <div
             className={`${s.still} flex h-[300px] items-center justify-center rounded-[24px] text-[12px] tracking-[0.2em] text-white/80 uppercase md:h-[420px] lg:h-[520px]`}
             style={{ background: left.bg, transform: "rotate(1.2deg)" }}
           >
             {left.label}
           </div>
+          </Reveal>
+          <Reveal from={{ x: 70, y: 60 }} duration={1} delay={0.12}>
           <div
             className={`${s.still} flex h-[260px] items-center justify-center rounded-[24px] text-[12px] tracking-[0.2em] text-white/80 uppercase md:mt-[64px] md:h-[340px] lg:mt-[80px] lg:h-[400px]`}
             style={{ background: right.bg, transform: "rotate(-1.4deg)" }}
           >
             {right.label}
           </div>
+          </Reveal>
         </div>
       </section>
 
+      <Reveal from={{ y: 60 }}>
       <Link
         href={projectHref(next.slug)}
         className={`${s.next} panel-invert mb-[96px] flex items-center justify-between gap-[24px] rounded-[28px] px-[28px] py-[40px] lg:mb-[140px] lg:gap-[48px] lg:rounded-[40px] lg:px-[80px] lg:py-[72px] ${MX}`}
@@ -126,6 +153,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           →
         </span>
       </Link>
+      </Reveal>
     </>
   );
 }

@@ -1,8 +1,8 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { EASE, Reveal } from "@/components/motion/Reveal";
+import { Reveal } from "@/components/motion/Reveal";
+import { Swap } from "@/components/motion/Swap";
 import { useState } from "react";
 import { AUDIENCES as WHO, FORMATS as FMT, bare, startProjectHref } from "@/content/enquiry-options";
 import s from "../home.module.css";
@@ -23,23 +23,6 @@ function Chip({ on, label, onPick }: { on: boolean; label: string; onPick: () =>
     >
       {label}
     </button>
-  );
-}
-
-/** The word inside a sentence pill: slides up into place when the pick changes (not on first render). */
-function Swap({ text }: { text: string }) {
-  return (
-    <AnimatePresence mode="wait" initial={false}>
-      <motion.span
-        key={text}
-        className="inline-block"
-        initial={{ y: "45%", opacity: 0 }}
-        animate={{ y: 0, opacity: 1, transition: { duration: 0.35, ease: EASE } }}
-        exit={{ y: "-45%", opacity: 0, transition: { duration: 0.15 } }}
-      >
-        {text}
-      </motion.span>
-    </AnimatePresence>
   );
 }
 

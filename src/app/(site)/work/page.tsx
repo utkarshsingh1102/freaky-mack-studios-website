@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DraggableMark } from "@/components/motion/DraggableMark";
+import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import s from "@/components/site/site.module.css";
 import { AccentWord, H1, Intro, Kicker, MX, PX } from "@/components/site/ui";
 import { WorkGrid } from "./_components/WorkGrid";
@@ -15,21 +16,31 @@ export const metadata: Metadata = {
 export default function WorkPage() {
   return (
     <>
-      <section className={`relative flex flex-col gap-[24px] pt-[64px] pb-[48px] lg:gap-[32px] lg:pt-[120px] lg:pb-[72px] ${PX}`}>
+      <section className={`relative pt-[64px] pb-[48px] lg:pt-[120px] lg:pb-[72px] ${PX}`}>
         <DraggableMark className="absolute top-[24px] right-[20px] h-[56px] w-[84px] lg:top-[110px] lg:right-[150px] lg:h-[100px] lg:w-[150px]" imgClassName={`${s.blob} ${s.logo}`} />
-        <Kicker>Chapter 01 — The work</Kicker>
-        <H1 className="max-w-[1000px]">
-          Six years of saying <AccentWord>yes</AccentWord> to brands.
-        </H1>
-        <Intro>
-          Ad films, music videos, fashion films, documentaries and the stories we tell for ourselves. Pick a format, open
-          a film.
-        </Intro>
+        <Reveal onMount stagger={0.12} delay={0.1} className="flex flex-col gap-[24px] lg:gap-[32px]">
+          <RevealItem>
+            <Kicker>Chapter 01 — The work</Kicker>
+          </RevealItem>
+          <RevealItem from={{ y: 60, blur: 8 }} duration={1.1}>
+            <H1 className="max-w-[1000px]">
+              Six years of saying <AccentWord>yes</AccentWord> to brands.
+            </H1>
+          </RevealItem>
+          <RevealItem>
+            <Intro>
+              Ad films, music videos, fashion films, documentaries and the stories we tell for ourselves. Pick a format,
+              open a film.
+            </Intro>
+          </RevealItem>
+        </Reveal>
       </section>
 
       <WorkGrid />
 
-      <section
+      <Reveal
+        as="section"
+        from={{ y: 60 }}
         className={`mb-[96px] flex flex-col items-start justify-between gap-[28px] rounded-[28px] panel-invert px-[28px] py-[40px] md:flex-row md:items-center lg:mb-[140px] lg:gap-[48px] lg:rounded-[40px] lg:px-[80px] lg:py-[72px] ${MX}`}
       >
         <div className="flex flex-col gap-[14px]">
@@ -44,7 +55,7 @@ export default function WorkPage() {
         >
           Start a project
         </Link>
-      </section>
+      </Reveal>
     </>
   );
 }

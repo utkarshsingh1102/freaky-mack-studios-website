@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CONTACT } from "@/shared/config";
+import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import s from "@/components/site/site.module.css";
 import { H1, Intro, Kicker, Label, PX } from "@/components/site/ui";
 import { EnquiryForm } from "./_components/EnquiryForm";
@@ -20,8 +21,17 @@ const NEXT_STEPS = [
 export default function StartAProjectPage() {
   return (
     <>
-      <section className={`flex flex-col gap-[24px] pt-[64px] pb-[48px] lg:gap-[28px] lg:pt-[120px] lg:pb-[80px] ${PX}`}>
-        <Kicker>Chapter 06 — Your turn</Kicker>
+      <Reveal
+        as="section"
+        onMount
+        stagger={0.12}
+        delay={0.1}
+        className={`flex flex-col gap-[24px] pt-[64px] pb-[48px] lg:gap-[28px] lg:pt-[120px] lg:pb-[80px] ${PX}`}
+      >
+        <RevealItem>
+          <Kicker>Chapter 06 — Your turn</Kicker>
+        </RevealItem>
+        <RevealItem from={{ y: 60, blur: 8 }} duration={1.1}>
         <H1 big balance={false} tracking="tracking-[-0.035em]" className="max-w-[1150px]">
           Got a story?{" "}
           <span
@@ -30,14 +40,24 @@ export default function StartAProjectPage() {
             Let’s shoot it.
           </span>
         </H1>
-        <Intro>Tell us what you’re making. We read every brief and come back to you personally.</Intro>
-      </section>
+        </RevealItem>
+        <RevealItem>
+          <Intro>Tell us what you’re making. We read every brief and come back to you personally.</Intro>
+        </RevealItem>
+      </Reveal>
 
       <section className={`grid grid-cols-1 items-start gap-y-[56px] pb-[96px] lg:pb-[160px] xl:grid-cols-12 xl:gap-x-[32px] ${PX}`}>
-        <EnquiryForm />
+        <Reveal onMount delay={0.45} from={{ y: 70 }} duration={1} className="xl:col-span-8">
+          <EnquiryForm />
+        </Reveal>
 
-        <aside className="grid grid-cols-1 items-start gap-[40px] md:grid-cols-2 xl:col-span-4 xl:col-start-9 xl:flex xl:flex-col xl:gap-[48px] xl:pt-[16px]">
-          <div className="flex flex-col gap-[16px]">
+        <Reveal
+          as="aside"
+          stagger={0.14}
+          delay={0.6}
+          onMount
+          className="grid grid-cols-1 items-start gap-[40px] md:grid-cols-2 xl:col-span-4 xl:col-start-9 xl:flex xl:flex-col xl:gap-[48px] xl:pt-[16px]">
+          <RevealItem className="flex flex-col gap-[16px]">
             <Label size="text-[20px] lg:text-[24px]">Rather talk?</Label>
             <a
               href={`mailto:${CONTACT.email}`}
@@ -51,16 +71,17 @@ export default function StartAProjectPage() {
             <a href={CONTACT.phoneHref} className={`${s.link} self-start text-[17px] lg:text-[18px]`}>
               Call · {CONTACT.phone}
             </a>
-          </div>
-          <div className="flex flex-col gap-[12px]">
+          </RevealItem>
+          <RevealItem className="flex flex-col gap-[12px]">
             <Label size="text-[20px] lg:text-[24px]">The studio</Label>
             <address className="text-[17px] leading-[1.6] not-italic lg:text-[18px]">
               [Studio address]
               <br />
               [City], India
             </address>
-          </div>
-          <div className="flex flex-col gap-[22px] rounded-[28px] border md:col-span-2 md:max-w-[520px] xl:max-w-none border-[var(--ink)] p-[28px] [transform:rotate(1.5deg)] lg:p-[32px]">
+          </RevealItem>
+          <RevealItem from={{ y: 60 }} className="md:col-span-2 md:max-w-[520px] xl:max-w-none">
+          <div className="flex flex-col gap-[22px] rounded-[28px] border border-[var(--ink)] p-[28px] [transform:rotate(1.5deg)] lg:p-[32px]">
             <Label size="text-[20px] lg:text-[24px]">What happens next</Label>
             <ol className="m-0 flex list-none flex-col gap-[22px] p-0">
               {NEXT_STEPS.map((t, i) => (
@@ -71,7 +92,8 @@ export default function StartAProjectPage() {
               ))}
             </ol>
           </div>
-        </aside>
+          </RevealItem>
+        </Reveal>
       </section>
     </>
   );

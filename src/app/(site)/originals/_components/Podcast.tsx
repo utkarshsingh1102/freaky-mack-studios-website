@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { SOCIAL } from "@/shared/config";
+import { Reveal, RevealItem } from "@/components/motion/Reveal";
+import { ScrollIn } from "@/components/motion/ScrollIn";
 import { pillAccent } from "@/components/site/blocks";
 import s from "@/components/site/site.module.css";
 import { Eq, Label, PauseIcon, PlayIcon, PX } from "@/components/site/ui";
@@ -24,12 +26,14 @@ export function Podcast() {
         aria-label="The podcast"
         className={`grid scroll-mt-[24px] grid-cols-1 items-center gap-y-[40px] pb-[80px] lg:grid-cols-12 lg:gap-x-[32px] lg:pb-[120px] ${PX}`}
       >
+        {/* The featured player grows into place as it scrolls in; the episode details slide in beside it. */}
+        <ScrollIn scale={0.9} rotate={-3} y={50} className="lg:col-span-7">
         <button
           type="button"
           onClick={() => toggle(0)}
           aria-pressed={featuredOn}
           aria-label={featuredOn ? "Pause the latest episode" : "Play the latest episode"}
-          className="relative block h-[260px] overflow-hidden rounded-[24px] border-0 bg-[#0d0d0d] p-0 text-left text-white shadow-[0_30px_80px_rgba(0,0,0,0.16)] [transform:rotate(-1deg)] md:h-[400px] lg:col-span-7 lg:h-[460px] lg:rounded-[28px]"
+          className="relative block h-[260px] overflow-hidden rounded-[24px] border-0 bg-[#0d0d0d] p-0 text-left text-white shadow-[0_30px_80px_rgba(0,0,0,0.16)] [transform:rotate(-1deg)] md:h-[400px] lg:h-[460px] lg:rounded-[28px] w-full"
         >
           <span
             className="absolute inset-0"
@@ -54,7 +58,8 @@ export function Podcast() {
             latest
           </span>
         </button>
-        <div className="flex flex-col gap-[20px] lg:col-span-4 lg:col-start-9">
+        </ScrollIn>
+        <Reveal from={{ x: 60, y: 0 }} duration={1} delay={0.15} className="flex flex-col gap-[20px] lg:col-span-4 lg:col-start-9">
           <Label size="text-[20px] lg:text-[24px]">The Freaky Mack Podcast</Label>
           <h2 className="m-0 text-[34px] leading-[1.08] font-extrabold tracking-[-0.03em] lg:text-[44px]">{latest.title}</h2>
           <span className="text-[13px] tracking-[0.18em] text-[var(--muted)] uppercase">
@@ -66,16 +71,18 @@ export function Podcast() {
               Subscribe on YouTube ↗
             </a>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       <section aria-label="All episodes" className={`flex flex-col gap-[24px] pb-[96px] lg:gap-[32px] lg:pb-[180px] ${PX}`}>
-        <Label>Every episode</Label>
-        <ul className="m-0 list-none border-t border-[var(--ink)] p-0">
+        <Reveal>
+          <Label>Every episode</Label>
+        </Reveal>
+        <Reveal as="ul" stagger={0.07} amount={0.15} className="m-0 list-none border-t border-[var(--ink)] p-0">
           {EPISODES.map((e, i) => {
             const on = playing === i;
             return (
-              <li key={e.no} className="border-b border-[var(--line)]">
+              <RevealItem as="li" key={e.no} from={{ y: 24 }} duration={0.7} className="border-b border-[var(--line)]">
                 <button
                   type="button"
                   onClick={() => toggle(i)}
@@ -102,10 +109,10 @@ export function Podcast() {
                   </span>
                   <span className="hidden text-[15px] text-[var(--muted)] md:block">{e.duration}</span>
                 </button>
-              </li>
+              </RevealItem>
             );
           })}
-        </ul>
+        </Reveal>
       </section>
     </>
   );
