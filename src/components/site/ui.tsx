@@ -59,11 +59,22 @@ export function H1({
 }
 
 /** The Instrument Serif italic accent word inside a headline ("yes", "appetite", "own"…). */
-export function AccentWord({ children, big = false, className = "" }: { children: ReactNode; big?: boolean; className?: string }) {
+export function AccentWord({
+  children,
+  big = false,
+  size,
+  className = "",
+}: {
+  children: ReactNode;
+  big?: boolean;
+  /** Replaces the default size classes (e.g. to scale with a resized headline). */
+  size?: string;
+  className?: string;
+}) {
   return (
     <span
       className={`${s.it} font-normal tracking-[0.01em] text-[var(--accent-text)] ${
-        big ? "text-[clamp(44px,7.222vw,104px)]" : "text-[clamp(44px,6.667vw,96px)]"
+        size ?? (big ? "text-[clamp(44px,7.222vw,104px)]" : "text-[clamp(44px,6.667vw,96px)]")
       } ${className}`}
     >
       {children}

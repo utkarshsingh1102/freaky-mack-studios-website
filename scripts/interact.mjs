@@ -89,21 +89,23 @@ console.log("Theme picker");
 const bg = () => root(page).evaluate((el) => getComputedStyle(el).backgroundColor);
 const fg = () => root(page).evaluate((el) => getComputedStyle(el).color);
 const accentVar = () => root(page).evaluate((el) => getComputedStyle(el).getPropertyValue("--accent").trim().toUpperCase());
-check((await root(page).getAttribute("data-theme")) === "light" && (await bg()) === "rgb(255, 255, 255)", "defaults to Light on white");
-check((await page.getByRole("button", { name: /^Ground / }).count()) === 3, "ground swatches shown in Light");
-await page.getByRole("button", { name: "Dark theme" }).click();
-await page.waitForTimeout(400);
-check((await root(page).getAttribute("data-theme")) === "dark", "Dark sets data-theme=dark");
-check((await bg()) === "rgb(10, 10, 10)" && (await fg()) === "rgb(255, 255, 255)", `Dark is black ground, white text (${await bg()} / ${await fg()})`);
+const serverHtml = await (await page.request.get(`${base}/studio/`)).text();
+check(/<html[^>]*data-theme="dark"[^>]*data-accent="grey"/.test(serverHtml), "server HTML already carries the default Dark + Grey (works without JS)");
+check((await root(page).getAttribute("data-theme")) === "dark" && (await bg()) === "rgb(10, 10, 10)" && (await fg()) === "rgb(255, 255, 255)", `defaults to Dark: black ground, white text (${await bg()} / ${await fg()})`);
+check((await accentVar()) === "#8A8A8A", `defaults to the Grey accent (${await accentVar()})`);
 check((await page.getByRole("button", { name: /^Ground / }).count()) === 0, "ground swatches hidden in Dark");
-await page.getByRole("button", { name: "Grey accent" }).click();
-check((await accentVar()) === "#8A8A8A", `Grey sets --accent (${await accentVar()})`);
-check(page.url().endsWith("/?theme=dark&accent=grey"), `URL records the choice (${page.url()})`);
+await page.getByRole("button", { name: "Light theme" }).click();
+await page.waitForTimeout(400);
+check((await root(page).getAttribute("data-theme")) === "light" && (await bg()) === "rgb(255, 255, 255)", "Light sets data-theme=light on white");
+check((await page.getByRole("button", { name: /^Ground / }).count()) === 3, "ground swatches shown in Light");
+await page.getByRole("button", { name: "Cobalt accent" }).click();
+check((await accentVar()) === "#1F3BFF", `Cobalt sets --accent (${await accentVar()})`);
+check(page.url().endsWith("/?theme=light&accent=cobalt"), `URL records the choice (${page.url()})`);
 await page.reload({ waitUntil: "networkidle" });
-check((await root(page).getAttribute("data-theme")) === "dark" && (await accentVar()) === "#8A8A8A", "reloading the link restores Dark + Grey");
+check((await root(page).getAttribute("data-theme")) === "light" && (await accentVar()) === "#1F3BFF", "reloading the link restores Light + Cobalt");
 
 console.log("Contrast sweep");
-for (const [label, q] of [["Light · Cobalt", "/"], ["Dark · Cobalt", "/?theme=dark"], ["Dark · Grey", "/?theme=dark&accent=grey"], ["Light · Grey", "/?accent=grey"]]) {
+for (const [label, q] of [["Light · Cobalt", "/?theme=light&accent=cobalt"], ["Dark · Cobalt", "/?theme=dark&accent=cobalt"], ["Dark · Grey", "/?theme=dark&accent=grey"], ["Light · Grey", "/?theme=light&accent=grey"]]) {
   await page.goto(`${base}${q}`, { waitUntil: "networkidle" });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.waitForTimeout(400);
@@ -187,7 +189,7 @@ const res = await page.goto(`${base}/missing-page/`, { waitUntil: "networkidle" 
 check(res.status() === 404 && (await page.getByText("This scene didn’t make the edit.").isVisible()), `unknown URL → 404 page (${res.status()})`);
 
 console.log("Theme across pages");
-await page.goto(`${base}/`, { waitUntil: "networkidle" });
+await page.goto(`${base}/?theme=light&accent=cobalt`, { waitUntil: "networkidle" });
 await page.getByRole("button", { name: "Dark theme" }).click();
 await page.getByRole("button", { name: "Orange accent" }).click();
 await page.locator('nav a[href="/studio"], nav a[href="/studio/"]').first().click();
@@ -195,7 +197,7 @@ await page.waitForURL(/\/studio/);
 check((await root(page).getAttribute("data-theme")) === "dark" && (await accentVar()) === "#FF8A00", "Dark + Orange carries over on client navigation");
 await page.goto(`${base}/people/`, { waitUntil: "networkidle" });
 check((await root(page).getAttribute("data-theme")) === "dark" && (await accentVar()) === "#FF8A00", "…and after a fresh load without the query");
-await page.goto(`${base}/?theme=light&accent=cobalt`, { waitUntil: "networkidle" }); // reset for later runs
+await page.goto(`${base}/?theme=dark&accent=grey`, { waitUntil: "networkidle" }); // back to the defaults
 
 console.log("Mobile menu");
 const phone = await browser.newPage({ viewport: { width: 390, height: 844 } });

@@ -20,11 +20,13 @@ export type AccentId = (typeof ACCENTS)[number]["id"];
 export const GROUNDS = ["#ffffff", "#fbfbf9", "#f6f6f2"] as const;
 export const DARK_GROUND = "#0a0a0a";
 
-export const DEFAULT_THEME: Theme = "light";
-export const DEFAULT_ACCENT: AccentId = "cobalt";
+// The client's pick: Dark with the Grey accent (the boards themselves are drawn in Light · Cobalt).
+export const DEFAULT_THEME: Theme = "dark";
+export const DEFAULT_ACCENT: AccentId = "grey";
 export const DEFAULT_GROUND: string = GROUNDS[0];
 
-export const STORAGE_KEY = "fm-theme";
+// Versioned so a choice saved under an earlier default doesn't override a new default. Bump it when the defaults change.
+export const STORAGE_KEY = "fm-theme-v2";
 
 export type Choice = { theme: Theme; accent: AccentId; ground: string };
 export const DEFAULT_CHOICE: Choice = { theme: DEFAULT_THEME, accent: DEFAULT_ACCENT, ground: DEFAULT_GROUND };

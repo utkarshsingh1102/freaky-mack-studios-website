@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Instrument_Sans, Instrument_Serif, Plus_Jakarta_Sans } from "next/font/google";
 import { ThemeHead } from "@/shared/theme/ThemeHead";
+import { DEFAULT_CHOICE, resolveChoice } from "@/shared/theme/theme";
 import { ThemePicker } from "@/shared/theme/ThemePicker";
 import { SITE_URL } from "@/shared/config";
 import "./globals.css";
@@ -24,14 +25,18 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  themeColor: resolveChoice(DEFAULT_CHOICE)["--ground"],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    // The theme head script sets data-theme / data-accent / data-ground and the accent variables on <html>
-    // before paint, so its attributes intentionally differ from the server render.
+    // The server renders the default look (so it also holds without JavaScript); the theme head script
+    // swaps in a pitch choice before paint, so <html> attributes may intentionally differ from the server render.
     <html
       lang="en"
+      data-theme={DEFAULT_CHOICE.theme}
+      data-accent={DEFAULT_CHOICE.accent}
+      data-ground={DEFAULT_CHOICE.ground}
       data-scroll-behavior="smooth"
       className={`${sans.variable} ${serif.variable} ${badge.variable}`}
       suppressHydrationWarning

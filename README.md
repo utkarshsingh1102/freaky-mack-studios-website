@@ -70,11 +70,11 @@ src/
 
 ## Theme: Light, Dark and accents
 
-The boards are drawn in Light; every page also works in **Dark** (black ground, white text) with any of the accents **Cobalt, Grey, Lime, Orange, Pink**. Colours are tokens in `globals.css` (`--ink`, `--surface`, `--inv-bg`, …) switched by `data-theme` on `<html>`; the accent comes from `--accent`, `--on-accent` and `--accent-text`.
+The site opens in **Dark with the Grey accent** by default (the client's choice). The boards are drawn in Light · Cobalt, and every page works in Light or Dark (black ground, white text) with any of the accents **Cobalt, Grey, Lime, Orange, Pink**. Colours are tokens in `globals.css` (`--ink`, `--surface`, `--inv-bg`, …) switched by `data-theme` on `<html>`; the accent comes from `--accent`, `--on-accent` and `--accent-text`.
 
 While pitching, a floating picker (bottom-left) switches them. The choice is kept across pages and reloads, and links carry it: `/work/?theme=dark&accent=grey`.
 
-To lock the site to the chosen look for launch, set `DEFAULT_THEME` / `DEFAULT_ACCENT` / `DEFAULT_GROUND` in `src/shared/theme/theme.ts` and build with `NEXT_PUBLIC_PITCH_MODE=off` (no picker, query ignored).
+The default look is `DEFAULT_THEME` / `DEFAULT_ACCENT` / `DEFAULT_GROUND` in `src/shared/theme/theme.ts`; the server renders it, so it also holds without JavaScript. If you change the defaults, bump `STORAGE_KEY` there so visitors' earlier picks don't override them. To lock the site to the default for launch, build with `NEXT_PUBLIC_PITCH_MODE=off` (no picker, query ignored).
 
 ## Environment variables
 
