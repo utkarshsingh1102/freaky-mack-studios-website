@@ -74,8 +74,9 @@ export function WorkGrid() {
     <>
       <Reveal as="section" onMount delay={0.45} aria-label="Filter by format" className={`flex flex-col gap-[20px] pb-[56px] lg:pb-[72px] ${PX}`}>
         <ChipGroup label="Filter by format" options={FILTERS} value={filter} onChange={setFilter} size="lg" />
-        <span className={`${s.it} text-[18px] text-[var(--muted-2)] lg:text-[20px]`} aria-live="polite">
-          {shown.length} {shown.length === 1 ? "film" : "films"} · {PROJECTS.length} in total
+        {/* No visible count; screen readers still hear how many films the filter shows. */}
+        <span className="sr-only" aria-live="polite">
+          {shown.length} {shown.length === 1 ? "film" : "films"}
         </span>
       </Reveal>
       <section className={`grid grid-cols-1 items-start gap-y-[56px] pb-[96px] md:grid-cols-2 md:gap-x-[32px] lg:gap-x-[48px] lg:pb-[160px] ${PX}`}>

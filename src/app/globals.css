@@ -151,16 +151,3 @@ html[data-theme="dark"] .panel-invert {
     filter: none !important;
   }
 }
-
-/* Logo cursor (src/components/motion/LogoCursor.tsx): the class is added only once a mouse moves,
-   so touch, keyboard and no-JS visitors keep the system cursor. Text fields keep the text cursor. */
-@media (hover: hover) and (pointer: fine) {
-  html.logo-cursor,
-  html.logo-cursor * {
-    cursor: none !important;
-  }
-  html.logo-cursor
-    :is(input:not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]), textarea, [contenteditable="true"]) {
-    cursor: text !important;
-  }
-}

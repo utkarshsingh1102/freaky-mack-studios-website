@@ -87,21 +87,6 @@ check((await page.locator("#ch4").getByText("Now playing").count()) === 1, "epis
 await eps.nth(0).click();
 check((await eps.nth(1).getAttribute("aria-pressed")) === "false", "playing another episode stops the first");
 
-console.log("Logo cursor");
-await page.mouse.move(700, 300);
-await page.mouse.move(720, 320);
-const cur = page.locator("[data-logo-cursor]");
-check((await page.evaluate(() => document.documentElement.classList.contains("logo-cursor"))) && (await cur.count()) === 1, "mouse movement swaps in the logo cursor");
-const navLink = page.getByRole("link", { name: /Work/ }).first();
-const nb = await navLink.boundingBox();
-await page.mouse.move(nb.x + nb.width / 2, nb.y + nb.height / 2);
-check((await cur.getAttribute("data-logo-cursor")) === "reach", "cursor reaches over a link");
-await page.mouse.move(8, 400); // empty margin, so the press doesn't follow a link
-await page.mouse.down();
-check((await cur.getAttribute("data-logo-cursor")) === "grab", "cursor clenches while pressed");
-await page.mouse.up();
-check((await cur.getAttribute("data-logo-cursor")) === "idle", "cursor relaxes when released");
-
 console.log("Theme picker");
 const bg = () => root(page).evaluate((el) => getComputedStyle(el).backgroundColor);
 const fg = () => root(page).evaluate((el) => getComputedStyle(el).color);
@@ -144,7 +129,7 @@ await page.getByRole("radio", { name: "Music videos" }).click();
 await page.waitForTimeout(900); // leaving cards animate out, the rest glide into place
 const settled = await page.evaluate(() => [...document.querySelectorAll('section a[href^="/work/"]:not([href="/work/"])')].map((a) => getComputedStyle(a.parentElement).opacity));
 check(settled.every((o) => o === "1"), `filtered cards settle fully visible (${settled.join(", ")})`);
-check((await cards.count()) === 1 && (await page.getByText(`1 film · ${allCount} in total`).isVisible()), `Music videos filter shows 1 of ${allCount}`);
+check((await cards.count()) === 1 && !(await page.getByText(/in total/).count()), `Music videos filter shows 1 of ${allCount}, with no visible count`);
 await page.keyboard.press("ArrowRight");
 check((await page.getByRole("radio", { name: "Fashion films" }).getAttribute("aria-checked")) === "true", "arrow key moves the filter");
 await page.getByRole("radio", { name: "All work" }).click();

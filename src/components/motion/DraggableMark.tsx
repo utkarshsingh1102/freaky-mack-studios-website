@@ -12,7 +12,6 @@ export function DraggableMark({ className = "", imgClassName = "" }: { className
   return (
     <motion.div
       aria-hidden="true"
-      data-cursor="grab"
       drag
       dragSnapToOrigin
       dragMomentum={false}
