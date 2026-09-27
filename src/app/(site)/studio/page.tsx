@@ -26,8 +26,18 @@ export default function StudioPage() {
     <>
       <section className={`flex flex-col gap-[24px] pt-[64px] pb-[56px] lg:gap-[32px] lg:pt-[120px] lg:pb-[88px] ${PX}`}>
         <Kicker>Chapter 02 — The studio</Kicker>
-        <H1 className="max-w-[1150px]">
-          Advertising taught us precision. Cinema gave us the <AccentWord>appetite</AccentWord>.
+        {/* Two lines from tablet up, one sentence each. "Advertising taught us precision." is 17.7em wide,
+            so the size tracks the column width (1248px at 1440 → 68px) instead of the board's 88px. */}
+        <H1
+          balance={false}
+          className="md:text-[min(68px,calc((100vw-80px)/18.2))] lg:text-[min(68px,calc((100vw-192px)/18.2))]"
+        >
+          <span className="md:whitespace-nowrap">Advertising taught us precision.</span>
+          <br />
+          <span className="md:whitespace-nowrap">
+            Cinema gave us the{" "}
+            <AccentWord size="text-[clamp(44px,6.667vw,96px)] md:text-[1.09em]">appetite</AccentWord>.
+          </span>
         </H1>
         <Intro className="max-w-[760px]">
           A film production house built on six years of advertising filmmaking — now a studio for commercial, narrative
