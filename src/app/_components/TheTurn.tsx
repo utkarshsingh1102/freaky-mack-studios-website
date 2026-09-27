@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRef } from "react";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import { useSmoothScrollValue } from "@/components/motion/useScrollMotion";
-import { FM_MARK_WHITE } from "@/shared/assets";
+import { Mark } from "@/components/site/Logo";
 import s from "../home.module.css";
 
 /** Chapter 03: dark interlude. */
@@ -18,11 +18,7 @@ export function TheTurn() {
   return (
     <motion.section ref={ref} style={{ scale }} className="relative mx-4 mb-[96px] flex shrink-0 flex-col gap-[28px] overflow-hidden rounded-[28px] bg-[var(--inv-bg)] px-[24px] py-[64px] text-[var(--inv-ink)] md:mx-10 md:px-[56px] lg:mx-[96px] lg:mb-[180px] lg:gap-[40px] lg:rounded-[40px] lg:px-[96px] lg:py-[120px]">
       <motion.div style={{ rotate: markRotate }} className="absolute right-[-60px] bottom-[-40px] h-[200px] w-[280px] lg:h-[396px] lg:w-[560px]">
-        <img
-          src={FM_MARK_WHITE}
-          alt=""
-          className={`${s.logoOnInverse} h-full w-full object-contain opacity-[0.12] [transform:rotate(-12deg)]`}
-        />
+        <Mark className="h-full w-full opacity-[0.12] [transform:rotate(-12deg)]" />
       </motion.div>
       <Reveal stagger={0.12} delay={0.15} amount={0.3} className="relative flex flex-col gap-[28px] lg:gap-[40px]">
       <RevealItem className={`${s.it} text-[20px] text-[var(--inv-muted)] lg:text-[26px]`}>

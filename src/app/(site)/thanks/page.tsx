@@ -23,7 +23,7 @@ export default function ThanksPage() {
         delay={0.1}
         className={`flex flex-col items-center gap-[24px] pt-[72px] pb-[80px] text-center lg:gap-[32px] lg:pt-[140px] lg:pb-[120px] ${PX}`}
       >
-        <DraggableMark className="relative h-[84px] w-[126px] lg:h-[120px] lg:w-[180px]" imgClassName={`${s.blob} ${s.logo}`} />
+        <DraggableMark className="relative h-[84px] w-[126px] lg:h-[120px] lg:w-[180px]" imgClassName={s.blob} />
         <RevealItem from={{ scale: 0.3, rotate: -20, y: 0 }} className="flex">
           <span className="rounded-full bg-[var(--accent)] px-[20px] py-[8px] text-[15px] font-semibold text-[var(--on-accent)] [transform:rotate(-3deg)]">
             Brief received

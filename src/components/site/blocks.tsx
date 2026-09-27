@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import { ScrollIn } from "@/components/motion/ScrollIn";
-import { FM_MARK_WHITE } from "@/shared/assets";
+import { Mark } from "./Logo";
 import s from "./site.module.css";
 import { MX } from "./ui";
 
@@ -57,7 +57,7 @@ export function InverseSlab({
       aria-label={ariaLabel}
       className={`relative mb-[96px] flex flex-col items-start justify-between gap-[32px] overflow-hidden rounded-[28px] bg-[var(--inv-bg)] px-[28px] py-[48px] text-[var(--inv-ink)] md:flex-row md:items-center lg:mb-[140px] lg:gap-[48px] lg:rounded-[40px] lg:p-[96px] ${MX}`}
     >
-      <img src={FM_MARK_WHITE} alt="" className={`${s.logoOnInverse} pointer-events-none absolute object-contain opacity-10 ${markClassName}`} />
+      <Mark className={`pointer-events-none absolute opacity-10 ${markClassName}`} />
       <Reveal stagger={0.12} delay={0.1} amount={0.4} className={`relative flex flex-col gap-[16px] ${maxWidth}`}>
         <RevealItem as="span" className={`${s.it} text-[20px] text-[var(--inv-muted)] lg:text-[24px]`}>{label}</RevealItem>
         <RevealItem as="span" className="text-[34px] leading-[1.05] font-extrabold tracking-[-0.03em] md:text-[44px] lg:text-[56px]">{title}</RevealItem>

@@ -75,7 +75,7 @@ check(await page.getByRole("button", { name: "Close the reel" }).first().isVisib
 await page.getByRole("button", { name: "Close the reel" }).last().click();
 check(await shows(page.getByText("[ 10–15 SEC LOOP, MUTED ]")), "band closes back to tilted card");
 await page.locator("#ch1 li").nth(2).hover();
-check((await page.locator("#ch1").getByText("[Brand] · Fashion film").count()) === 2, "hovering row 03 swaps preview meta");
+check((await page.locator("#ch1").getByText("PC Jeweller · Ad film").count()) === 2, "hovering row 03 swaps preview meta");
 await page.getByRole("button", { name: "music video", exact: true }).click();
 await page.getByRole("button", { name: "face on screen" }).click();
 await page.waitForTimeout(700); // the pill words slide in
@@ -122,25 +122,27 @@ check(new URL(page.url()).pathname === "/", `/option-b/ lands on / (${page.url()
 
 console.log("Work & project pages");
 await page.goto(`${base}/work/`, { waitUntil: "networkidle" });
-const cards = page.locator('a[href^="/work/project-"]');
+const CARD = 'section a[href^="/work/"]:not([href="/work/"])';
+const cards = page.locator(CARD);
 const allCount = await cards.count();
 await page.getByRole("radio", { name: "Music videos" }).click();
 await page.waitForTimeout(900); // leaving cards animate out, the rest glide into place
-const settled = await page.evaluate(() => [...document.querySelectorAll('a[href^="/work/project-"]')].map((a) => getComputedStyle(a.parentElement).opacity));
+const settled = await page.evaluate(() => [...document.querySelectorAll('section a[href^="/work/"]:not([href="/work/"])')].map((a) => getComputedStyle(a.parentElement).opacity));
 check(settled.every((o) => o === "1"), `filtered cards settle fully visible (${settled.join(", ")})`);
-check((await cards.count()) === 2 && (await page.getByText("2 films · [NN] in total").isVisible()), `Music videos filter shows 2 of ${allCount}`);
+check((await cards.count()) === 1 && !(await page.getByText(/in total/).count()), `Music videos filter shows 1 of ${allCount}, with no visible count`);
 await page.keyboard.press("ArrowRight");
 check((await page.getByRole("radio", { name: "Fashion films" }).getAttribute("aria-checked")) === "true", "arrow key moves the filter");
 await page.getByRole("radio", { name: "All work" }).click();
 await cards.first().click();
-await page.waitForURL(/\/work\/project-01\/?$/);
+await page.waitForURL(/\/work\/mercedes-benz-global-star\/?$/);
+check(await page.getByText(`Film 01 of ${allCount}`).isVisible(), `project counter reads Film 01 of ${allCount}`);
 const film = page.getByRole("button", { name: "Play the film" });
 await film.click();
 check((await page.getByRole("button", { name: "Pause the film" }).getAttribute("aria-pressed")) === "true" && (await page.getByText(/Now playing/).isVisible()), "project play toggle → Now playing");
-check((await page.locator('a[href="/work/project-02/"], a[href="/work/project-02"]').count()) > 0, "Next up links to project-02");
+check((await page.locator('a[href="/work/changa/"], a[href="/work/changa"]').count()) > 0, "Next up links to the second film");
 check((await page.getByRole("link", { name: "Work" }).first().getAttribute("aria-current")) === "page", "nav marks Work active on a project page");
-await page.goto(`${base}/work/project-08/`, { waitUntil: "networkidle" });
-check((await page.locator('a[href^="/work/project-01"]').count()) > 0, "last project's Next up wraps to project-01");
+await page.goto(`${base}/work/tlp-teaser/`, { waitUntil: "networkidle" });
+check((await page.locator('a[href^="/work/mercedes-benz-global-star"]').count()) > 0, "last project's Next up wraps to the first");
 
 console.log("Originals");
 await page.goto(`${base}/originals/`, { waitUntil: "networkidle" });
@@ -233,7 +235,7 @@ check(!(await menu.isVisible()), "navigating closes the menu");
 await phone.close();
 
 console.log("Contrast sweep · every page");
-const PAGES = ["/work/", "/work/project-01/", "/studio/", "/originals/", "/people/", "/start-a-project/", "/thanks/", "/privacy/", "/terms/", "/missing-page/"];
+const PAGES = ["/work/", "/work/mercedes-benz-global-star/", "/studio/", "/originals/", "/people/", "/start-a-project/", "/thanks/", "/privacy/", "/terms/", "/missing-page/"];
 for (const [label, q] of [["Light · Cobalt", "theme=light&accent=cobalt"], ["Dark · Cobalt", "theme=dark&accent=cobalt"], ["Dark · Grey", "theme=dark&accent=grey"], ["Light · Grey", "theme=light&accent=grey"]]) {
   const bad = [];
   for (const r of PAGES) {
@@ -271,7 +273,7 @@ console.log("Motion (homepage)");
   const reel = mp.getByRole("button", { name: "Open the showreel" });
   const tilt = await reel.evaluate((el) => getComputedStyle(el).transform);
   const sizes = [];
-  for (const y of [300, 900, 1200, 1500, 1800]) {
+  for (const y of [300, 900, 1200, 1450, 1800]) {
     await mp.evaluate((y) => window.scrollTo(0, y), y);
     await mp.waitForTimeout(600);
     const r = await reel.boundingBox();
@@ -293,10 +295,10 @@ console.log("Motion (homepage)");
   await mp.waitForTimeout(1400);
   const after = await people.evaluate((el) => getComputedStyle(el.closest("[data-reveal]")).opacity);
   check(before === "0" && after === "1", `below-the-fold heading reveals on scroll (opacity ${before} → ${after})`);
-  // Scroll-linked: the progress bar fills and the hero text drifts away.
-  const bar = await mp.evaluate(() => document.querySelector('[aria-hidden="true"].fixed').getBoundingClientRect().width);
+  // Scroll-linked: the hero text drifts away; there is no progress bar across the top.
+  const bar = await mp.evaluate(() => [...document.querySelectorAll("body *")].some((el) => { const s = getComputedStyle(el); const r = el.getBoundingClientRect(); return s.position === "fixed" && r.top === 0 && r.height <= 4 && r.width > 200; }));
   const heroY = await mp.evaluate(() => new DOMMatrix(getComputedStyle(document.querySelector("section#top > div.flex")).transform).m42);
-  check(bar > 400 && heroY > 20, `scroll progress bar fills (${Math.round(bar)}px) and hero text drifts (${Math.round(heroY)}px)`);
+  check(!bar && heroY > 20, `no top progress bar, and hero text drifts (${Math.round(heroY)}px)`);
   await ctx.close();
   // Without JavaScript nothing is left hidden.
   const nojs = await browser.newContext({ viewport: { width: 1440, height: 900 }, javaScriptEnabled: false });
@@ -332,7 +334,7 @@ console.log("Motion (other pages)");
   const nojs = await browser.newContext({ viewport: { width: 1440, height: 900 }, javaScriptEnabled: false });
   const np = await nojs.newPage();
   const hiddenOn = [];
-  for (const r of ["/work/", "/work/project-01/", "/studio/", "/originals/", "/people/", "/start-a-project/", "/thanks/", "/privacy/", "/missing-page/"]) {
+  for (const r of ["/work/", "/work/mercedes-benz-global-star/", "/studio/", "/originals/", "/people/", "/start-a-project/", "/thanks/", "/privacy/", "/missing-page/"]) {
     await np.goto(`${base}${r}`, { waitUntil: "load" });
     const n = await np.evaluate(() => [...document.querySelectorAll("[data-reveal]")].filter((el) => getComputedStyle(el).opacity !== "1").length);
     if (n) hiddenOn.push(`${r}: ${n}`);

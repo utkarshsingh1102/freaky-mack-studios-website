@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FM_LOGO_WHITE } from "@/shared/assets";
 import { Reveal } from "@/components/motion/Reveal";
+import { Lockup } from "./Logo";
 import { CONTACT, SOCIAL } from "@/shared/config";
 import s from "./site.module.css";
 import { PX } from "./ui";
@@ -19,7 +19,7 @@ export function SiteFooter() {
     >
       <Reveal amount={0.3} className="flex flex-col items-start justify-between gap-[48px] lg:flex-row">
         <div className="flex max-w-[360px] min-w-0 flex-col gap-[20px]">
-          <img src={FM_LOGO_WHITE} alt="Freaky Mack Studios" className={`${s.logo} h-[118px] w-[150px] object-contain object-left`} />
+          <Lockup title="Freaky Mack Studios" alignLeft className="h-[118px] w-[150px]" />
           <p className="m-0 text-[15px] leading-[1.6] text-[var(--muted)]">
             A home for filmmakers, creators and ideas that deserve to become films.
           </p>

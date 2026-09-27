@@ -30,7 +30,7 @@ export default function PeoplePage() {
       <section
         className={`relative pt-[88px] pb-[72px] text-center lg:pt-[120px] lg:pb-[120px] ${PX}`}
       >
-        <DraggableMark className="absolute top-[16px] left-[20px] h-[56px] w-[84px] lg:top-[24px] lg:left-[40px] xl:top-[110px] xl:left-[170px] xl:h-[100px] xl:w-[150px]" imgClassName={`${s.blob} ${s.logo}`} />
+        <DraggableMark className="absolute top-[16px] left-[20px] h-[56px] w-[84px] lg:top-[24px] lg:left-[40px] xl:top-[110px] xl:left-[170px] xl:h-[100px] xl:w-[150px]" imgClassName={s.blob} />
         <Reveal onMount stagger={0.12} delay={0.1} className="flex flex-col items-center gap-[24px] lg:gap-[32px]">
           <RevealItem>
             <Kicker>Chapter 04 — The humans behind the camera</Kicker>

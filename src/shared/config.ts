@@ -24,6 +24,8 @@ export const REEL = {
   loopSrc: "",
   poster: "",
   fullEmbedUrl: "",
+  /** Running time of the full reel (Freaky Mack_Showreel.mov). */
+  duration: "1:30",
 };
 
 /** Social profiles. The client still owes the real handles, so these point at the platforms for now. */

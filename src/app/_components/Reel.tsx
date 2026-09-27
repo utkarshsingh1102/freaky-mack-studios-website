@@ -85,10 +85,13 @@ export function Reel({ open, onToggle }: { open: boolean; onToggle: () => void }
             </motion.div>
           </AnimatePresence>
         </div>
-        {/* Scroll room while the reel grows in place, plus the height it gains below its box once grown,
-            so the next chapter keeps its usual distance. */}
-        {pin && <div aria-hidden="true" style={{ height: Math.round(vh * PIN + ((maxScale - 1) * baseH) / 2) }} />}
+        {/* Scroll room while the reel grows in place. */}
+        {pin && <div aria-hidden="true" style={{ height: Math.round(vh * PIN) }} />}
       </div>
+      {/* Once grown, the reel reaches below its layout box by half the height it gained. That room has to
+          come after the pinned stretch (inside it, the card would only stay pinned longer), so the next
+          chapter keeps its usual distance at every window size. */}
+      {pin && <div aria-hidden="true" style={{ height: Math.ceil(((maxScale - 1) * baseH) / 2) }} />}
     </section>
   );
 }
@@ -149,7 +152,7 @@ function ClosedReel({ onToggle }: { onToggle: () => void }) {
         </span>
         <span className="flex flex-col gap-[2px]">
           <span className="text-[14px] font-semibold lg:text-[15px]">Showreel</span>
-          <span className="text-[12px] text-white/65 lg:text-[13px]">tap to open · [DURATION]</span>
+          <span className="text-[12px] text-white/65 lg:text-[13px]">tap to open · {REEL.duration}</span>
         </span>
       </div>
       <span

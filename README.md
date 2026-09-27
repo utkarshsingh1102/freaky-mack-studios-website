@@ -88,6 +88,6 @@ The default look is `DEFAULT_THEME` / `DEFAULT_ACCENT` / `DEFAULT_GROUND` in `sr
 
 Anything in `[square brackets]` is missing content — `[Project title]`, `[Client]`, `[Name]`, `[Role]`, `[Year]`, `[City]`, `[Studio address]`, `[X] working days`, the `[Range 1–3]` budget options. They stay visible until real content arrives; replace them in `src/content/` and `src/shared/config.ts`.
 
-Still to send: logo vectors · a 10–15s homepage loop and the full reel link · project videos, 3–5 stills and credits per project · about text · team photos · client logos and testimonials (with permission) · social handles · domain and hosting details.
+Still to send: a 10–15s homepage loop and the full reel link · project videos, 3–5 stills and credits per project · about text · team photos · client logos and testimonials (with permission) · social handles · domain and hosting details.
 
 **Legal:** Privacy and Terms are drafts. Fill every bracket (legal entity, address, city, hosting / form / analytics tools, retention period, grievance officer) and have a lawyer review both before launch.

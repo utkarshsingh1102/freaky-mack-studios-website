@@ -9,11 +9,6 @@
   font-family: var(--fm-serif), "Instrument Serif", Georgia, serif;
 }
 
-/* The logo PNGs are white: inverted to black on the light page, as-is on the dark page. */
-.logo { filter: invert(1); }
-html[data-theme="dark"] .logo { filter: none; }
-/* Marks sitting on an inverse block (the black slab in Light, the white slab in Dark). */
-html[data-theme="dark"] .logoOnInverse { filter: invert(1); }
 
 .link { transition: opacity 0.25s ease; }
 .link:hover { opacity: 0.5; }
