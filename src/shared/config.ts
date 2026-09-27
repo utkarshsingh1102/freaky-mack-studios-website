@@ -1,6 +1,6 @@
 /**
- * Pitch-only UI: the floating "← All options · A B C D" switcher and Option A's accent picker.
- * Set to false (or NEXT_PUBLIC_PITCH_MODE=off) once the client has picked an option.
+ * Pitch-only UI: the floating theme / accent picker on the homepage.
+ * Set NEXT_PUBLIC_PITCH_MODE=off (or make this false) once the client has locked in a look.
  */
 export const PITCH_MODE = process.env.NEXT_PUBLIC_PITCH_MODE !== "off";
 
@@ -20,12 +20,3 @@ export const REEL = {
   poster: "",
   fullEmbedUrl: "",
 };
-
-export const OPTIONS = [
-  { letter: "A", href: "/option-a/" },
-  { letter: "B", href: "/option-b/" },
-  { letter: "C", href: "/option-c/" },
-  { letter: "D", href: "/option-d/" },
-] as const;
-
-export type OptionLetter = (typeof OPTIONS)[number]["letter"];
