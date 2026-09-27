@@ -8,11 +8,11 @@ import { MX } from "./ui";
 export const pillAccent = (size = "h-[56px] px-[30px] text-[15px] lg:h-[60px]") =>
   `${s.pill} flex shrink-0 items-center rounded-full bg-[var(--accent)] font-semibold whitespace-nowrap text-[var(--on-accent)] ${size}`;
 
-/** Surface panel that closes a page: "Chapter 06 — Your turn / Got a story? Let’s shoot it." */
+/** Panel that closes a page: "Chapter 06 — Your turn / Got a story? Let’s shoot it." Inverted: black in Light, white in Dark. */
 export function YourTurnCta() {
   return (
     <section
-      className={`mb-[96px] flex flex-col items-start justify-between gap-[28px] rounded-[28px] bg-[var(--surface)] px-[28px] py-[44px] md:flex-row md:items-center lg:mb-[140px] lg:gap-[48px] lg:rounded-[40px] lg:px-[96px] lg:py-[88px] ${MX}`}
+      className={`mb-[96px] flex flex-col items-start justify-between gap-[28px] panel-invert rounded-[28px] px-[28px] py-[44px] md:flex-row md:items-center lg:mb-[140px] lg:gap-[48px] lg:rounded-[40px] lg:px-[96px] lg:py-[88px] ${MX}`}
     >
       <div className="flex flex-col gap-[14px]">
         <span className={`${s.it} text-[20px] text-[var(--muted-2)] lg:text-[24px]`}>Chapter 06 — Your turn</span>
