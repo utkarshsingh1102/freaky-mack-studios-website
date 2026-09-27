@@ -109,3 +109,20 @@ button {
   border-top: 1px solid var(--ink);
   pointer-events: none;
 }
+
+/*
+ * A light panel that stays light in Dark: the board's #f4f4f1 panel in Light, white in Dark, with the
+ * Light text tokens inside so everything on it reads black-on-white. Accent colours are unchanged.
+ */
+.panel-light {
+  background: var(--surface);
+  color: var(--ink);
+}
+html[data-theme="dark"] .panel-light {
+  --ink: #0a0a0a;
+  --ink-2: #3a3a3a;
+  --muted: #5c5c5c;
+  --muted-2: #6b6b6b;
+  --line: #d6d6d2;
+  background: #ffffff;
+}
