@@ -111,7 +111,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
       <Link
         href={projectHref(next.slug)}
-        className={`${s.next} mb-[96px] flex items-center justify-between gap-[24px] rounded-[28px] bg-[var(--surface)] px-[28px] py-[40px] lg:mb-[140px] lg:gap-[48px] lg:rounded-[40px] lg:px-[80px] lg:py-[72px] ${MX}`}
+        className={`${s.next} panel-invert mb-[96px] flex items-center justify-between gap-[24px] rounded-[28px] px-[28px] py-[40px] lg:mb-[140px] lg:gap-[48px] lg:rounded-[40px] lg:px-[80px] lg:py-[72px] ${MX}`}
       >
         <div className="flex flex-col gap-[14px]">
           <span className={`${s.it} text-[20px] text-[var(--muted-2)] lg:text-[24px]`}>Next up · {next.category}</span>

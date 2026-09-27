@@ -34,7 +34,7 @@ export default function WorkPage() {
       <WorkGrid />
 
       <section
-        className={`mb-[96px] flex flex-col items-start justify-between gap-[28px] rounded-[28px] bg-[var(--surface)] px-[28px] py-[40px] md:flex-row md:items-center lg:mb-[140px] lg:gap-[48px] lg:rounded-[40px] lg:px-[80px] lg:py-[72px] ${MX}`}
+        className={`mb-[96px] flex flex-col items-start justify-between gap-[28px] rounded-[28px] panel-invert px-[28px] py-[40px] md:flex-row md:items-center lg:mb-[140px] lg:gap-[48px] lg:rounded-[40px] lg:px-[80px] lg:py-[72px] ${MX}`}
       >
         <div className="flex flex-col gap-[14px]">
           <span className={`${s.it} text-[20px] text-[var(--muted-2)] lg:text-[24px]`}>Don’t see your format?</span>
