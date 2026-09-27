@@ -1,5 +1,5 @@
 import s from "../home.module.css";
-import { PB, PX } from "./theme";
+import { PB, PX } from "@/shared/ui";
 
 // Board positions inside a 1296×300 box; left is stored as a % of 1296 so it scales with the box.
 const TAGS = [

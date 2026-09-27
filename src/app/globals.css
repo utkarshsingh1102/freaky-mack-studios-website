@@ -1,12 +1,69 @@
 @import "tailwindcss";
 
-/* Neutral base only. Every option owns its fonts, colours and component styles in its own folder. */
+/* Colour tokens for every page. Light is the approved board palette; Dark is its inverse (black ground, white text).
+   The accent variables (--accent, --on-accent, --accent-text, --ground) come from the theme head script. */
+:root,
+html[data-theme="light"] {
+  --ink: #0a0a0a;
+  --ink-2: #3a3a3a;
+  --muted: #5c5c5c;
+  --muted-2: #6b6b6b;
+  --dim: #7a7a7a;
+  --line: #d6d6d2;
+  --line-2: #e4e4e0;
+  --surface: #f4f4f1;
+  --surface-2: #e8e8e5;
+  --surface-3: #dcdcd8;
+  --surface-4: #d2d2ce;
+  --portrait: linear-gradient(170deg, #e8e8e5, #bdbdb8);
+  --field-bg: #ffffff;
+  --field-line: #d0d0cc;
+  --pill-bg: #ffffff;
+  --inv-bg: #0a0a0a;
+  --inv-ink: #ffffff;
+  --inv-muted: rgba(255, 255, 255, 0.65);
+  --inv-soft: rgba(255, 255, 255, 0.78);
+  --inv-avatar: #3a3a3a;
+  --next-hover: #ecece8;
+  --ghost: #f1f1ee;
+  --error: #b42318;
+  color-scheme: light;
+}
+html[data-theme="dark"] {
+  --ink: #ffffff;
+  --ink-2: #c8c8c4;
+  --muted: #a3a3a0;
+  --muted-2: #9a9a96;
+  --dim: #8a8a86;
+  --line: #2e2e2c;
+  --line-2: #262624;
+  --surface: #161615;
+  --surface-2: #1f1f1e;
+  --surface-3: #262625;
+  --surface-4: #2c2c2b;
+  --portrait: linear-gradient(170deg, #262625, #3a3a38);
+  --field-bg: #0a0a0a;
+  --field-line: #3a3a38;
+  --pill-bg: #0a0a0a;
+  --inv-bg: #ffffff;
+  --inv-ink: #0a0a0a;
+  --inv-muted: rgba(10, 10, 10, 0.62);
+  --inv-soft: rgba(10, 10, 10, 0.75);
+  --inv-avatar: #d0d0cc;
+  --next-hover: #1f1f1e;
+  --ghost: #161615;
+  --error: #ff8a80;
+  color-scheme: dark;
+}
+
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
 body {
   margin: 0;
+  background: var(--ground);
+  color: var(--ink);
   -webkit-font-smoothing: antialiased;
 }
 button {

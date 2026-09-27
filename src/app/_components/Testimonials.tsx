@@ -1,5 +1,5 @@
 import s from "../home.module.css";
-import { CHAPTER, PB, PX } from "./theme";
+import { CHAPTER, PB, PX } from "@/shared/ui";
 
 const QUOTE = "“[Client testimonial — two or three lines in their own words.]”";
 

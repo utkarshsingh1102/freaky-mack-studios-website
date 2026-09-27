@@ -1,14 +1,15 @@
 import { CONTACT } from "@/shared/config";
 import { useEnquiryForm } from "@/shared/enquiry";
 import s from "../home.module.css";
-import { CHAPTER, PX } from "./theme";
+import { CHAPTER, PX } from "@/shared/ui";
 
 const FIELD = "rounded-[12px] border border-[var(--field-line)] bg-[var(--field-bg)] px-[16px] text-[16px] text-[var(--ink)] [font-family:inherit]";
 const LABEL = "text-[13px] font-medium text-[var(--ink-2)]";
+const ERR = "m-0 text-[13px] text-[var(--error)]";
 
 /** Chapter 06: contact + enquiry form (shared submit handler). */
 export function Contact() {
-  const { onSubmit, status, message } = useEnquiryForm();
+  const { onSubmit, status, message, errors } = useEnquiryForm({ source: "Homepage" });
   return (
     <section
       id="contact"
@@ -31,16 +32,19 @@ export function Contact() {
       </div>
       <form
         onSubmit={onSubmit}
+        noValidate
         aria-label="Start a project"
         className="mt-[48px] flex flex-col gap-[20px] rounded-[28px] bg-[var(--surface)] p-[24px] [transform:rotate(1deg)] sm:p-[36px] lg:col-span-5 lg:col-start-8 lg:mt-[96px]"
       >
         <div className="flex flex-col gap-[8px]">
           <label htmlFor="fm-name" className={LABEL}>Your name</label>
-          <input id="fm-name" name="name" type="text" required placeholder="Hi, I’m…" className={`${FIELD} h-[52px]`} />
+          <input id="fm-name" name="name" type="text" required aria-invalid={!!errors.name} aria-describedby={errors.name ? "fm-name-err" : undefined} placeholder="Hi, I’m…" className={`${FIELD} h-[52px]`} />
+          {errors.name && <p id="fm-name-err" className={ERR}>{errors.name}</p>}
         </div>
         <div className="flex flex-col gap-[8px]">
           <label htmlFor="fm-email" className={LABEL}>Email</label>
-          <input id="fm-email" name="email" type="email" required placeholder="you@brand.com" className={`${FIELD} h-[52px]`} />
+          <input id="fm-email" name="email" type="email" required aria-invalid={!!errors.email} aria-describedby={errors.email ? "fm-email-err" : undefined} placeholder="you@brand.com" className={`${FIELD} h-[52px]`} />
+          {errors.email && <p id="fm-email-err" className={ERR}>{errors.email}</p>}
         </div>
         <div className="flex flex-col gap-[8px]">
           <label htmlFor="fm-brief" className={LABEL}>The story so far</label>
@@ -48,9 +52,13 @@ export function Contact() {
             id="fm-brief"
             name="brief"
             rows={4}
+            required
+            aria-invalid={!!errors.brief}
+            aria-describedby={errors.brief ? "fm-brief-err" : undefined}
             placeholder="Format, timeline, budget range — whatever you have."
             className={`${FIELD} resize-y py-[14px]`}
           />
+          {errors.brief && <p id="fm-brief-err" className={ERR}>{errors.brief}</p>}
         </div>
         <button
           type="submit"

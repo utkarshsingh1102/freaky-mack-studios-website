@@ -1,10 +1,11 @@
+import Link from "next/link";
 import { useState } from "react";
+import { AUDIENCES as WHO, FORMATS as FMT, bare, startProjectHref } from "@/content/enquiry-options";
 import s from "../home.module.css";
-import { CHAPTER, PB, PX } from "./theme";
+import { CHAPTER, PB, PX } from "@/shared/ui";
 
-const FORMATS = ["an ad film", "a music video", "a fashion film", "an event film", "a documentary", "a short film", "a web series", "a podcast"];
-const AUDIENCES = ["a brand", "an agency", "a music label", "a fashion label", "a face on screen"];
-const bare = (n: string) => n.replace(/^an? /, "");
+const FORMATS = FMT.map((f) => f.phrase);
+const AUDIENCES = WHO.map((a) => a.phrase);
 
 function Chip({ on, label, onPick }: { on: boolean; label: string; onPick: () => void }) {
   return (
@@ -63,12 +64,12 @@ export function SentenceBuilder() {
           </div>
         </div>
       </div>
-      <a
-        href="#contact"
+      <Link
+        href={startProjectHref(FMT[fmt].id, WHO[who].id)}
         className={`${s.link} ${s.it} self-start border-b border-[var(--ink)] pb-[4px] text-[24px] lg:text-[30px]`}
       >
         Sounds right? Tell us the rest →
-      </a>
+      </Link>
     </section>
   );
 }

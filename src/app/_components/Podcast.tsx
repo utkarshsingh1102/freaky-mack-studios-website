@@ -1,7 +1,7 @@
 import { useState } from "react";
 import s from "../home.module.css";
 import { Eq, PlayIcon } from "./icons";
-import { CHAPTER, H2, PB, PX } from "./theme";
+import { CHAPTER, H2, PB, PX } from "@/shared/ui";
 
 const EPISODES = [
   // Tilt is a class (not inline) so the board's hover transform can override it.

@@ -1,17 +1,12 @@
+"use client";
+
 import { PITCH_MODE } from "@/shared/config";
-import { ACCENTS, GROUNDS, THEMES, type AccentId, type Theme } from "./theme";
+import { setThemeChoice, useThemeChoice } from "./store";
+import { ACCENTS, GROUNDS, THEMES } from "./theme";
 
-type Props = {
-  theme: Theme;
-  accentId: AccentId;
-  ground: string;
-  onTheme: (t: Theme) => void;
-  onAccent: (a: AccentId) => void;
-  onGround: (g: string) => void;
-};
-
-/** Pitch-only: lets the client compare Light / Dark, the accent colours and the light grounds. */
-export function ThemePicker({ theme, accentId, ground, onTheme, onAccent, onGround }: Props) {
+/** Pitch-only, on every page: compare Light / Dark, the accent colours and the light grounds. */
+export function ThemePicker() {
+  const { theme, accent: accentId, ground } = useThemeChoice();
   if (!PITCH_MODE) return null;
   return (
     <div
@@ -25,7 +20,7 @@ export function ThemePicker({ theme, accentId, ground, onTheme, onAccent, onGrou
           <button
             key={t}
             type="button"
-            onClick={() => onTheme(t)}
+            onClick={() => setThemeChoice({ theme: t })}
             aria-pressed={theme === t}
             aria-label={`${t === "light" ? "Light" : "Dark"} theme`}
             className={`rounded-full px-[10px] py-[3px] capitalize transition-colors ${
@@ -42,7 +37,7 @@ export function ThemePicker({ theme, accentId, ground, onTheme, onAccent, onGrou
         <button
           key={a.id}
           type="button"
-          onClick={() => onAccent(a.id)}
+          onClick={() => setThemeChoice({ accent: a.id })}
           aria-label={`${a.name} accent`}
           aria-pressed={accentId === a.id}
           title={a.name}
@@ -58,7 +53,7 @@ export function ThemePicker({ theme, accentId, ground, onTheme, onAccent, onGrou
             <button
               key={g}
               type="button"
-              onClick={() => onGround(g)}
+              onClick={() => setThemeChoice({ ground: g })}
               aria-label={`Ground ${g}`}
               aria-pressed={ground === g}
               title={g}

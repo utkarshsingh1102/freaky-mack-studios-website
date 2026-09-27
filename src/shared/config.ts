@@ -4,6 +4,11 @@
  */
 export const PITCH_MODE = process.env.NEXT_PUBLIC_PITCH_MODE !== "off";
 
+/** Absolute site URL for metadata (Open Graph, sitemap). On Vercel the production domain is used automatically. */
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");
+
 export const CONTACT = {
   email: "freakymackstudios@gmail.com",
   phone: "+91 97115 42274",
