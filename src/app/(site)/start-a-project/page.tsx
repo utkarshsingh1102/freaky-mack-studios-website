@@ -33,15 +33,15 @@ export default function StartAProjectPage() {
         <Intro>Tell us what you’re making. We read every brief and come back to you personally.</Intro>
       </section>
 
-      <section className={`grid grid-cols-1 items-start gap-y-[56px] pb-[96px] lg:grid-cols-12 lg:gap-x-[32px] lg:pb-[160px] ${PX}`}>
+      <section className={`grid grid-cols-1 items-start gap-y-[56px] pb-[96px] lg:pb-[160px] xl:grid-cols-12 xl:gap-x-[32px] ${PX}`}>
         <EnquiryForm />
 
-        <aside className="flex flex-col gap-[40px] lg:col-span-4 lg:col-start-9 lg:gap-[48px] lg:pt-[16px]">
+        <aside className="grid grid-cols-1 items-start gap-[40px] md:grid-cols-2 xl:col-span-4 xl:col-start-9 xl:flex xl:flex-col xl:gap-[48px] xl:pt-[16px]">
           <div className="flex flex-col gap-[16px]">
             <Label size="text-[20px] lg:text-[24px]">Rather talk?</Label>
             <a
               href={`mailto:${CONTACT.email}`}
-              className={`${s.link} self-start border-b-[3px] border-[var(--accent)] pb-[4px] text-[19px] font-semibold break-all lg:text-[22px]`}
+              className={`${s.link} self-start border-b-[3px] border-[var(--accent)] pb-[4px] text-[19px] font-semibold break-all sm:break-normal lg:text-[22px]`}
             >
               {CONTACT.email}
             </a>
@@ -60,7 +60,7 @@ export default function StartAProjectPage() {
               [City], India
             </address>
           </div>
-          <div className="flex flex-col gap-[22px] rounded-[28px] border border-[var(--ink)] p-[28px] [transform:rotate(1.5deg)] lg:p-[32px]">
+          <div className="flex flex-col gap-[22px] rounded-[28px] border md:col-span-2 md:max-w-[520px] xl:max-w-none border-[var(--ink)] p-[28px] [transform:rotate(1.5deg)] lg:p-[32px]">
             <Label size="text-[20px] lg:text-[24px]">What happens next</Label>
             <ol className="m-0 flex list-none flex-col gap-[22px] p-0">
               {NEXT_STEPS.map((t, i) => (

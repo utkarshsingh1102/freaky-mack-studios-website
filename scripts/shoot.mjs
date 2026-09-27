@@ -1,7 +1,7 @@
 // Full-page screenshots + layout checks with the preinstalled Chromium.
-// Usage: node scripts/shoot.mjs [route ...] [--out dir] [--seg 1500] [--base http://localhost:3000]
-//   Routes may carry the pitch query, e.g. "/?theme=dark&accent=grey".
-//   Shoots each route at 1440 and 390, fails on horizontal overflow or console errors.
+// Usage: node scripts/shoot.mjs [route ...] [--out dir] [--seg 1500] [--widths 1440,390] [--base http://localhost:3000]
+//   With no routes it shoots every page. Routes may carry the pitch query, e.g. "/work/?theme=dark&accent=grey".
+//   Fails on horizontal overflow or console errors.
 import { chromium } from "playwright";
 import fs from "node:fs";
 import path from "node:path";
@@ -14,19 +14,22 @@ const flag = (name, fallback) => {
 const base = flag("--base", "http://localhost:3000");
 const out = flag("--out", "shots");
 const seg = Number(flag("--seg", "0")); // >0: also save the full page in slices of this height
+const widths = flag("--widths", "1440,390").split(",").map(Number);
 const routes = args.filter((a) => !a.startsWith("--"));
-const list = routes.length ? routes : ["/", "/?theme=dark"];
+const ALL = ["/", "/work/", "/work/project-01/", "/studio/", "/originals/", "/people/", "/start-a-project/", "/thanks/", "/privacy/", "/terms/", "/missing-page/"];
+const list = routes.length ? routes : ALL;
 const slug = (r) => r.replace(/^\/+|\/+$/g, "").replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "") || "home";
 
 const browser = await chromium.launch();
 let failed = false;
 fs.mkdirSync(out, { recursive: true });
 for (const route of list) {
-  for (const width of [1440, 390]) {
-    const page = await browser.newPage({ viewport: { width, height: width === 390 ? 844 : 900 } });
+  for (const width of widths) {
+    const page = await browser.newPage({ viewport: { width, height: width < 500 ? 844 : 900 } });
     const errors = [];
     page.on("pageerror", (e) => errors.push(String(e)));
-    page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
+    // The 404 route answers with status 404 on purpose; that resource error isn't a page error.
+    page.on("console", (m) => m.type() === "error" && !(route.includes("missing") && m.text().includes("404")) && errors.push(m.text()));
     await page.goto(`${base}${route}`, { waitUntil: "networkidle" });
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.waitForTimeout(600);

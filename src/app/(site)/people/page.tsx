@@ -31,7 +31,7 @@ export default function PeoplePage() {
         <img
           src={FM_MARK_WHITE}
           alt=""
-          className={`${s.blob} ${s.logo} absolute top-[16px] left-[20px] h-[56px] w-[84px] object-contain lg:top-[110px] lg:left-[170px] lg:h-[100px] lg:w-[150px]`}
+          className={`${s.blob} ${s.logo} absolute top-[16px] left-[20px] h-[56px] w-[84px] object-contain lg:top-[24px] lg:left-[40px] xl:top-[110px] xl:left-[170px] xl:h-[100px] xl:w-[150px]`}
         />
         <Kicker>Chapter 04 — The humans behind the camera</Kicker>
         <H1 className="max-w-[1000px]">
@@ -84,7 +84,7 @@ export default function PeoplePage() {
               style={{ ["--lift" as string]: `${c.lift}px` }}
             >
               <div
-                className="flex h-[220px] w-full items-center justify-center text-[12px] tracking-[0.2em] text-[var(--muted)] uppercase md:h-[260px] lg:h-[320px]"
+                className="flex h-[220px] w-full items-center justify-center text-[12px] tracking-[0.2em] text-[var(--ink-2)] uppercase md:h-[260px] lg:h-[320px]"
                 style={{ borderRadius: c.shape, background: c.tone }}
               >
                 [ Photo ]

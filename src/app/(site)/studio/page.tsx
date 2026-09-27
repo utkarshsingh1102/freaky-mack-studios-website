@@ -74,11 +74,11 @@ export default function StudioPage() {
           <Label>Told in chapters</Label>
           <h2 className={H2}>From agency to studio.</h2>
         </div>
-        <ol className="m-0 grid list-none grid-cols-1 items-end gap-[24px] p-0 md:grid-cols-2 lg:grid-cols-4">
+        <ol className="m-0 grid list-none grid-cols-1 items-end gap-[24px] p-0 md:grid-cols-2 xl:grid-cols-4">
           {TIMELINE.map((t) => (
             <li
               key={t.label}
-              className={`${s.card} ${TONE[t.tone].card} flex min-h-[220px] flex-col justify-between gap-[40px] rounded-[24px] p-[28px] lg:h-[var(--h)] lg:min-h-0`}
+              className={`${s.card} ${TONE[t.tone].card} flex min-h-[220px] flex-col justify-between gap-[40px] rounded-[24px] p-[28px] xl:h-[var(--h)] xl:min-h-0`}
               style={{ transform: `rotate(${t.tilt}deg)`, ["--h" as string]: `${t.h}px` }}
             >
               <span className={`${s.it} text-[20px] ${TONE[t.tone].label}`}>{t.label}</span>
@@ -109,14 +109,14 @@ export default function StudioPage() {
         </div>
       </section>
 
-      <section aria-label="What we make" className={`grid grid-cols-1 gap-y-[40px] lg:grid-cols-12 lg:gap-x-[32px] ${SECTION}`}>
-        <div className="flex flex-col gap-[16px] lg:col-span-4">
+      <section aria-label="What we make" className={`grid grid-cols-1 gap-y-[40px] xl:grid-cols-12 xl:gap-x-[32px] ${SECTION}`}>
+        <div className="flex flex-col gap-[16px] xl:col-span-4">
           <Label>What we make</Label>
           <h2 className="m-0 text-[36px] leading-[1.05] font-extrabold tracking-[-0.03em] text-balance md:text-[48px] lg:text-[56px]">
             Eight ways a brief becomes a film.
           </h2>
         </div>
-        <ol className="m-0 list-none border-t border-[var(--ink)] p-0 lg:col-span-7 lg:col-start-6">
+        <ol className="m-0 list-none border-t border-[var(--ink)] p-0 xl:col-span-7 xl:col-start-6">
           {SERVICES.map((sv, i) => (
             <li
               key={sv.name}

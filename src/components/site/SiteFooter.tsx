@@ -17,13 +17,13 @@ export function SiteFooter() {
       className={`mt-auto flex shrink-0 flex-col gap-[48px] border-t border-[var(--ink)] pt-[56px] pb-[88px] lg:h-[424px] lg:justify-between lg:gap-0 lg:pt-[64px] lg:pb-[40px] ${PX}`}
     >
       <div className="flex flex-col items-start justify-between gap-[48px] lg:flex-row">
-        <div className="flex max-w-[360px] flex-col gap-[20px]">
+        <div className="flex max-w-[360px] min-w-0 flex-col gap-[20px]">
           <img src={FM_LOGO_WHITE} alt="Freaky Mack Studios" className={`${s.logo} h-[118px] w-[150px] object-contain object-left`} />
           <p className="m-0 text-[15px] leading-[1.6] text-[var(--muted)]">
             A home for filmmakers, creators and ideas that deserve to become films.
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-x-[24px] gap-y-[40px] md:flex md:gap-[64px] lg:gap-[96px]">
+        <div className="grid grid-cols-2 gap-x-[24px] gap-y-[40px] md:flex md:shrink-0 md:gap-[64px] lg:gap-[40px] xl:gap-[96px]">
           <div className="flex flex-col gap-[12px] text-[15px]">
             <div className={HEAD}>Chapters</div>
             <Link href="/work" className={s.link}>Work</Link>
@@ -41,7 +41,7 @@ export function SiteFooter() {
           </div>
           <div className="col-span-2 flex flex-col gap-[12px] text-[15px]">
             <div className={HEAD}>Say hello</div>
-            <a href={`mailto:${CONTACT.email}`} className={`${s.link} break-all`}>{CONTACT.email}</a>
+            <a href={`mailto:${CONTACT.email}`} className={`${s.link} break-all md:break-normal`}>{CONTACT.email}</a>
             <a href={CONTACT.phoneHref} className={s.link}>{CONTACT.phone}</a>
             <a href={CONTACT.whatsapp} className={s.link}>WhatsApp</a>
             <span className="text-[var(--muted)]">[STUDIO ADDRESS], [CITY]</span>

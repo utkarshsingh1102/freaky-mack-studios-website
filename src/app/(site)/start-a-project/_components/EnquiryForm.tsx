@@ -64,7 +64,7 @@ export function EnquiryForm() {
       onSubmit={onSubmit}
       noValidate
       aria-label="Start a project"
-      className="flex flex-col gap-[36px] rounded-[24px] bg-[var(--surface)] p-[22px] sm:p-[32px] lg:col-span-8 lg:gap-[40px] lg:rounded-[32px] lg:p-[48px]"
+      className="flex flex-col gap-[36px] rounded-[24px] bg-[var(--surface)] p-[22px] sm:p-[32px] xl:col-span-8 lg:gap-[40px] lg:rounded-[32px] lg:p-[48px]"
     >
       <p className="m-0 text-[26px] leading-[1.3] font-extrabold tracking-[-0.03em] md:text-[34px] lg:text-[40px]" aria-live="polite">
         You need{" "}
