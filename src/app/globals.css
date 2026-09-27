@@ -64,6 +64,7 @@ body {
   margin: 0;
   background: var(--ground);
   color: var(--ink);
+  font-family: var(--fm-sans), "Plus Jakarta Sans", "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 button {
