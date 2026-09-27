@@ -1,9 +1,9 @@
 "use client";
 
-import { AnimatePresence, motion, useScroll } from "framer-motion";
-import { useRef } from "react";
-import { EASE } from "@/components/motion/Reveal";
-import { useSmoothScrollValue } from "@/components/motion/useScrollMotion";
+import { AnimatePresence, motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { useRef, useSyncExternalStore } from "react";
+import { EASE, Reveal } from "@/components/motion/Reveal";
+import { useScrollMotionAllowed } from "@/components/motion/useScrollMotion";
 import { REEL } from "@/shared/config";
 import { ReelEmbed, ReelLoop } from "@/shared/reel";
 import s from "../home.module.css";
@@ -14,33 +14,81 @@ const GRADIENT = "radial-gradient(ellipse at 50% 55%, #2c2c2c 0%, #121212 55%, #
 const DASHED =
   "absolute flex items-center justify-center border border-dashed border-white/[0.18] text-center text-[11px] tracking-[0.22em] text-white/45 uppercase lg:text-[12px]";
 
-/** Small tilted card that opens into a full-width band (board: reelOpen / reelClosed). */
+const ASPECT = 760 / 428;
+/** How much of the window the reel should cover once it has grown (by area). */
+const COVER = 0.7;
+/** How far the page scrolls (as a share of the window height) while the reel grows in place. */
+const PIN = 0.9;
+
+/** The window size, read without a hydration mismatch: "" on the server and while hydrating. */
+const onResize = (cb: () => void) => {
+  window.addEventListener("resize", cb);
+  return () => window.removeEventListener("resize", cb);
+};
+function useViewport(): [number, number] {
+  const v = useSyncExternalStore(onResize, () => `${document.documentElement.clientWidth}x${window.innerHeight}`, () => "");
+  const [w, h] = v ? v.split("x").map(Number) : [0, 0];
+  return [w, h];
+}
+
+/**
+ * The showreel: a straight card that fades in, then grows as the page scrolls. While it grows the
+ * reel stays pinned in the middle of the window (the page seems to hold still), and once it covers
+ * about 70% of the window the pin releases and the page scrolls on. Opening it (click, or the hero's
+ * "Press play") swaps in the full-width band. Phones, reduced motion and no-JS get the static card.
+ */
 export function Reel({ open, onToggle }: { open: boolean; onToggle: () => void }) {
-  const ref = useRef<HTMLElement>(null);
-  // Scrolling in, the card swings up from a steeper tilt and grows into place (spring-smoothed).
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "center center"] });
-  const rotate = useSmoothScrollValue(scrollYProgress, [-8, 0], 0);
-  const scale = useSmoothScrollValue(scrollYProgress, [0.84, 1], 1);
-  const y = useSmoothScrollValue(scrollYProgress, [90, 0], 0);
+  const track = useRef<HTMLDivElement>(null);
+  const allowed = useScrollMotionAllowed();
+  const [vw, vh] = useViewport();
+
+  // The card's width in the layout (760px, less on narrow screens) and the size that covers COVER of
+  // the window, kept inside it.
+  const px = vw < 768 ? 20 : vw < 1024 ? 40 : 96;
+  const baseW = Math.min(760, vw - 2 * px);
+  const baseH = baseW / ASPECT;
+  const targetW = Math.min(Math.sqrt(COVER * vw * vh * ASPECT), vw * 0.94, vh * 0.94 * ASPECT);
+  const maxScale = vw ? Math.max(1, targetW / baseW) : 1;
+  const pin = allowed && !open && maxScale > 1.05;
+
+  // 0 when the card is centred in the window and pins, 1 when it has grown and releases.
+  const top = Math.round(vh / 2 - baseH / 2);
+  const { scrollYProgress } = useScroll({ target: track, offset: [`start ${top}px`, `end ${top + Math.round(baseH)}px`] });
+  const grown = useTransform(scrollYProgress, (p) => (pin ? 1 + (maxScale - 1) * p : 1));
+  const scale = useSpring(grown, { stiffness: 220, damping: 32, mass: 0.5 });
+
   return (
-    <section ref={ref} id="reel" aria-label="Showreel" className={`flex shrink-0 justify-center pb-[96px] lg:pb-[160px] ${PX}`}>
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.div
-          key={open ? "open" : "closed"}
-          initial={{ opacity: 0, scale: 0.94 }}
-          animate={{ opacity: 1, scale: 1, transition: { duration: 0.55, ease: EASE } }}
-          exit={{ opacity: 0, scale: 0.97, transition: { duration: 0.2 } }}
-          className={`flex w-full justify-center ${open ? "max-w-[1296px]" : "max-w-[760px]"}`}
+    <section id="reel" aria-label="Showreel" className={`flex shrink-0 flex-col items-center pb-[96px] lg:pb-[160px] ${PX}`}>
+      <div ref={track} className="flex w-full flex-col items-center">
+        <div
+          className={`flex w-full justify-center ${pin ? "sticky z-10" : ""}`}
+          style={pin ? { top } : undefined}
         >
-          {open ? (
-            <OpenReel onToggle={onToggle} />
-          ) : (
-            <motion.div style={{ rotate, scale, y }} className="flex w-full">
-              <ClosedReel onToggle={onToggle} />
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={open ? "open" : "closed"}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { duration: 0.55, ease: EASE } }}
+              exit={{ opacity: 0, transition: { duration: 0.2 } }}
+              className={`flex w-full justify-center ${open ? "max-w-[1296px]" : "max-w-[760px]"}`}
+            >
+              {open ? (
+                <OpenReel onToggle={onToggle} />
+              ) : (
+                <motion.div style={{ scale }} className="flex w-full">
+                  {/* Fade only: no tilt, no slide. */}
+                  <Reveal from={{ y: 0 }} duration={1} amount={0.3} className="flex w-full">
+                    <ClosedReel onToggle={onToggle} />
+                  </Reveal>
+                </motion.div>
+              )}
             </motion.div>
-          )}
-        </motion.div>
-      </AnimatePresence>
+          </AnimatePresence>
+        </div>
+        {/* Scroll room while the reel grows in place, plus the height it gains below its box once grown,
+            so the next chapter keeps its usual distance. */}
+        {pin && <div aria-hidden="true" style={{ height: Math.round(vh * PIN + ((maxScale - 1) * baseH) / 2) }} />}
+      </div>
     </section>
   );
 }
@@ -89,7 +137,7 @@ function ClosedReel({ onToggle }: { onToggle: () => void }) {
       type="button"
       onClick={onToggle}
       aria-label="Open the showreel"
-      className={`${s.reelCard} relative aspect-[760/428] w-full max-w-[760px] overflow-hidden rounded-[20px] border-0 bg-[#0d0d0d] p-0 text-left text-white shadow-[0_30px_80px_rgba(0,0,0,0.18)] [transform:rotate(-2.5deg)] lg:rounded-[24px]`}
+      className={`${s.reelCard} relative aspect-[760/428] w-full max-w-[760px] overflow-hidden rounded-[20px] border-0 bg-[#0d0d0d] p-0 text-left text-white shadow-[0_30px_80px_rgba(0,0,0,0.18)] lg:rounded-[24px]`}
     >
       <div className="absolute inset-0" style={{ background: GRADIENT }} />
       <ReelLoop className="absolute inset-0 h-full w-full object-cover">
