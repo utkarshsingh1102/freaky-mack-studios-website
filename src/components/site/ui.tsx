@@ -34,10 +34,22 @@ export function Label({
 }
 
 /** Page H1: Plus Jakarta 800, uppercase, 88px at 1440 (96px on some boards). */
-export function H1({ children, className = "", big = false }: { children: ReactNode; className?: string; big?: boolean }) {
+export function H1({
+  children,
+  className = "",
+  big = false,
+  balance = true,
+  tracking = "tracking-[-0.03em]",
+}: {
+  children: ReactNode;
+  className?: string;
+  big?: boolean;
+  balance?: boolean;
+  tracking?: string;
+}) {
   return (
     <h1
-      className={`m-0 leading-[0.98] font-extrabold tracking-[-0.03em] text-balance uppercase ${
+      className={`m-0 leading-[0.98] font-extrabold uppercase ${tracking} ${balance ? "text-balance" : ""} ${
         big ? "text-[clamp(40px,6.667vw,96px)]" : "text-[clamp(40px,6.111vw,88px)]"
       } ${className}`}
     >
