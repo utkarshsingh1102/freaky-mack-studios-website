@@ -87,3 +87,25 @@ button {
     transition-duration: 0.001ms !important;
   }
 }
+
+/*
+ * Full-bleed. Pages sit in a centred 1440px column; the few elements that run edge to edge on the
+ * 1440 boards (the services ticker, the footer's top rule) stretch past it to the window edges on
+ * wider screens, while their content stays where the column puts it. 100vw includes a classic
+ * scrollbar, so these overshoot by half its width on each side; the page root clips that.
+ */
+.bleed {
+  margin-inline: calc(50% - 50vw);
+}
+.rule-bleed {
+  position: relative;
+}
+.rule-bleed::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: calc(50% - 50vw);
+  right: calc(50% - 50vw);
+  border-top: 1px solid var(--ink);
+  pointer-events: none;
+}
