@@ -273,7 +273,7 @@ console.log("Motion (homepage)");
   const reel = mp.getByRole("button", { name: "Open the showreel" });
   const tilt = await reel.evaluate((el) => getComputedStyle(el).transform);
   const sizes = [];
-  for (const y of [300, 900, 1200, 1500, 1800]) {
+  for (const y of [300, 900, 1200, 1450, 1800]) {
     await mp.evaluate((y) => window.scrollTo(0, y), y);
     await mp.waitForTimeout(600);
     const r = await reel.boundingBox();
