@@ -14,7 +14,7 @@ export function SiteFooter() {
   const signoff = usePathname().startsWith("/thanks") ? "Cut. Print. Talk soon." : "The end. For now.";
   return (
     <footer
-      className={`mt-auto flex shrink-0 flex-col gap-[48px] border-t border-[var(--ink)] pt-[56px] pb-[88px] lg:h-[424px] lg:justify-between lg:gap-0 lg:pt-[64px] lg:pb-[40px] ${PX}`}
+      className={`rule-bleed mt-auto flex shrink-0 flex-col gap-[48px] border-t border-[var(--ink)] pt-[56px] pb-[88px] lg:h-[424px] lg:justify-between lg:gap-0 lg:pt-[64px] lg:pb-[40px] ${PX}`}
     >
       <div className="flex flex-col items-start justify-between gap-[48px] lg:flex-row">
         <div className="flex max-w-[360px] min-w-0 flex-col gap-[20px]">

@@ -52,7 +52,7 @@ html[data-theme="dark"] .logoOnInverse { filter: invert(1); }
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
-.marquee { animation: marquee 40s linear infinite; }
+.marquee { animation: marquee 120s linear infinite; } /* -50% = three runs of services */
 @keyframes bar {
   0% { transform: scaleY(0.3); }
   50% { transform: scaleY(1); }
