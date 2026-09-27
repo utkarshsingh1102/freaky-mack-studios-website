@@ -43,6 +43,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <head>
         <ThemeHead />
+        {/* Scroll reveals start hidden; without JavaScript they never run, so show everything. */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important}[data-reveal="move"]{transform:none!important;filter:none!important}`}</style>
+        </noscript>
       </head>
       <body>
         {children}

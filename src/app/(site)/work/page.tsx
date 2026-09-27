@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { FM_MARK_WHITE } from "@/shared/assets";
+import { DraggableMark } from "@/components/motion/DraggableMark";
 import s from "@/components/site/site.module.css";
 import { AccentWord, H1, Intro, Kicker, MX, PX } from "@/components/site/ui";
 import { WorkGrid } from "./_components/WorkGrid";
@@ -16,11 +16,7 @@ export default function WorkPage() {
   return (
     <>
       <section className={`relative flex flex-col gap-[24px] pt-[64px] pb-[48px] lg:gap-[32px] lg:pt-[120px] lg:pb-[72px] ${PX}`}>
-        <img
-          src={FM_MARK_WHITE}
-          alt=""
-          className={`${s.blob} ${s.logo} absolute top-[24px] right-[20px] h-[56px] w-[84px] object-contain lg:top-[110px] lg:right-[150px] lg:h-[100px] lg:w-[150px]`}
-        />
+        <DraggableMark className="absolute top-[24px] right-[20px] h-[56px] w-[84px] lg:top-[110px] lg:right-[150px] lg:h-[100px] lg:w-[150px]" imgClassName={`${s.blob} ${s.logo}`} />
         <Kicker>Chapter 01 — The work</Kicker>
         <H1 className="max-w-[1000px]">
           Six years of saying <AccentWord>yes</AccentWord> to brands.

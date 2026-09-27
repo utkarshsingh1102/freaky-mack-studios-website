@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { FM_MARK_WHITE } from "@/shared/assets";
 import { CONTACT, SOCIAL } from "@/shared/config";
 import { InverseSlab, pillAccent } from "@/components/site/blocks";
+import { DraggableMark } from "@/components/motion/DraggableMark";
 import s from "@/components/site/site.module.css";
 import { AccentWord, H1, H2, Intro, Kicker, Label, PX } from "@/components/site/ui";
 import { COLLABORATORS, CREW } from "@/content/people";
@@ -28,11 +28,7 @@ export default function PeoplePage() {
       <section
         className={`relative flex flex-col items-center gap-[24px] pt-[88px] pb-[72px] text-center lg:gap-[32px] lg:pt-[120px] lg:pb-[120px] ${PX}`}
       >
-        <img
-          src={FM_MARK_WHITE}
-          alt=""
-          className={`${s.blob} ${s.logo} absolute top-[16px] left-[20px] h-[56px] w-[84px] object-contain lg:top-[24px] lg:left-[40px] xl:top-[110px] xl:left-[170px] xl:h-[100px] xl:w-[150px]`}
-        />
+        <DraggableMark className="absolute top-[16px] left-[20px] h-[56px] w-[84px] lg:top-[24px] lg:left-[40px] xl:top-[110px] xl:left-[170px] xl:h-[100px] xl:w-[150px]" imgClassName={`${s.blob} ${s.logo}`} />
         <Kicker>Chapter 04 — The humans behind the camera</Kicker>
         <H1 className="max-w-[1000px]">
           Small crew. Big <AccentWord>appetite</AccentWord>.

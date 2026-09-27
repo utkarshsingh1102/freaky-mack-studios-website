@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import s from "../home.module.css";
 import { CHAPTER, H2, PB, PX } from "@/shared/ui";
 
@@ -12,14 +15,15 @@ const FACES = [
 export function People() {
   return (
     <section id="ch5" className={`flex shrink-0 flex-col items-center gap-[48px] lg:gap-[64px] ${PB} ${PX}`}>
-      <div className="flex flex-col items-center gap-[20px] text-center">
+      <Reveal className="flex flex-col items-center gap-[20px] text-center">
         <div className={`${s.it} ${CHAPTER}`}>Chapter 05 — The humans behind the camera</div>
         <h2 className={`${H2} max-w-[900px]`}>Small crew. Big appetite.</h2>
-      </div>
-      <div className="grid w-full grid-cols-2 items-end gap-x-[16px] gap-y-[40px] md:flex md:w-auto md:gap-[32px] lg:gap-[48px]">
+      </Reveal>
+      <Reveal stagger={0.1} amount={0.2} className="grid w-full grid-cols-2 items-end gap-x-[16px] gap-y-[40px] md:flex md:w-auto md:gap-[32px] lg:gap-[48px]">
         {FACES.map((f, i) => (
-          <div
+          <RevealItem
             key={i}
+            from={{ y: 60 }}
             className={`${s.face} flex flex-col items-center gap-[16px] ${f.mb === 40 ? "md:mb-[40px]" : f.mb === 24 ? "md:mb-[24px]" : ""}`}
           >
             <div
@@ -34,12 +38,14 @@ export function People() {
             >
               {f.label}
             </span>
-          </div>
+          </RevealItem>
         ))}
-      </div>
+      </Reveal>
+      <Reveal delay={0.1} className="flex">
       <Link href="/people" className={`${s.link} ${s.it} border-b border-[var(--ink)] pb-[4px] text-[22px] lg:text-[26px]`}>
         Meet everyone →
       </Link>
+      </Reveal>
     </section>
   );
 }

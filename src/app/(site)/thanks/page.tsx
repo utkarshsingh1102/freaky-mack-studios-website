@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { FM_MARK_WHITE } from "@/shared/assets";
 import { BTN_INVERSE, BTN_OUTLINE } from "@/components/site/buttons";
+import { DraggableMark } from "@/components/motion/DraggableMark";
 import s from "@/components/site/site.module.css";
 import { AccentWord, H1, Intro, Label, PlayIcon, PX } from "@/components/site/ui";
 
@@ -16,7 +16,7 @@ export default function ThanksPage() {
   return (
     <>
       <section className={`flex flex-col items-center gap-[24px] pt-[72px] pb-[80px] text-center lg:gap-[32px] lg:pt-[140px] lg:pb-[120px] ${PX}`}>
-        <img src={FM_MARK_WHITE} alt="" className={`${s.blob} ${s.logo} h-[84px] w-[126px] object-contain lg:h-[120px] lg:w-[180px]`} />
+        <DraggableMark className="relative h-[84px] w-[126px] lg:h-[120px] lg:w-[180px]" imgClassName={`${s.blob} ${s.logo}`} />
         <span className="rounded-full bg-[var(--accent)] px-[20px] py-[8px] text-[15px] font-semibold text-[var(--on-accent)] [transform:rotate(-3deg)]">
           Brief received
         </span>

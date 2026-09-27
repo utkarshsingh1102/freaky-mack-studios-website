@@ -137,3 +137,17 @@ html[data-theme="dark"] .panel-invert {
   --muted-2: #6b6b6b;
   --line: #d6d6d2;
 }
+
+/*
+ * Scroll reveals (src/components/motion/Reveal.tsx) start hidden. They show at rest without
+ * JavaScript (layout.tsx adds this rule in <noscript>) and for visitors who ask for reduced motion.
+ */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+  }
+  [data-reveal="move"] {
+    transform: none !important;
+    filter: none !important;
+  }
+}

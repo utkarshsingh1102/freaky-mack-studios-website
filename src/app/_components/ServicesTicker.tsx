@@ -1,4 +1,7 @@
+"use client";
+
 import { Fragment } from "react";
+import { Reveal } from "@/components/motion/Reveal";
 import s from "../home.module.css";
 
 const SERVICES = ["Ad films", "Music videos", "Fashion films", "Event films", "Documentaries", "Short films & web series", "Podcast & YouTube", "Post-production"];
@@ -18,7 +21,9 @@ export function ServicesTicker() {
     </Fragment>
   ));
   return (
-    <section
+    <Reveal
+      as="section"
+      from={{ y: 0, scale: 0.98 }}
       aria-label="Services"
       className="bleed mb-[96px] flex h-[64px] shrink-0 items-center overflow-hidden border-y border-[var(--ink)] lg:mb-[180px] lg:h-[84px]"
     >
@@ -34,6 +39,6 @@ export function ServicesTicker() {
           </span>
         ))}
       </div>
-    </section>
+    </Reveal>
   );
 }

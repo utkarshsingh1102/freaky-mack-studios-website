@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { FM_MARK_WHITE } from "@/shared/assets";
 import { SiteShell } from "@/components/site/SiteShell";
 import { BTN_ACCENT, BTN_OUTLINE } from "@/components/site/buttons";
+import { DraggableMark } from "@/components/motion/DraggableMark";
 import s from "@/components/site/site.module.css";
 import { AccentWord, H1, Intro, Kicker, PX } from "@/components/site/ui";
 
@@ -24,7 +24,7 @@ export default function NotFound() {
         >
           404
         </span>
-        <img src={FM_MARK_WHITE} alt="" className={`${s.blob} ${s.logo} relative h-[84px] w-[126px] object-contain lg:h-[120px] lg:w-[180px]`} />
+        <DraggableMark className="relative h-[84px] w-[126px] lg:h-[120px] lg:w-[180px]" imgClassName={`${s.blob} ${s.logo}`} />
         <Kicker className="relative">Error 404 — scene missing</Kicker>
         <H1 className="relative max-w-[1000px]">
           <AccentWord>Cut!</AccentWord> This scene didn’t make the edit.

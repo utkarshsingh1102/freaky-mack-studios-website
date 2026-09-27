@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { FM_MARK_WHITE } from "@/shared/assets";
 import { InverseSlab, pillAccent } from "@/components/site/blocks";
+import { DraggableMark } from "@/components/motion/DraggableMark";
 import s from "@/components/site/site.module.css";
 import { AccentWord, H1, H2, Intro, Kicker, Label, PX } from "@/components/site/ui";
 import { SLATE } from "@/content/originals";
@@ -19,11 +19,7 @@ export default function OriginalsPage() {
   return (
     <>
       <section className={`relative flex flex-col gap-[24px] pt-[64px] pb-[56px] lg:gap-[32px] lg:pt-[120px] lg:pb-[96px] ${PX}`}>
-        <img
-          src={FM_MARK_WHITE}
-          alt=""
-          className={`${s.blob} ${s.logo} absolute top-[24px] right-[20px] h-[56px] w-[84px] object-contain lg:top-[120px] lg:right-[160px] lg:h-[100px] lg:w-[150px]`}
-        />
+        <DraggableMark className="absolute top-[24px] right-[20px] h-[56px] w-[84px] lg:top-[120px] lg:right-[160px] lg:h-[100px] lg:w-[150px]" imgClassName={`${s.blob} ${s.logo}`} />
         <Kicker>Chapter 03 — Originals</Kicker>
         <H1 className="max-w-[1000px]">
           Films of our <AccentWord>own</AccentWord>.

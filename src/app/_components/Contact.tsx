@@ -1,3 +1,6 @@
+"use client";
+
+import { Reveal } from "@/components/motion/Reveal";
 import { CONTACT } from "@/shared/config";
 import { useEnquiryForm } from "@/shared/enquiry";
 import s from "../home.module.css";
@@ -15,7 +18,7 @@ export function Contact() {
       id="contact"
       className={`grid shrink-0 grid-cols-1 pb-[96px] lg:grid-cols-12 lg:gap-x-[32px] lg:pb-[140px] ${PX}`}
     >
-      <div className="flex flex-col gap-[24px] lg:col-span-7 lg:gap-[32px]">
+      <Reveal className="flex flex-col gap-[24px] lg:col-span-7 lg:gap-[32px]">
         <div className={`${s.it} ${CHAPTER}`}>Chapter 06 — Your turn</div>
         <h2 className="m-0 text-[clamp(46px,6.111vw,88px)] leading-[1] font-extrabold tracking-[-0.035em] text-balance">
           Got a story? <span className={`${s.it} font-normal tracking-normal normal-case`}>Let’s shoot it.</span>
@@ -29,12 +32,13 @@ export function Contact() {
         <a href={CONTACT.whatsapp} className={`${s.link} self-start text-[16px] text-[var(--ink-2)]`}>
           or WhatsApp us · {CONTACT.phone} ↗
         </a>
-      </div>
+      </Reveal>
+      <Reveal from={{ y: 80 }} delay={0.12} className="mt-[48px] lg:col-span-5 lg:col-start-8 lg:mt-[96px]">
       <form
         onSubmit={onSubmit}
         noValidate
         aria-label="Start a project"
-        className="mt-[48px] flex flex-col gap-[20px] rounded-[28px] bg-[var(--surface)] p-[24px] [transform:rotate(1deg)] sm:p-[36px] lg:col-span-5 lg:col-start-8 lg:mt-[96px]"
+        className="flex flex-col gap-[20px] rounded-[28px] bg-[var(--surface)] p-[24px] [transform:rotate(1deg)] sm:p-[36px]"
       >
         <div className="flex flex-col gap-[8px]">
           <label htmlFor="fm-name" className={LABEL}>Your name</label>
@@ -73,6 +77,7 @@ export function Contact() {
           </p>
         )}
       </form>
+      </Reveal>
     </section>
   );
 }

@@ -1,3 +1,9 @@
+"use client";
+
+import { AnimatePresence, motion, useScroll } from "framer-motion";
+import { useRef } from "react";
+import { EASE } from "@/components/motion/Reveal";
+import { useSmoothScrollValue } from "@/components/motion/useScrollMotion";
 import { REEL } from "@/shared/config";
 import { ReelEmbed, ReelLoop } from "@/shared/reel";
 import s from "../home.module.css";
@@ -10,9 +16,31 @@ const DASHED =
 
 /** Small tilted card that opens into a full-width band (board: reelOpen / reelClosed). */
 export function Reel({ open, onToggle }: { open: boolean; onToggle: () => void }) {
+  const ref = useRef<HTMLElement>(null);
+  // Scrolling in, the card swings up from a steeper tilt and grows into place (spring-smoothed).
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "center center"] });
+  const rotate = useSmoothScrollValue(scrollYProgress, [-8, 0], 0);
+  const scale = useSmoothScrollValue(scrollYProgress, [0.84, 1], 1);
+  const y = useSmoothScrollValue(scrollYProgress, [90, 0], 0);
   return (
-    <section id="reel" aria-label="Showreel" className={`flex shrink-0 justify-center pb-[96px] lg:pb-[160px] ${PX}`}>
-      {open ? <OpenReel onToggle={onToggle} /> : <ClosedReel onToggle={onToggle} />}
+    <section ref={ref} id="reel" aria-label="Showreel" className={`flex shrink-0 justify-center pb-[96px] lg:pb-[160px] ${PX}`}>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={open ? "open" : "closed"}
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={{ opacity: 1, scale: 1, transition: { duration: 0.55, ease: EASE } }}
+          exit={{ opacity: 0, scale: 0.97, transition: { duration: 0.2 } }}
+          className={`flex w-full justify-center ${open ? "max-w-[1296px]" : "max-w-[760px]"}`}
+        >
+          {open ? (
+            <OpenReel onToggle={onToggle} />
+          ) : (
+            <motion.div style={{ rotate, scale, y }} className="flex w-full">
+              <ClosedReel onToggle={onToggle} />
+            </motion.div>
+          )}
+        </motion.div>
+      </AnimatePresence>
     </section>
   );
 }
