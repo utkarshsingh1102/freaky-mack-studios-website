@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   images: { unoptimized: true },
   agentRules: false,
+  // The dev-only Next.js badge sits bottom-left, on top of the pitch theme picker.
+  devIndicators: false,
 };
 
 export default nextConfig;
