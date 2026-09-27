@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Instrument_Sans, Instrument_Serif, Plus_Jakarta_Sans } from "next/font/google";
+import { MotionRoot } from "@/components/motion/MotionRoot";
 import { ThemeHead } from "@/shared/theme/ThemeHead";
 import { DEFAULT_CHOICE, resolveChoice } from "@/shared/theme/theme";
 import { ThemePicker } from "@/shared/theme/ThemePicker";
@@ -43,9 +44,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <head>
         <ThemeHead />
+        {/* Scroll reveals start hidden; without JavaScript they never run, so show everything. */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important}[data-reveal="move"]{transform:none!important;filter:none!important}`}</style>
+        </noscript>
       </head>
       <body>
-        {children}
+        <MotionRoot>{children}</MotionRoot>
         <ThemePicker />
       </body>
     </html>

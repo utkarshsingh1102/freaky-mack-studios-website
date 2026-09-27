@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useSyncExternalStore } from "react";
+import { Swap } from "@/components/motion/Swap";
 import { ChipGroup } from "@/components/site/ChipGroup";
 import { pillAccent } from "@/components/site/blocks";
 import s from "@/components/site/site.module.css";
@@ -64,18 +65,18 @@ export function EnquiryForm() {
       onSubmit={onSubmit}
       noValidate
       aria-label="Start a project"
-      className="flex flex-col gap-[36px] rounded-[24px] bg-[var(--surface)] p-[22px] sm:p-[32px] xl:col-span-8 lg:gap-[40px] lg:rounded-[32px] lg:p-[48px]"
+      className="flex flex-col gap-[36px] rounded-[24px] bg-[var(--surface)] p-[22px] sm:p-[32px] lg:gap-[40px] lg:rounded-[32px] lg:p-[48px]"
     >
       <p className="m-0 text-[26px] leading-[1.3] font-extrabold tracking-[-0.03em] md:text-[34px] lg:text-[40px]" aria-live="polite">
         You need{" "}
         <span className="inline-block rounded-full bg-[var(--accent)] px-[14px] text-[var(--on-accent)] [transform:rotate(-1.5deg)] lg:px-[20px]">
-          {f.phrase}
+          <Swap text={f.phrase} />
         </span>{" "}
         for{" "}
         <span className="inline-block rounded-full border-[3px] border-[var(--accent)] px-[14px] [transform:rotate(1.5deg)] lg:px-[20px]">
-          {a.phrase}
+          <Swap text={a.phrase} />
         </span>
-        , <span className={`${s.it} font-normal tracking-normal`}>{w.phrase}</span>.
+        , <span className={`${s.it} font-normal tracking-normal`}><Swap inline text={w.phrase} /></span>.
       </p>
 
       <fieldset className="m-0 border-0 p-0">

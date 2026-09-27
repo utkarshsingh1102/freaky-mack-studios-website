@@ -1,7 +1,9 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
+import { EASE, Reveal } from "@/components/motion/Reveal";
 import { ChipGroup } from "@/components/site/ChipGroup";
 import s from "@/components/site/site.module.css";
 import { PX } from "@/components/site/ui";
@@ -34,6 +36,34 @@ function Card({ p, i }: { p: Project; i: number }) {
   );
 }
 
+/**
+ * One column of cards. Each card rises in when it first scrolls into view; when the filter changes,
+ * leaving cards shrink away and the rest glide to their new places (layout="position", so the tilted
+ * cards move without being stretched). The wrapper animates; the card inside keeps its tilt and hover.
+ */
+function Column({ items, shown, className }: { items: Project[]; shown: Project[]; className: string }) {
+  return (
+    <div className={`relative ${className}`}>
+      <AnimatePresence mode="popLayout">
+        {items.map((p) => (
+          <motion.div
+            key={p.slug}
+            layout="position"
+            data-reveal="move"
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            exit={{ opacity: 0, scale: 0.92, transition: { duration: 0.25 } }}
+            transition={{ duration: 0.8, ease: EASE, layout: { duration: 0.6, ease: EASE } }}
+          >
+            <Card p={p} i={shown.indexOf(p)} />
+          </motion.div>
+        ))}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 /** Work board: filter chips (`filter`) re-flow the two staggered, tilted columns. */
 export function WorkGrid() {
   const [filter, setFilter] = useState<string>("All");
@@ -42,23 +72,15 @@ export function WorkGrid() {
   const right = shown.filter((_, i) => i % 2 === 1);
   return (
     <>
-      <section aria-label="Filter by format" className={`flex flex-col gap-[20px] pb-[56px] lg:pb-[72px] ${PX}`}>
+      <Reveal as="section" onMount delay={0.45} aria-label="Filter by format" className={`flex flex-col gap-[20px] pb-[56px] lg:pb-[72px] ${PX}`}>
         <ChipGroup label="Filter by format" options={FILTERS} value={filter} onChange={setFilter} size="lg" />
         <span className={`${s.it} text-[18px] text-[var(--muted-2)] lg:text-[20px]`} aria-live="polite">
           {shown.length} {shown.length === 1 ? "film" : "films"} · [NN] in total
         </span>
-      </section>
+      </Reveal>
       <section className={`grid grid-cols-1 items-start gap-y-[56px] pb-[96px] md:grid-cols-2 md:gap-x-[32px] lg:gap-x-[48px] lg:pb-[160px] ${PX}`}>
-        <div className="flex flex-col gap-[56px] lg:gap-[72px]">
-          {left.map((p) => (
-            <Card key={p.slug} p={p} i={shown.indexOf(p)} />
-          ))}
-        </div>
-        <div className="flex flex-col gap-[56px] md:pt-[100px] lg:gap-[72px] lg:pt-[140px]">
-          {right.map((p) => (
-            <Card key={p.slug} p={p} i={shown.indexOf(p)} />
-          ))}
-        </div>
+        <Column items={left} shown={shown} className="flex flex-col gap-[56px] lg:gap-[72px]" />
+        <Column items={right} shown={shown} className="flex flex-col gap-[56px] md:pt-[100px] lg:gap-[72px] lg:pt-[140px]" />
       </section>
     </>
   );

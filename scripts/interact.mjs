@@ -69,14 +69,16 @@ await page.goto(`${base}/`, { waitUntil: "networkidle" });
 
 console.log("Homepage interactions");
 await page.getByRole("button", { name: "Open the showreel" }).click();
-check(await page.getByText("[ FULL SHOWREEL — EMBED, SOUND ON ]").isVisible(), "reel card expands to full band");
+const shows = (loc) => loc.waitFor({ state: "visible", timeout: 3000 }).then(() => true, () => false); // the reel fades between states
+check(await shows(page.getByText("[ FULL SHOWREEL — EMBED, SOUND ON ]")), "reel card expands to full band");
 check(await page.getByRole("button", { name: "Close the reel" }).first().isVisible(), "hero button label → Close the reel");
 await page.getByRole("button", { name: "Close the reel" }).last().click();
-check(await page.getByText("[ 10–15 SEC LOOP, MUTED ]").isVisible(), "band closes back to tilted card");
+check(await shows(page.getByText("[ 10–15 SEC LOOP, MUTED ]")), "band closes back to tilted card");
 await page.locator("#ch1 li").nth(2).hover();
 check((await page.locator("#ch1").getByText("[Brand] · Fashion film").count()) === 2, "hovering row 03 swaps preview meta");
 await page.getByRole("button", { name: "music video", exact: true }).click();
 await page.getByRole("button", { name: "face on screen" }).click();
+await page.waitForTimeout(700); // the pill words slide in
 const sentence = (await page.locator("#ch3 p").first().innerText()).replace(/\s+/g, " ");
 check(/a music video/.test(sentence) && /a face on screen/.test(sentence), `sentence builder → "${sentence}"`);
 const eps = page.locator("#ch4 button[aria-pressed]");
@@ -123,6 +125,9 @@ await page.goto(`${base}/work/`, { waitUntil: "networkidle" });
 const cards = page.locator('a[href^="/work/project-"]');
 const allCount = await cards.count();
 await page.getByRole("radio", { name: "Music videos" }).click();
+await page.waitForTimeout(900); // leaving cards animate out, the rest glide into place
+const settled = await page.evaluate(() => [...document.querySelectorAll('a[href^="/work/project-"]')].map((a) => getComputedStyle(a.parentElement).opacity));
+check(settled.every((o) => o === "1"), `filtered cards settle fully visible (${settled.join(", ")})`);
 check((await cards.count()) === 2 && (await page.getByText("2 films · [NN] in total").isVisible()), `Music videos filter shows 2 of ${allCount}`);
 await page.keyboard.press("ArrowRight");
 check((await page.getByRole("radio", { name: "Fashion films" }).getAttribute("aria-checked")) === "true", "arrow key moves the filter");
@@ -153,9 +158,11 @@ await page.getByRole("link", { name: /Tell us the rest/ }).click();
 await page.waitForURL(/start-a-project/);
 await page.waitForTimeout(300);
 check((await page.getByRole("radio", { name: "music video" }).getAttribute("aria-checked")) === "true" && (await page.getByRole("radio", { name: "agency" }).getAttribute("aria-checked")) === "true", `homepage sentence pre-fills the form (${new URL(page.url()).search})`);
+await page.waitForTimeout(700); // sentence words settle
 const summary = () => page.locator("form p").first().innerText().then((x) => x.replace(/\s+/g, " "));
 check(/You need a music video for an agency, as soon as possible\./.test(await summary()), `live sentence → "${await summary()}"`);
 await page.getByRole("radio", { name: "Flexible" }).click();
+await page.waitForTimeout(700); // the phrase swaps with a fade
 check(/whenever it’s right\./.test(await summary()), "When chip updates the sentence");
 await page.getByRole("radio", { name: "music video" }).focus();
 await page.keyboard.press("ArrowRight");
@@ -205,7 +212,10 @@ await phone.goto(`${base}/work/`, { waitUntil: "networkidle" });
 await phone.getByRole("button", { name: "Open menu" }).click();
 const menu = phone.locator("#fm-menu");
 check(await menu.isVisible(), "menu opens");
+await phone.waitForTimeout(600);
+check((await menu.evaluate((el) => getComputedStyle(el).opacity)) === "1", "menu panel animates fully in");
 await phone.keyboard.press("Escape");
+await menu.waitFor({ state: "detached", timeout: 2000 }).catch(() => {});
 check(!(await menu.isVisible()), "Esc closes the menu");
 await phone.getByRole("button", { name: "Open menu" }).click();
 await menu.getByRole("link", { name: /Originals/ }).click();
@@ -225,6 +235,83 @@ for (const [label, q] of [["Light · Cobalt", "theme=light&accent=cobalt"], ["Da
     bad.push(...(await contrastSweep(page)).map((b) => `${r} ${b}`));
   }
   check(bad.length === 0, `${label}: every page ≥ WCAG AA${bad.length ? `\n      ${bad.slice(0, 15).join("\n      ")}` : ""}`);
+}
+
+console.log("Motion (homepage)");
+{
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  const mp = await ctx.newPage();
+  mp.on("pageerror", (e) => errors.push(String(e)));
+  mp.on("console", (m) => m.type() === "error" && errors.push(m.text()));
+  await mp.goto(`${base}/`, { waitUntil: "networkidle" });
+  await mp.waitForTimeout(1500);
+  // Drag the blob mark far across the page; it follows, then springs back on release.
+  const mark = mp.locator("section#top > div.cursor-grab").first();
+  const home = await mark.boundingBox();
+  await mp.mouse.move(home.x + home.width / 2, home.y + home.height / 2);
+  await mp.mouse.down();
+  await mp.mouse.move(home.x + 700, home.y + 420, { steps: 12 });
+  await mp.waitForTimeout(150);
+  const held = await mark.boundingBox();
+  check(Math.abs(held.x - home.x) > 500 && Math.abs(held.y - home.y) > 300, `blob follows the drag (moved ${Math.round(held.x - home.x)}, ${Math.round(held.y - home.y)})`);
+  await mp.mouse.up();
+  await mp.mouse.move(5, 5); // off the mark, so its hover lift ends too
+  await mp.waitForTimeout(1600);
+  const back = await mark.boundingBox();
+  check(Math.abs(back.x - home.x) < 2 && Math.abs(back.y - home.y) < 2, `blob springs back on release (off by ${Math.round(back.x - home.x)}, ${Math.round(back.y - home.y)})`);
+  // Sections below the fold start hidden and reveal when scrolled to.
+  const people = mp.locator("#ch5 h2");
+  const before = await people.evaluate((el) => getComputedStyle(el.closest("[data-reveal]")).opacity);
+  await people.scrollIntoViewIfNeeded();
+  await mp.waitForTimeout(1400);
+  const after = await people.evaluate((el) => getComputedStyle(el.closest("[data-reveal]")).opacity);
+  check(before === "0" && after === "1", `below-the-fold heading reveals on scroll (opacity ${before} → ${after})`);
+  // Scroll-linked: the progress bar fills and the hero text drifts away.
+  const bar = await mp.evaluate(() => document.querySelector('[aria-hidden="true"].fixed').getBoundingClientRect().width);
+  const heroY = await mp.evaluate(() => new DOMMatrix(getComputedStyle(document.querySelector("section#top > div.flex")).transform).m42);
+  check(bar > 400 && heroY > 20, `scroll progress bar fills (${Math.round(bar)}px) and hero text drifts (${Math.round(heroY)}px)`);
+  await ctx.close();
+  // Without JavaScript nothing is left hidden.
+  const nojs = await browser.newContext({ viewport: { width: 1440, height: 900 }, javaScriptEnabled: false });
+  const np = await nojs.newPage();
+  await np.goto(`${base}/`, { waitUntil: "load" });
+  const hidden = await np.evaluate(() => [...document.querySelectorAll("[data-reveal]")].filter((el) => getComputedStyle(el).opacity !== "1").length);
+  check(hidden === 0, `without JavaScript every section is visible (${hidden} hidden)`);
+  await nojs.close();
+}
+
+console.log("Motion (other pages)");
+{
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  const sp = await ctx.newPage();
+  sp.on("pageerror", (e) => errors.push(String(e)));
+  // A section below the fold starts hidden and reveals when scrolled to (Studio's process cards).
+  await sp.goto(`${base}/studio/`, { waitUntil: "networkidle" });
+  await sp.waitForTimeout(1200);
+  const card = sp.locator('section[aria-label="How we work"] li').first();
+  const o1 = await card.evaluate((el) => getComputedStyle(el).opacity);
+  await card.scrollIntoViewIfNeeded();
+  await sp.waitForTimeout(1500);
+  const o2 = await card.evaluate((el) => getComputedStyle(el).opacity);
+  const tilt = await card.evaluate((el) => getComputedStyle(el.firstElementChild).transform);
+  check(o1 === "0" && o2 === "1" && tilt !== "none", `Studio cards reveal on scroll and keep their tilt (opacity ${o1} → ${o2})`);
+  // The hero plays in on load.
+  await sp.goto(`${base}/people/`, { waitUntil: "networkidle" });
+  await sp.waitForTimeout(1800);
+  const h1 = await sp.evaluate(() => getComputedStyle(document.querySelector("h1").closest("[data-reveal]")).opacity);
+  check(h1 === "1", "People hero plays in on load");
+  await ctx.close();
+  // Without JavaScript nothing is hidden on any page.
+  const nojs = await browser.newContext({ viewport: { width: 1440, height: 900 }, javaScriptEnabled: false });
+  const np = await nojs.newPage();
+  const hiddenOn = [];
+  for (const r of ["/work/", "/work/project-01/", "/studio/", "/originals/", "/people/", "/start-a-project/", "/thanks/", "/privacy/", "/missing-page/"]) {
+    await np.goto(`${base}${r}`, { waitUntil: "load" });
+    const n = await np.evaluate(() => [...document.querySelectorAll("[data-reveal]")].filter((el) => getComputedStyle(el).opacity !== "1").length);
+    if (n) hiddenOn.push(`${r}: ${n}`);
+  }
+  check(hiddenOn.length === 0, `without JavaScript every page is fully visible${hiddenOn.length ? ` (${hiddenOn.join(", ")})` : ""}`);
+  await nojs.close();
 }
 
 check(errors.length === 0, `no page errors${errors.length ? `: ${errors.join("; ")}` : ""}`);

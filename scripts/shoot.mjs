@@ -25,13 +25,13 @@ let failed = false;
 fs.mkdirSync(out, { recursive: true });
 for (const route of list) {
   for (const width of widths) {
-    const page = await browser.newPage({ viewport: { width, height: width < 500 ? 844 : 900 } });
+    // Reduced motion from the first paint: animations and scroll reveals sit at their resting state.
+    const page = await browser.newPage({ viewport: { width, height: width < 500 ? 844 : 900 }, reducedMotion: "reduce" });
     const errors = [];
     page.on("pageerror", (e) => errors.push(String(e)));
     // The 404 route answers with status 404 on purpose; that resource error isn't a page error.
     page.on("console", (m) => m.type() === "error" && !(route.includes("missing") && m.text().includes("404")) && errors.push(m.text()));
     await page.goto(`${base}${route}`, { waitUntil: "networkidle" });
-    await page.emulateMedia({ reducedMotion: "reduce" });
     await page.waitForTimeout(600);
     const { sw, h } = await page.evaluate(() => ({
       sw: document.documentElement.scrollWidth,

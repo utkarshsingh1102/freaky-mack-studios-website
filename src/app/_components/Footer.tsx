@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { Reveal } from "@/components/motion/Reveal";
 import { FM_LOGO_WHITE } from "@/shared/assets";
 import { CONTACT } from "@/shared/config";
 import s from "../home.module.css";
@@ -11,7 +14,7 @@ export function Footer() {
     <footer
       className={`rule-bleed mt-auto flex shrink-0 flex-col gap-[48px] border-t border-[var(--ink)] pt-[56px] pb-[88px] lg:gap-[56px] lg:pt-[64px] lg:pb-[40px] ${PX}`}
     >
-      <div className="flex flex-col items-start justify-between gap-[48px] lg:flex-row">
+      <Reveal amount={0.3} className="flex flex-col items-start justify-between gap-[48px] lg:flex-row">
         <div className="flex max-w-[360px] flex-col gap-[20px]">
           <img src={FM_LOGO_WHITE} alt="Freaky Mack Studios" className={`${s.logo} h-[118px] w-[150px] object-contain`} />
           <p className="m-0 text-[15px] leading-[1.6] text-[var(--muted)]">
@@ -42,8 +45,8 @@ export function Footer() {
             <span className="text-[var(--muted)]">[STUDIO ADDRESS], [CITY]</span>
           </div>
         </div>
-      </div>
-      <div className="flex flex-col items-start justify-between gap-[10px] border-t border-[var(--line-2)] pt-[24px] text-[13px] text-[var(--muted)] md:flex-row md:items-center">
+      </Reveal>
+      <Reveal delay={0.1} amount={0.5} className="flex flex-col items-start justify-between gap-[10px] border-t border-[var(--line-2)] pt-[24px] text-[13px] text-[var(--muted)] md:flex-row md:items-center">
         <span>© 2026 Freaky Mack Studios. All rights reserved.</span>
         <span className={`${s.it} text-[16px]`}>The end. For now.</span>
         <span className="flex gap-[16px]">
@@ -51,7 +54,7 @@ export function Footer() {
           <Link href="/terms" className={s.link}>Terms</Link>
           <a href="#top" className={s.link}>Back to the top ↑</a>
         </span>
-      </div>
+      </Reveal>
     </footer>
   );
 }

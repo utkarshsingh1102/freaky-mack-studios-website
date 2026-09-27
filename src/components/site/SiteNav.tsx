@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FM_MARK_WHITE } from "@/shared/assets";
+import { Reveal } from "@/components/motion/Reveal";
 import { MobileMenu } from "./MobileMenu";
 import { NAV_ITEMS, activeFor } from "./nav-items";
 import s from "./site.module.css";
@@ -13,7 +14,7 @@ export function SiteNav() {
   const active = activeFor(usePathname());
   const onContact = active === "contact";
   return (
-    <header className={`flex h-[72px] shrink-0 items-center justify-between lg:h-[96px] ${PX}`}>
+    <Reveal as="header" onMount from={{ y: -24 }} duration={0.8} className={`flex h-[72px] shrink-0 items-center justify-between lg:h-[96px] ${PX}`}>
       <Link href="/" aria-label="Freaky Mack Studios home" className={`${s.link} flex items-center gap-[14px]`}>
         <img src={FM_MARK_WHITE} alt="" className={`${s.logo} h-[32px] w-[48px] object-contain`} />
         <span className="text-[14px] font-extrabold tracking-[0.1em] whitespace-nowrap uppercase">Freaky Mack</span>
@@ -47,6 +48,6 @@ export function SiteNav() {
         </Link>
         <MobileMenu serifClass={s.it} />
       </div>
-    </header>
+    </Reveal>
   );
 }

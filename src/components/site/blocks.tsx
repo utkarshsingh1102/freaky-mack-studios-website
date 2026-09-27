@@ -1,5 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { Reveal, RevealItem } from "@/components/motion/Reveal";
+import { ScrollIn } from "@/components/motion/ScrollIn";
 import { FM_MARK_WHITE } from "@/shared/assets";
 import s from "./site.module.css";
 import { MX } from "./ui";
@@ -11,7 +13,9 @@ export const pillAccent = (size = "h-[56px] px-[30px] text-[15px] lg:h-[60px]") 
 /** Panel that closes a page: "Chapter 06 — Your turn / Got a story? Let’s shoot it." Inverted: black in Light, white in Dark. */
 export function YourTurnCta() {
   return (
-    <section
+    <Reveal
+      as="section"
+      from={{ y: 60 }}
       className={`mb-[96px] flex flex-col items-start justify-between gap-[28px] panel-invert rounded-[28px] px-[28px] py-[44px] md:flex-row md:items-center lg:mb-[140px] lg:gap-[48px] lg:rounded-[40px] lg:px-[96px] lg:py-[88px] ${MX}`}
     >
       <div className="flex flex-col gap-[14px]">
@@ -23,7 +27,7 @@ export function YourTurnCta() {
       <Link href="/start-a-project" className={pillAccent()}>
         Start a project
       </Link>
-    </section>
+    </Reveal>
   );
 }
 
@@ -47,16 +51,21 @@ export function InverseSlab({
   maxWidth?: string;
 }) {
   return (
+    // The slab scales up to full size as it scrolls in; its words and button follow.
+    <ScrollIn scale={0.9} y={0} endAt="start 35%">
     <section
       aria-label={ariaLabel}
       className={`relative mb-[96px] flex flex-col items-start justify-between gap-[32px] overflow-hidden rounded-[28px] bg-[var(--inv-bg)] px-[28px] py-[48px] text-[var(--inv-ink)] md:flex-row md:items-center lg:mb-[140px] lg:gap-[48px] lg:rounded-[40px] lg:p-[96px] ${MX}`}
     >
       <img src={FM_MARK_WHITE} alt="" className={`${s.logoOnInverse} pointer-events-none absolute object-contain opacity-10 ${markClassName}`} />
-      <div className={`relative flex flex-col gap-[16px] ${maxWidth}`}>
-        <span className={`${s.it} text-[20px] text-[var(--inv-muted)] lg:text-[24px]`}>{label}</span>
-        <span className="text-[34px] leading-[1.05] font-extrabold tracking-[-0.03em] md:text-[44px] lg:text-[56px]">{title}</span>
-      </div>
-      <div className="relative">{action}</div>
+      <Reveal stagger={0.12} delay={0.1} amount={0.4} className={`relative flex flex-col gap-[16px] ${maxWidth}`}>
+        <RevealItem as="span" className={`${s.it} text-[20px] text-[var(--inv-muted)] lg:text-[24px]`}>{label}</RevealItem>
+        <RevealItem as="span" className="text-[34px] leading-[1.05] font-extrabold tracking-[-0.03em] md:text-[44px] lg:text-[56px]">{title}</RevealItem>
+      </Reveal>
+      <Reveal from={{ y: 30, scale: 0.9 }} delay={0.3} amount={0.4} className="relative flex">
+        {action}
+      </Reveal>
     </section>
+    </ScrollIn>
   );
 }

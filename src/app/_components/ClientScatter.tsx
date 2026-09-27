@@ -1,3 +1,6 @@
+"use client";
+
+import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import s from "../home.module.css";
 import { PB, PX } from "@/shared/ui";
 
@@ -16,27 +19,39 @@ const TAGS = [
 export function ClientScatter() {
   return (
     <section aria-label="Clients" className={`flex shrink-0 flex-col items-center gap-[32px] lg:gap-[40px] ${PB} ${PX}`}>
-      <div className={`${s.it} text-center text-[20px] text-[var(--muted-2)] lg:text-[26px]`}>
+      <Reveal className={`${s.it} text-center text-[20px] text-[var(--muted-2)] lg:text-[26px]`}>
         …and the brands that trusted us with the yes
-      </div>
-      <div className="flex max-w-[1296px] flex-wrap justify-center gap-[12px] xl:relative xl:block xl:h-[300px] xl:w-[calc(100%+48px)] xl:shrink-0">
+      </Reveal>
+      <Reveal
+        stagger={0.07}
+        delay={0.1}
+        amount={0.3}
+        className="flex max-w-[1296px] flex-wrap justify-center gap-[12px] xl:relative xl:block xl:h-[300px] xl:w-[calc(100%+48px)] xl:shrink-0"
+      >
         {TAGS.map((t) => (
-          <span
+          // The wrapper pops in and carries the board position (absolute from xl up); the tag inside keeps its tilt and hover.
+          <RevealItem
+            as="span"
             key={t.name}
-            className={`${s.tag} rounded-full border px-[18px] py-[10px] text-[17px] xl:absolute xl:px-[26px] xl:py-[14px] xl:text-[22px] ${
-              t.accent
-                ? "border-[var(--accent)] bg-[var(--accent)] font-semibold text-[var(--on-accent)]"
-                : t.more
-                  ? "border-dashed border-[var(--ink)] bg-[var(--pill-bg)] font-medium text-[var(--muted)]"
-                  : "border-[var(--ink)] bg-[var(--pill-bg)] font-semibold"
-            }`}
-            // left/top only take effect once the tag is absolutely positioned (xl and up).
-            style={{ left: `${(t.left / 1296) * 100}%`, top: t.top, transform: `rotate(${t.rot}deg)` }}
+            from={{ y: 40, scale: 0.6, rotate: t.rot * 3 }}
+            className="inline-flex xl:absolute"
+            style={{ left: `${(t.left / 1296) * 100}%`, top: t.top }}
           >
-            {t.name}
-          </span>
+            <span
+              className={`${s.tag} relative rounded-full border px-[18px] py-[10px] text-[17px] xl:px-[26px] xl:py-[14px] xl:text-[22px] ${
+                t.accent
+                  ? "border-[var(--accent)] bg-[var(--accent)] font-semibold text-[var(--on-accent)]"
+                  : t.more
+                    ? "border-dashed border-[var(--ink)] bg-[var(--pill-bg)] font-medium text-[var(--muted)]"
+                    : "border-[var(--ink)] bg-[var(--pill-bg)] font-semibold"
+              }`}
+              style={{ transform: `rotate(${t.rot}deg)` }}
+            >
+              {t.name}
+            </span>
+          </RevealItem>
         ))}
-      </div>
+      </Reveal>
     </section>
   );
 }

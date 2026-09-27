@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import { useState } from "react";
 import { projectHref } from "@/content/projects";
 import s from "../home.module.css";
@@ -19,16 +22,18 @@ export function WorkPreview() {
   const preview = PROJECTS[hovered] ?? PROJECTS[0];
   return (
     <section id="ch1" className={`flex shrink-0 flex-col gap-[48px] pt-[24px] lg:gap-[96px] lg:pt-[40px] ${PB} ${PX}`}>
-      <div className="flex max-w-[900px] flex-col gap-[20px]">
+      <Reveal className="flex max-w-[900px] flex-col gap-[20px]">
         <div className={`${s.it} ${CHAPTER}`}>Chapter 01 — Six years of saying yes to brands</div>
         <h2 className={`${H2} text-balance`}>Hover a title. Meet the film.</h2>
-      </div>
+      </Reveal>
       <div className="grid grid-cols-1 items-start gap-y-[56px] lg:grid-cols-12 lg:gap-x-[32px]">
-        <ul className="m-0 flex list-none flex-col border-t border-[var(--ink)] p-0 lg:col-span-6 lg:col-start-1">
+        <Reveal as="ul" stagger={0.08} amount={0.15} className="m-0 flex list-none flex-col border-t border-[var(--ink)] p-0 lg:col-span-6 lg:col-start-1">
           {PROJECTS.map((p, i) => {
             const active = hovered === i;
             return (
-              <li
+              <RevealItem
+                as="li"
+                from={{ y: 28 }}
                 key={i}
                 onMouseEnter={() => setHovered(i)}
                 className={`${s.row} border-b border-[var(--line)] ${active ? "pl-[20px] text-[var(--ink)]" : "pl-0 text-[var(--dim)]"}`}
@@ -48,11 +53,16 @@ export function WorkPreview() {
                   </span>
                   <span className="text-[13px] whitespace-nowrap text-[var(--muted)] lg:text-[14px]">{p.meta}</span>
                 </Link>
-              </li>
+              </RevealItem>
             );
           })}
-        </ul>
-        <div className="relative order-first flex flex-col gap-[18px] lg:order-none lg:col-span-5 lg:col-start-8">
+        </Reveal>
+        <Reveal
+          from={{ x: 80, y: 0 }}
+          duration={1.1}
+          delay={0.15}
+          className="relative order-first flex flex-col gap-[18px] lg:order-none lg:col-span-5 lg:col-start-8"
+        >
           <div
             className="relative h-[340px] overflow-hidden rounded-[24px] shadow-[0_30px_70px_rgba(0,0,0,0.14)] transition-[background] duration-500 [transform:rotate(2deg)] md:h-[460px] lg:h-[560px]"
             style={{ background: preview.bg }}
@@ -71,7 +81,7 @@ export function WorkPreview() {
               Open project →
             </Link>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

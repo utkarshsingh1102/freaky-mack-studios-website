@@ -1,4 +1,7 @@
+"use client";
+
 import { useState } from "react";
+import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import s from "../home.module.css";
 import { Eq, PlayIcon } from "./icons";
 import { CHAPTER, H2, PB, PX } from "@/shared/ui";
@@ -15,7 +18,7 @@ export function Podcast() {
   const [playing, setPlaying] = useState(-1);
   return (
     <section id="ch4" className={`flex shrink-0 flex-col gap-[40px] lg:gap-[64px] ${PB} ${PX}`}>
-      <div className="flex flex-col items-start gap-[24px] md:flex-row md:items-end md:justify-between md:gap-[40px]">
+      <Reveal className="flex flex-col items-start gap-[24px] md:flex-row md:items-end md:justify-between md:gap-[40px]">
         <div className="flex flex-col gap-[20px]">
           <div className={`${s.it} ${CHAPTER}`}>Chapter 04 — Voices, on the record</div>
           <h2 className={H2}>The podcast</h2>
@@ -26,13 +29,13 @@ export function Podcast() {
         >
           Watch on YouTube ↗
         </a>
-      </div>
-      <div className="grid grid-cols-1 items-start gap-[40px] md:grid-cols-3 md:gap-[32px]">
+      </Reveal>
+      <Reveal stagger={0.14} amount={0.15} className="grid grid-cols-1 items-start gap-[40px] md:grid-cols-3 md:gap-[32px]">
         {EPISODES.map((e, i) => {
           const on = playing === i;
           return (
+            <RevealItem key={i} from={{ y: 80 }}>
             <button
-              key={i}
               type="button"
               onClick={() => setPlaying(on ? -1 : i)}
               aria-pressed={on}
@@ -58,9 +61,10 @@ export function Podcast() {
                 <span className="text-[22px] leading-[1.3] font-semibold">[Episode title]</span>
               </div>
             </button>
+            </RevealItem>
           );
         })}
-      </div>
+      </Reveal>
     </section>
   );
 }

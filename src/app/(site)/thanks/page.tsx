@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { FM_MARK_WHITE } from "@/shared/assets";
 import { BTN_INVERSE, BTN_OUTLINE } from "@/components/site/buttons";
+import { DraggableMark } from "@/components/motion/DraggableMark";
+import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import s from "@/components/site/site.module.css";
 import { AccentWord, H1, Intro, Label, PlayIcon, PX } from "@/components/site/ui";
 
@@ -15,26 +16,41 @@ export const metadata: Metadata = {
 export default function ThanksPage() {
   return (
     <>
-      <section className={`flex flex-col items-center gap-[24px] pt-[72px] pb-[80px] text-center lg:gap-[32px] lg:pt-[140px] lg:pb-[120px] ${PX}`}>
-        <img src={FM_MARK_WHITE} alt="" className={`${s.blob} ${s.logo} h-[84px] w-[126px] object-contain lg:h-[120px] lg:w-[180px]`} />
-        <span className="rounded-full bg-[var(--accent)] px-[20px] py-[8px] text-[15px] font-semibold text-[var(--on-accent)] [transform:rotate(-3deg)]">
-          Brief received
-        </span>
-        <H1 big className="max-w-[1000px]">
-          That’s a <AccentWord big>wrap</AccentWord> — for now.
-        </H1>
-        <Intro className="max-w-[620px]">
-          Thanks for telling us your story. We’ll be in touch at the email you gave us, within [X] working days.
-        </Intro>
-        <div className="mt-[8px] flex flex-wrap justify-center gap-[12px] sm:gap-[16px]">
+      <Reveal
+        as="section"
+        onMount
+        stagger={0.12}
+        delay={0.1}
+        className={`flex flex-col items-center gap-[24px] pt-[72px] pb-[80px] text-center lg:gap-[32px] lg:pt-[140px] lg:pb-[120px] ${PX}`}
+      >
+        <DraggableMark className="relative h-[84px] w-[126px] lg:h-[120px] lg:w-[180px]" imgClassName={`${s.blob} ${s.logo}`} />
+        <RevealItem from={{ scale: 0.3, rotate: -20, y: 0 }} className="flex">
+          <span className="rounded-full bg-[var(--accent)] px-[20px] py-[8px] text-[15px] font-semibold text-[var(--on-accent)] [transform:rotate(-3deg)]">
+            Brief received
+          </span>
+        </RevealItem>
+        <RevealItem from={{ y: 60, blur: 8 }} duration={1.1}>
+          <H1 big className="max-w-[1000px]">
+            That’s a <AccentWord big>wrap</AccentWord> — for now.
+          </H1>
+        </RevealItem>
+        <RevealItem>
+          <Intro className="max-w-[620px]">
+            Thanks for telling us your story. We’ll be in touch at the email you gave us, within [X] working days.
+          </Intro>
+        </RevealItem>
+        <RevealItem className="mt-[8px] flex flex-wrap justify-center gap-[12px] sm:gap-[16px]">
           <Link href="/" className={BTN_INVERSE}>Back to the start</Link>
           <Link href="/work" className={BTN_OUTLINE}>See the work</Link>
-        </div>
-      </section>
+        </RevealItem>
+      </Reveal>
 
       <section aria-label="While you wait" className={`flex flex-col gap-[24px] pb-[96px] lg:gap-[32px] lg:pb-[140px] ${PX}`}>
-        <Label>While you wait</Label>
-        <div className="grid grid-cols-1 gap-[24px] md:grid-cols-2 lg:gap-[32px]">
+        <Reveal>
+          <Label>While you wait</Label>
+        </Reveal>
+        <Reveal stagger={0.14} amount={0.3} className="grid grid-cols-1 gap-[24px] md:grid-cols-2 lg:gap-[32px]">
+          <RevealItem from={{ y: 60 }} className="flex flex-col">
           <Link
             href="/originals#podcast"
             className={`${s.card} flex items-center justify-between gap-[24px] rounded-[28px] bg-[var(--inv-bg)] p-[28px] text-[var(--inv-ink)] [transform:rotate(-1deg)] lg:p-[40px]`}
@@ -47,6 +63,8 @@ export default function ThanksPage() {
               <PlayIcon size={16} />
             </span>
           </Link>
+          </RevealItem>
+          <RevealItem from={{ y: 60 }} className="flex flex-col">
           <Link
             href="/studio"
             className={`${s.card} flex items-center justify-between gap-[24px] rounded-[28px] bg-[var(--surface)] p-[28px] [transform:rotate(1deg)] lg:p-[40px]`}
@@ -57,7 +75,8 @@ export default function ThanksPage() {
             </div>
             <span className="text-[32px]" aria-hidden="true">→</span>
           </Link>
-        </div>
+          </RevealItem>
+        </Reveal>
       </section>
     </>
   );
