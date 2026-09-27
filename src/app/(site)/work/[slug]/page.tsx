@@ -5,7 +5,7 @@ import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import { ScrollIn } from "@/components/motion/ScrollIn";
 import s from "@/components/site/site.module.css";
 import { Label, MX, PX } from "@/components/site/ui";
-import { PROJECTS, getProject, nextProject, projectHref } from "@/content/projects";
+import { PROJECTS, getProject, nextProject, projectHref, projectNumber } from "@/content/projects";
 import { FilmPlayer } from "./FilmPlayer";
 
 export const dynamicParams = false;
@@ -37,7 +37,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         <Link href="/work" className={`${s.link} font-semibold`}>
           ← All work
         </Link>
-        <span className={`${s.it} text-[16px] text-[var(--muted-2)] lg:text-[18px]`}>Film [NN] of [NN]</span>
+        <span className={`${s.it} text-[16px] text-[var(--muted-2)] lg:text-[18px]`}>
+          Film {String(projectNumber(p.slug)).padStart(2, "0")} of {PROJECTS.length}
+        </span>
       </Reveal>
 
       <Reveal

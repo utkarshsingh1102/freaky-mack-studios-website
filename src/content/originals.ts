@@ -1,5 +1,3 @@
-import { projectHref } from "./projects";
-
 /** Originals board: podcast episodes (newest first) and the slate of our own films. */
 export const EPISODES = [1, 2, 3, 4, 5, 6].map((n, i) => ({
   no: `Ep. ${String(7 - n).padStart(2, "0")}`,
@@ -17,6 +15,6 @@ export const SLATE = [
   title: "[Title]",
   logline: "[One-line logline.]",
   status: "[Status]",
-  // The board links every slate card to the project template; project-07 is the studio's own short film.
-  href: projectHref("project-07"),
+  // The board links each slate card to a project page; until these films exist, send people to the work.
+  href: "/work",
 }));

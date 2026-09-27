@@ -3,18 +3,17 @@
 import Link from "next/link";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import { useState } from "react";
-import { projectHref } from "@/content/projects";
+import { PROJECTS as ALL_PROJECTS, projectHref } from "@/content/projects";
 import s from "../home.module.css";
 import { CHAPTER, H2, PB, PX } from "@/shared/ui";
 
-const PROJECTS = [
-  { title: "[Project title]", meta: "[Client] · Ad film", href: projectHref("project-01"), bg: "linear-gradient(160deg,#3a3a3a,#111)" },
-  { title: "[Project title]", meta: "[Artist] · Music video", href: projectHref("project-02"), bg: "linear-gradient(200deg,#5a5a58,#1a1a1a)" },
-  { title: "[Project title]", meta: "[Brand] · Fashion film", href: projectHref("project-03"), bg: "linear-gradient(140deg,#2a2a2a,#6a6a66)" },
-  { title: "[Project title]", meta: "[Subject] · Documentary", href: projectHref("project-04"), bg: "linear-gradient(220deg,#444,#0e0e0e)" },
-  { title: "[Project title]", meta: "[Client] · Event film", href: projectHref("project-05"), bg: "linear-gradient(120deg,#777773,#222)" },
-  { title: "[Project title]", meta: "[Client] · Web series", href: "/work", bg: "linear-gradient(180deg,#303030,#8a8a86)" },
-];
+/** The first six films on /work. */
+const PROJECTS = ALL_PROJECTS.slice(0, 6).map((p) => ({
+  title: p.title,
+  meta: `${p.who} · ${p.category}`,
+  href: projectHref(p.slug),
+  bg: p.bg,
+}));
 
 /** Chapter 01: hover (or focus / tap) a title to swap the tilted preview. */
 export function WorkPreview() {

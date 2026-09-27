@@ -16,7 +16,7 @@ const out = flag("--out", "shots");
 const seg = Number(flag("--seg", "0")); // >0: also save the full page in slices of this height
 const widths = flag("--widths", "1440,390").split(",").map(Number);
 const routes = args.filter((a) => !a.startsWith("--"));
-const ALL = ["/", "/work/", "/work/project-01/", "/studio/", "/originals/", "/people/", "/start-a-project/", "/thanks/", "/privacy/", "/terms/", "/missing-page/"];
+const ALL = ["/", "/work/", "/work/mercedes-benz-global-star/", "/studio/", "/originals/", "/people/", "/start-a-project/", "/thanks/", "/privacy/", "/terms/", "/missing-page/"];
 const list = routes.length ? routes : ALL;
 const slug = (r) => r.replace(/^\/+|\/+$/g, "").replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "") || "home";
 

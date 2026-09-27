@@ -149,7 +149,7 @@ function ClosedReel({ onToggle }: { onToggle: () => void }) {
         </span>
         <span className="flex flex-col gap-[2px]">
           <span className="text-[14px] font-semibold lg:text-[15px]">Showreel</span>
-          <span className="text-[12px] text-white/65 lg:text-[13px]">tap to open · [DURATION]</span>
+          <span className="text-[12px] text-white/65 lg:text-[13px]">tap to open · {REEL.duration}</span>
         </span>
       </div>
       <span
