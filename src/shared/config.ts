@@ -4,6 +4,11 @@
  */
 export const PITCH_MODE = process.env.NEXT_PUBLIC_PITCH_MODE !== "off";
 
+/** Absolute site URL for metadata (Open Graph, sitemap). On Vercel the production domain is used automatically. */
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");
+
 export const CONTACT = {
   email: "freakymackstudios@gmail.com",
   phone: "+91 97115 42274",
@@ -19,4 +24,14 @@ export const REEL = {
   loopSrc: "",
   poster: "",
   fullEmbedUrl: "",
+};
+
+/** Social profiles. The client still owes the real handles, so these point at the platforms for now. */
+export const SOCIAL = {
+  instagram: "https://instagram.com",
+  youtube: "https://youtube.com",
+  vimeo: "https://vimeo.com",
+  linkedin: "https://linkedin.com",
+  founderInstagram: "https://instagram.com",
+  founderLinkedin: "https://linkedin.com",
 };

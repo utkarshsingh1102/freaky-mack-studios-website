@@ -1,4 +1,5 @@
 import { FM_MARK_WHITE } from "@/shared/assets";
+import Link from "next/link";
 import s from "../home.module.css";
 
 /** Chapter 03: dark interlude. */
@@ -21,12 +22,12 @@ export function TheTurn() {
         original narratives — a slate of our own work alongside films for brands and cultural platforms. A home for
         filmmakers, creators and ideas that deserve to become films.
       </p>
-      <a
-        href="#about"
+      <Link
+        href="/studio"
         className={`${s.pill} relative flex h-[52px] items-center self-start rounded-full bg-[var(--accent)] px-[26px] text-[14px] font-semibold text-[var(--on-accent)]`}
       >
         Read the studio story
-      </a>
+      </Link>
     </section>
   );
 }

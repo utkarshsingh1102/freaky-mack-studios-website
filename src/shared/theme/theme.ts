@@ -24,8 +24,19 @@ export const DEFAULT_THEME: Theme = "light";
 export const DEFAULT_ACCENT: AccentId = "cobalt";
 export const DEFAULT_GROUND: string = GROUNDS[0];
 
-/** Shared spacing for this page: 96px gutters at desktop, 20px at 390. */
-export const PX = "px-5 md:px-10 lg:px-[96px]";
-export const PB = "pb-[96px] lg:pb-[180px]";
-export const CHAPTER = "text-[20px] lg:text-[26px] text-[var(--muted-2)]";
-export const H2 = "m-0 font-extrabold tracking-[-0.03em] text-[40px] md:text-[52px] lg:text-[64px] leading-[1.04]";
+export const STORAGE_KEY = "fm-theme";
+
+export type Choice = { theme: Theme; accent: AccentId; ground: string };
+export const DEFAULT_CHOICE: Choice = { theme: DEFAULT_THEME, accent: DEFAULT_ACCENT, ground: DEFAULT_GROUND };
+
+/** The CSS variables a choice resolves to. Used by the head script (before paint) and by the picker. */
+export function resolveChoice(c: Choice) {
+  const a = ACCENTS.find((x) => x.id === c.accent) ?? ACCENTS[0];
+  const dark = c.theme === "dark";
+  return {
+    "--accent": a.accent,
+    "--on-accent": a.onAccent,
+    "--accent-text": dark && "textOnDark" in a ? a.textOnDark : a.accent,
+    "--ground": dark ? DARK_GROUND : c.ground,
+  };
+}

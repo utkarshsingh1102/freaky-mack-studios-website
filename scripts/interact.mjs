@@ -1,4 +1,5 @@
-// Homepage checks: the board's renderVals() interactions, the pitch theme picker, and a contrast sweep.
+// Site checks: each board's renderVals() interactions, the enquiry form, navigation, the pitch theme picker
+// (and that it persists across pages), and a WCAG contrast sweep of every page in Light and Dark.
 // Usage: node scripts/interact.mjs [--base http://localhost:3000]
 import { chromium } from "playwright";
 
@@ -42,7 +43,7 @@ async function contrastSweep(page) {
       const el = walker.currentNode.parentElement;
       if (!el || seen.has(el) || !walker.currentNode.textContent.trim()) continue;
       seen.add(el);
-      if (el.closest("[data-pitch-only]")) continue;
+      if (el.closest("[data-pitch-only], [aria-hidden=\"true\"]")) continue; // picker, decorative text
       const cs = getComputedStyle(el);
       const r = el.getBoundingClientRect();
       if (cs.visibility === "hidden" || r.width === 0 || r.height === 0 || Number(cs.opacity) === 0) continue;
@@ -114,6 +115,115 @@ console.log("Old pitch links");
 await page.goto(`${base}/option-b/`);
 await page.waitForURL(`${base}/`, { timeout: 5000 }).catch(() => {});
 check(new URL(page.url()).pathname === "/", `/option-b/ lands on / (${page.url()})`);
+
+console.log("Work & project pages");
+await page.goto(`${base}/work/`, { waitUntil: "networkidle" });
+const cards = page.locator('a[href^="/work/project-"]');
+const allCount = await cards.count();
+await page.getByRole("radio", { name: "Music videos" }).click();
+check((await cards.count()) === 2 && (await page.getByText("2 films · [NN] in total").isVisible()), `Music videos filter shows 2 of ${allCount}`);
+await page.keyboard.press("ArrowRight");
+check((await page.getByRole("radio", { name: "Fashion films" }).getAttribute("aria-checked")) === "true", "arrow key moves the filter");
+await page.getByRole("radio", { name: "All work" }).click();
+await cards.first().click();
+await page.waitForURL(/\/work\/project-01\/?$/);
+const film = page.getByRole("button", { name: "Play the film" });
+await film.click();
+check((await page.getByRole("button", { name: "Pause the film" }).getAttribute("aria-pressed")) === "true" && (await page.getByText(/Now playing/).isVisible()), "project play toggle → Now playing");
+check((await page.locator('a[href="/work/project-02/"], a[href="/work/project-02"]').count()) > 0, "Next up links to project-02");
+check((await page.getByRole("link", { name: "Work" }).first().getAttribute("aria-current")) === "page", "nav marks Work active on a project page");
+await page.goto(`${base}/work/project-08/`, { waitUntil: "networkidle" });
+check((await page.locator('a[href^="/work/project-01"]').count()) > 0, "last project's Next up wraps to project-01");
+
+console.log("Originals");
+await page.goto(`${base}/originals/`, { waitUntil: "networkidle" });
+const rows = page.locator('section[aria-label="All episodes"] button');
+await page.getByRole("button", { name: "Play the latest episode" }).click();
+check((await rows.nth(0).getAttribute("aria-pressed")) === "true", "featured player lights up episode row 1");
+await rows.nth(2).click();
+check((await page.getByRole("button", { name: "Play the latest episode" }).getAttribute("aria-pressed")) === "false" && (await rows.nth(2).getAttribute("aria-pressed")) === "true", "playing row 3 pauses the featured player");
+
+console.log("Start a project");
+await page.goto(`${base}/`, { waitUntil: "networkidle" });
+await page.getByRole("button", { name: "music video", exact: true }).click();
+await page.getByRole("button", { name: "agency", exact: true }).click();
+await page.getByRole("link", { name: /Tell us the rest/ }).click();
+await page.waitForURL(/start-a-project/);
+await page.waitForTimeout(300);
+check((await page.getByRole("radio", { name: "music video" }).getAttribute("aria-checked")) === "true" && (await page.getByRole("radio", { name: "agency" }).getAttribute("aria-checked")) === "true", `homepage sentence pre-fills the form (${new URL(page.url()).search})`);
+const summary = () => page.locator("form p").first().innerText().then((x) => x.replace(/\s+/g, " "));
+check(/You need a music video for an agency, as soon as possible\./.test(await summary()), `live sentence → "${await summary()}"`);
+await page.getByRole("radio", { name: "Flexible" }).click();
+check(/whenever it’s right\./.test(await summary()), "When chip updates the sentence");
+await page.getByRole("radio", { name: "music video" }).focus();
+await page.keyboard.press("ArrowRight");
+check((await page.getByRole("radio", { name: "fashion film" }).getAttribute("aria-checked")) === "true" && (await page.evaluate(() => document.activeElement?.textContent)) === "fashion film", "ArrowRight selects and focuses the next format");
+check((await page.locator('[role="radiogroup"]').count()) === 4 && (await page.locator('[role="radio"][tabindex="0"]').count()) === 4, "4 radio groups, one tab stop each");
+await page.getByRole("button", { name: "Send it over →" }).click();
+check((await page.locator('[aria-invalid="true"]').count()) === 3, "empty submit flags name, email and brief");
+check((await page.evaluate(() => document.activeElement?.getAttribute("name"))) === "name", "focus moves to the first error");
+await page.getByLabel("Your name").fill("Test Person");
+await page.getByLabel("Email").fill("not-an-email");
+await page.getByLabel("The story so far").fill("A launch film.");
+await page.getByRole("button", { name: "Send it over →" }).click();
+check((await page.getByText("That email doesn’t look quite right.").isVisible()), "bad email is caught");
+await page.getByLabel("Email").fill("test@brand.com");
+await page.getByRole("button", { name: "Send it over →" }).click();
+await page.waitForURL(/\/thanks\/?$/, { timeout: 8000 }).catch(() => {});
+check(/\/thanks\/?$/.test(new URL(page.url()).pathname), `valid submit lands on /thanks (${page.url()})`);
+check(await page.getByText("Cut. Print. Talk soon.").isVisible(), "Thanks footer sign-off");
+check((await page.getByRole("link", { name: "Start a project" }).first().getAttribute("aria-current")) === "page", "nav CTA marked current on Thanks");
+
+console.log("Legal, 404");
+await page.goto(`${base}/privacy/`, { waitUntil: "networkidle" });
+await page.getByRole("navigation", { name: "On this page" }).getByRole("link", { name: "Cookies" }).click();
+await page.waitForTimeout(300);
+const inView = await page.locator("#p7").evaluate((el) => { const r = el.getBoundingClientRect(); return r.top >= 0 && r.top < 200; });
+check(page.url().endsWith("#p7") && inView, "Privacy anchor nav jumps to Cookies");
+check((await page.locator("#p1, #p2, #p3, #p4, #p5, #p6, #p7, #p8, #p9, #p10, #p11, #p12, #p13").count()) === 13, "Privacy has 13 sections");
+await page.goto(`${base}/terms/`, { waitUntil: "networkidle" });
+check((await page.locator('section[id^="t"]').count()) === 11, "Terms has 11 sections");
+const res = await page.goto(`${base}/missing-page/`, { waitUntil: "networkidle" });
+check(res.status() === 404 && (await page.getByText("This scene didn’t make the edit.").isVisible()), `unknown URL → 404 page (${res.status()})`);
+
+console.log("Theme across pages");
+await page.goto(`${base}/`, { waitUntil: "networkidle" });
+await page.getByRole("button", { name: "Dark theme" }).click();
+await page.getByRole("button", { name: "Orange accent" }).click();
+await page.locator('nav a[href="/studio"], nav a[href="/studio/"]').first().click();
+await page.waitForURL(/\/studio/);
+check((await root(page).getAttribute("data-theme")) === "dark" && (await accentVar()) === "#FF8A00", "Dark + Orange carries over on client navigation");
+await page.goto(`${base}/people/`, { waitUntil: "networkidle" });
+check((await root(page).getAttribute("data-theme")) === "dark" && (await accentVar()) === "#FF8A00", "…and after a fresh load without the query");
+await page.goto(`${base}/?theme=light&accent=cobalt`, { waitUntil: "networkidle" }); // reset for later runs
+
+console.log("Mobile menu");
+const phone = await browser.newPage({ viewport: { width: 390, height: 844 } });
+await phone.goto(`${base}/work/`, { waitUntil: "networkidle" });
+await phone.getByRole("button", { name: "Open menu" }).click();
+const menu = phone.locator("#fm-menu");
+check(await menu.isVisible(), "menu opens");
+await phone.keyboard.press("Escape");
+check(!(await menu.isVisible()), "Esc closes the menu");
+await phone.getByRole("button", { name: "Open menu" }).click();
+await menu.getByRole("link", { name: /Originals/ }).click();
+await phone.waitForURL(/\/originals/);
+await phone.waitForTimeout(300);
+check(!(await menu.isVisible()), "navigating closes the menu");
+await phone.close();
+
+console.log("Contrast sweep · every page");
+const PAGES = ["/work/", "/work/project-01/", "/studio/", "/originals/", "/people/", "/start-a-project/", "/thanks/", "/privacy/", "/terms/", "/missing-page/"];
+for (const [label, q] of [["Light · Cobalt", "theme=light&accent=cobalt"], ["Dark · Cobalt", "theme=dark&accent=cobalt"], ["Dark · Grey", "theme=dark&accent=grey"], ["Light · Grey", "theme=light&accent=grey"]]) {
+  const bad = [];
+  for (const r of PAGES) {
+    await page.goto(`${base}${r}?${q}`, { waitUntil: "networkidle" });
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.waitForTimeout(250);
+    bad.push(...(await contrastSweep(page)).map((b) => `${r} ${b}`));
+  }
+  check(bad.length === 0, `${label}: every page ≥ WCAG AA${bad.length ? `\n      ${bad.slice(0, 15).join("\n      ")}` : ""}`);
+}
 
 check(errors.length === 0, `no page errors${errors.length ? `: ${errors.join("; ")}` : ""}`);
 await browser.close();

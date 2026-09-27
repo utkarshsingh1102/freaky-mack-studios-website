@@ -1,0 +1,65 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import { ChipGroup } from "@/components/site/ChipGroup";
+import s from "@/components/site/site.module.css";
+import { PX } from "@/components/site/ui";
+import { FILTERS, PROJECTS, projectHref, type Project } from "@/content/projects";
+
+const TILTS = [-1.2, 1, -0.6, 1.4];
+
+function Card({ p, i }: { p: Project; i: number }) {
+  return (
+    <Link
+      href={projectHref(p.slug)}
+      className={`${s.card} flex flex-col gap-[18px]`}
+      style={{ transform: `rotate(${TILTS[i % 4]}deg)` }}
+    >
+      <div className="relative h-[300px] overflow-hidden rounded-[24px] md:h-[380px] lg:h-[460px]" style={{ background: p.bg }}>
+        <div className="absolute inset-0 flex items-center justify-center text-[12px] tracking-[0.2em] text-white/80 uppercase">
+          [ STILL ]
+        </div>
+        <span className="absolute top-[20px] left-[20px] rounded-full bg-[var(--accent)] px-[16px] py-[7px] text-[13px] font-semibold text-[var(--on-accent)] [transform:rotate(-4deg)]">
+          {p.category}
+        </span>
+      </div>
+      <div className="flex items-baseline justify-between gap-[24px] px-[6px]">
+        <span className="text-[22px] font-semibold tracking-[-0.02em] lg:text-[28px]">{p.title}</span>
+        <span className="text-[13px] whitespace-nowrap text-[var(--muted)] lg:text-[14px]">
+          {p.who} · {p.year}
+        </span>
+      </div>
+    </Link>
+  );
+}
+
+/** Work board: filter chips (`filter`) re-flow the two staggered, tilted columns. */
+export function WorkGrid() {
+  const [filter, setFilter] = useState<string>("All");
+  const shown = PROJECTS.filter((p) => filter === "All" || p.category === filter);
+  const left = shown.filter((_, i) => i % 2 === 0);
+  const right = shown.filter((_, i) => i % 2 === 1);
+  return (
+    <>
+      <section aria-label="Filter by format" className={`flex flex-col gap-[20px] pb-[56px] lg:pb-[72px] ${PX}`}>
+        <ChipGroup label="Filter by format" options={FILTERS} value={filter} onChange={setFilter} size="lg" />
+        <span className={`${s.it} text-[18px] text-[var(--muted-2)] lg:text-[20px]`} aria-live="polite">
+          {shown.length} {shown.length === 1 ? "film" : "films"} · [NN] in total
+        </span>
+      </section>
+      <section className={`grid grid-cols-1 items-start gap-y-[56px] pb-[96px] md:grid-cols-2 md:gap-x-[32px] lg:gap-x-[48px] lg:pb-[160px] ${PX}`}>
+        <div className="flex flex-col gap-[56px] lg:gap-[72px]">
+          {left.map((p) => (
+            <Card key={p.slug} p={p} i={shown.indexOf(p)} />
+          ))}
+        </div>
+        <div className="flex flex-col gap-[56px] md:pt-[100px] lg:gap-[72px] lg:pt-[140px]">
+          {right.map((p) => (
+            <Card key={p.slug} p={p} i={shown.indexOf(p)} />
+          ))}
+        </div>
+      </section>
+    </>
+  );
+}

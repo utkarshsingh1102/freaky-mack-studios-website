@@ -2,7 +2,7 @@ import { REEL } from "@/shared/config";
 import { ReelEmbed, ReelLoop } from "@/shared/reel";
 import s from "../home.module.css";
 import { Eq, PlayIcon } from "./icons";
-import { PX } from "./theme";
+import { PX } from "@/shared/ui";
 
 const GRADIENT = "radial-gradient(ellipse at 50% 55%, #2c2c2c 0%, #121212 55%, #0a0a0a 100%)";
 const DASHED =

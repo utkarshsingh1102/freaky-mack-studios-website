@@ -1,14 +1,16 @@
+import Link from "next/link";
 import { useState } from "react";
+import { projectHref } from "@/content/projects";
 import s from "../home.module.css";
-import { CHAPTER, H2, PB, PX } from "./theme";
+import { CHAPTER, H2, PB, PX } from "@/shared/ui";
 
 const PROJECTS = [
-  { title: "[Project title]", meta: "[Client] · Ad film", bg: "linear-gradient(160deg,#3a3a3a,#111)" },
-  { title: "[Project title]", meta: "[Artist] · Music video", bg: "linear-gradient(200deg,#5a5a58,#1a1a1a)" },
-  { title: "[Project title]", meta: "[Brand] · Fashion film", bg: "linear-gradient(140deg,#2a2a2a,#6a6a66)" },
-  { title: "[Project title]", meta: "[Subject] · Documentary", bg: "linear-gradient(220deg,#444,#0e0e0e)" },
-  { title: "[Project title]", meta: "[Client] · Event film", bg: "linear-gradient(120deg,#777773,#222)" },
-  { title: "[Project title]", meta: "[Client] · Web series", bg: "linear-gradient(180deg,#303030,#8a8a86)" },
+  { title: "[Project title]", meta: "[Client] · Ad film", href: projectHref("project-01"), bg: "linear-gradient(160deg,#3a3a3a,#111)" },
+  { title: "[Project title]", meta: "[Artist] · Music video", href: projectHref("project-02"), bg: "linear-gradient(200deg,#5a5a58,#1a1a1a)" },
+  { title: "[Project title]", meta: "[Brand] · Fashion film", href: projectHref("project-03"), bg: "linear-gradient(140deg,#2a2a2a,#6a6a66)" },
+  { title: "[Project title]", meta: "[Subject] · Documentary", href: projectHref("project-04"), bg: "linear-gradient(220deg,#444,#0e0e0e)" },
+  { title: "[Project title]", meta: "[Client] · Event film", href: projectHref("project-05"), bg: "linear-gradient(120deg,#777773,#222)" },
+  { title: "[Project title]", meta: "[Client] · Web series", href: "/work", bg: "linear-gradient(180deg,#303030,#8a8a86)" },
 ];
 
 /** Chapter 01: hover (or focus / tap) a title to swap the tilted preview. */
@@ -31,8 +33,8 @@ export function WorkPreview() {
                 onMouseEnter={() => setHovered(i)}
                 className={`${s.row} border-b border-[var(--line)] ${active ? "pl-[20px] text-[var(--ink)]" : "pl-0 text-[var(--dim)]"}`}
               >
-                <a
-                  href="#ch1"
+                <Link
+                  href={p.href}
                   onFocus={() => setHovered(i)}
                   onClick={() => setHovered(i)}
                   aria-current={active ? "true" : undefined}
@@ -45,7 +47,7 @@ export function WorkPreview() {
                     <span className="text-[24px] font-semibold tracking-[-0.02em] lg:text-[34px]">{p.title}</span>
                   </span>
                   <span className="text-[13px] whitespace-nowrap text-[var(--muted)] lg:text-[14px]">{p.meta}</span>
-                </a>
+                </Link>
               </li>
             );
           })}
@@ -65,9 +67,9 @@ export function WorkPreview() {
           </div>
           <div className="flex items-baseline justify-between px-[8px]">
             <span className={`${s.it} text-[22px] lg:text-[24px]`}>{preview.title}</span>
-            <a href="#ch1" className={`${s.link} border-b border-[var(--ink)] pb-[3px] text-[14px] font-semibold`}>
+            <Link href={preview.href} className={`${s.link} border-b border-[var(--ink)] pb-[3px] text-[14px] font-semibold`}>
               Open project →
-            </a>
+            </Link>
           </div>
         </div>
       </div>

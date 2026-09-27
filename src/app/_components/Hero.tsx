@@ -1,7 +1,7 @@
 import { FM_MARK_WHITE } from "@/shared/assets";
 import s from "../home.module.css";
 import { PlayIcon } from "./icons";
-import { PX } from "./theme";
+import { PX } from "@/shared/ui";
 
 export function Hero({ reelOpen, onToggleReel }: { reelOpen: boolean; onToggleReel: () => void }) {
   return (

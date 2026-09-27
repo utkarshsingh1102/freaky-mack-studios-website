@@ -1,0 +1,75 @@
+/* Shared page styles, ported from the <style> blocks of design/boards/*.dc.html (Work, Project, Studio,
+   Originals, People, Contact, Thanks, NotFound, Privacy, Terms). Colours come from the tokens in globals.css. */
+
+.it {
+  font-family: var(--fm-serif), "Instrument Serif", Georgia, serif;
+  font-style: italic;
+}
+.serif {
+  font-family: var(--fm-serif), "Instrument Serif", Georgia, serif;
+}
+
+/* The logo PNGs are white: inverted to black on the light page, as-is on the dark page. */
+.logo { filter: invert(1); }
+html[data-theme="dark"] .logo { filter: none; }
+/* Marks sitting on an inverse block (the black slab in Light, the white slab in Dark). */
+html[data-theme="dark"] .logoOnInverse { filter: invert(1); }
+
+.link { transition: opacity 0.25s ease; }
+.link:hover { opacity: 0.5; }
+.pill { transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), background 0.3s ease, color 0.3s ease; }
+.pill:hover { transform: translateY(-3px) rotate(-2deg); }
+.chip { transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease; }
+.chip:hover { transform: translateY(-2px); }
+/* People: collaborator chips lift and tilt */
+.chipTilt { transition: transform 0.25s ease; }
+.chipTilt:hover { transform: translateY(-3px) rotate(-2deg) !important; }
+.card { transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.card:hover { transform: rotate(0deg) translateY(-8px) !important; }
+.row { transition: padding-left 0.3s ease; }
+.row:hover { padding-left: 16px; }
+.tag { transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.tag:hover { transform: scale(1.08) rotate(0deg) !important; z-index: 2; }
+.face { transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.face:hover { transform: rotate(-5deg) scale(1.04) !important; }
+.still { transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.still:hover { transform: rotate(0deg) scale(1.02) !important; }
+.next { transition: background 0.3s ease; }
+.next:hover { background: var(--next-hover); }
+.epRow { transition: background 0.2s ease; }
+.epRow:hover { background: var(--surface); }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-8deg); }
+  50% { transform: translateY(-22px) rotate(4deg); }
+}
+.blob { animation: float 6s ease-in-out infinite; }
+
+@keyframes bar {
+  0% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+  100% { transform: scaleY(0.3); }
+}
+.eq span { animation: bar 1s ease-in-out infinite; transform-origin: bottom; }
+.eq span:nth-child(2) { animation-delay: 0.15s; }
+.eq span:nth-child(3) { animation-delay: 0.3s; }
+.eq span:nth-child(4) { animation-delay: 0.45s; }
+
+/* Legal pages (Privacy / Terms board `.lg`) */
+.lg h2 { margin: 0 0 16px; font-size: 26px; font-weight: 700; letter-spacing: -0.01em; display: flex; gap: 14px; align-items: baseline; }
+.lg h2 span { font-family: var(--fm-serif), "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; font-size: 20px; color: var(--muted-2); }
+.lg p, .lg li { font-size: 17px; line-height: 1.75; color: var(--ink-2); }
+.lg p { margin: 0 0 14px; }
+.lg ul { margin: 0 0 14px; padding-left: 22px; list-style: disc; }
+.lg strong { color: var(--ink); }
+.lg section { padding: 36px 0; border-top: 1px solid var(--line-2); scroll-margin-top: 24px; }
+.lg a { border-bottom: 1px solid var(--ink); }
+@media (max-width: 767px) {
+  .lg h2 { font-size: 22px; }
+  .lg p, .lg li { font-size: 16px; }
+  .lg section { padding: 28px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob, .eq span { animation: none; }
+}

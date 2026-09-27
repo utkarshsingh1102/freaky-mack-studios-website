@@ -1,5 +1,6 @@
+import Link from "next/link";
 import s from "../home.module.css";
-import { CHAPTER, H2, PB, PX } from "./theme";
+import { CHAPTER, H2, PB, PX } from "@/shared/ui";
 
 const FACES = [
   { label: "Izaan Khan · Founder", radius: "120px 120px 24px 24px", bg: "var(--surface-2)", rot: -3, mb: 0 },
@@ -36,9 +37,9 @@ export function People() {
           </div>
         ))}
       </div>
-      <a href="#team" className={`${s.link} ${s.it} border-b border-[var(--ink)] pb-[4px] text-[22px] lg:text-[26px]`}>
+      <Link href="/people" className={`${s.link} ${s.it} border-b border-[var(--ink)] pb-[4px] text-[22px] lg:text-[26px]`}>
         Meet everyone →
-      </a>
+      </Link>
     </section>
   );
 }
