@@ -33,7 +33,7 @@ export default function NotFound() {
         >
           404
         </RevealItem>
-        <DraggableMark className="relative h-[84px] w-[126px] lg:h-[120px] lg:w-[180px]" imgClassName={`${s.blob} ${s.logo}`} />
+        <DraggableMark className="relative h-[84px] w-[126px] lg:h-[120px] lg:w-[180px]" imgClassName={s.blob} />
         <RevealItem className="relative">
           <Kicker>Error 404 — scene missing</Kicker>
         </RevealItem>

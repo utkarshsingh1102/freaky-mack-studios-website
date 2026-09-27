@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Reveal } from "@/components/motion/Reveal";
 import { MobileMenu } from "@/components/site/MobileMenu";
 import { NAV_ITEMS } from "@/components/site/nav-items";
-import { FM_MARK_WHITE } from "@/shared/assets";
+import { Mark } from "@/components/site/Logo";
 import s from "../home.module.css";
 import { PX } from "@/shared/ui";
 
@@ -12,7 +12,7 @@ export function Nav() {
   return (
     <Reveal as="header" onMount from={{ y: -24 }} duration={0.8} className={`flex h-[72px] shrink-0 items-center justify-between lg:h-[96px] ${PX}`}>
       <a href="#top" className={`${s.link} flex items-center gap-[14px]`} aria-label="Freaky Mack Studios home">
-        <img src={FM_MARK_WHITE} alt="" className={`${s.logo} h-[32px] w-[48px] object-contain`} />
+        <Mark className="h-[32px] w-[48px] shrink-0" />
         <span className="text-[14px] font-extrabold tracking-[0.1em] whitespace-nowrap uppercase">Freaky Mack</span>
       </a>
       <nav aria-label="Chapters" className="hidden items-center gap-[32px] text-[15px] font-medium lg:flex">

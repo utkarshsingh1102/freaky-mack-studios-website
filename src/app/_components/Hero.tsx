@@ -23,7 +23,7 @@ export function Hero({ reelOpen, onToggleReel }: { reelOpen: boolean; onToggleRe
     >
       <DraggableMark
         className="absolute top-[24px] left-[12px] z-10 h-[56px] w-[84px] lg:top-[96px] lg:left-[148px] lg:h-[112px] lg:w-[168px]"
-        imgClassName={`${s.blob} ${s.logo} opacity-90`}
+        imgClassName={`${s.blob} opacity-90`}
       />
       <Reveal
         onMount

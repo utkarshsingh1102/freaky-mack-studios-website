@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FM_MARK_WHITE } from "@/shared/assets";
 import { Reveal } from "@/components/motion/Reveal";
+import { Mark } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 import { NAV_ITEMS, activeFor } from "./nav-items";
 import s from "./site.module.css";
@@ -16,7 +16,7 @@ export function SiteNav() {
   return (
     <Reveal as="header" onMount from={{ y: -24 }} duration={0.8} className={`flex h-[72px] shrink-0 items-center justify-between lg:h-[96px] ${PX}`}>
       <Link href="/" aria-label="Freaky Mack Studios home" className={`${s.link} flex items-center gap-[14px]`}>
-        <img src={FM_MARK_WHITE} alt="" className={`${s.logo} h-[32px] w-[48px] object-contain`} />
+        <Mark className="h-[32px] w-[48px] shrink-0" />
         <span className="text-[14px] font-extrabold tracking-[0.1em] whitespace-nowrap uppercase">Freaky Mack</span>
       </Link>
       <nav aria-label="Main" className="hidden items-center gap-[32px] text-[15px] font-medium lg:flex">

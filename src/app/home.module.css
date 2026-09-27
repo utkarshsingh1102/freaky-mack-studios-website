@@ -7,11 +7,6 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* The logo PNGs are white: inverted to black on the light page, as-is on the dark page. */
-.logo { filter: invert(1); }
-html[data-theme="dark"] .logo { filter: none; }
-/* Marks sitting on an inverse block (the dark slab in Light, the white slab in Dark). */
-html[data-theme="dark"] .logoOnInverse { filter: invert(1); }
 .serif {
   font-family: var(--fm-serif), "Instrument Serif", Georgia, serif;
 }

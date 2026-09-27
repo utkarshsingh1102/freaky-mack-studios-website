@@ -297,7 +297,7 @@ Contact details already filled in and real: freakymackstudios@gmail.com, +91 971
 
 | Item | How many | Format / size | Used on |
 |---|---|---|---|
-| Logo vectors | Mark + wordmark, black and white | SVG (or PDF/AI) | Nav, footer, blob mark, social image. The PNGs in `assets/brand/` work for now. |
+| ~~Logo vectors~~ | **Received** | FreakyMack_Logo_26.pdf, page 4 (white logo), now `assets/brand/fm-logo-*.svg` and `fm-mark-*.svg` | Nav, footer, blob mark, watermarks, social image. Drawn in the text colour, with no inversion. |
 | Favicon / app icon | 1 | Made from the mark (I can make it) | Browser tab. **Currently missing.** |
 | Homepage loop | 1 | 10–15s, muted, 720p, about 2–3MB | Home reel card |
 | Full showreel | 1 | Master file (for Stream) or YouTube link | Home reel |

@@ -20,7 +20,7 @@ export default function OriginalsPage() {
   return (
     <>
       <section className={`relative pt-[64px] pb-[56px] lg:pt-[120px] lg:pb-[96px] ${PX}`}>
-        <DraggableMark className="absolute top-[24px] right-[20px] h-[56px] w-[84px] lg:top-[120px] lg:right-[160px] lg:h-[100px] lg:w-[150px]" imgClassName={`${s.blob} ${s.logo}`} />
+        <DraggableMark className="absolute top-[24px] right-[20px] h-[56px] w-[84px] lg:top-[120px] lg:right-[160px] lg:h-[100px] lg:w-[150px]" imgClassName={s.blob} />
         <Reveal onMount stagger={0.12} delay={0.1} className="flex flex-col gap-[24px] lg:gap-[32px]">
           <RevealItem>
             <Kicker>Chapter 03 — Originals</Kicker>

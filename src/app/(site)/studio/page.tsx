@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { FM_MARK_WHITE } from "@/shared/assets";
+import { Mark } from "@/components/site/Logo";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import { ScrollIn } from "@/components/motion/ScrollIn";
 import { YourTurnCta } from "@/components/site/blocks";
@@ -131,11 +131,7 @@ export default function StudioPage() {
         aria-label="What we believe"
         className={`relative mb-[96px] flex flex-col gap-[40px] overflow-hidden rounded-[28px] bg-[var(--inv-bg)] px-[28px] py-[56px] text-[var(--inv-ink)] lg:mb-[180px] lg:gap-[64px] lg:rounded-[40px] lg:p-[96px] ${MX}`}
       >
-        <img
-          src={FM_MARK_WHITE}
-          alt=""
-          className={`${s.logoOnInverse} pointer-events-none absolute top-[-40px] right-[-60px] h-[200px] w-[300px] object-contain opacity-10 [transform:rotate(12deg)] lg:h-[305px] lg:w-[460px]`}
-        />
+        <Mark className="pointer-events-none absolute top-[-40px] right-[-60px] h-[200px] w-[300px] opacity-10 [transform:rotate(12deg)] lg:h-[305px] lg:w-[460px]" />
         <Reveal className="relative">
           <Label color="text-[var(--inv-muted)]">What we believe</Label>
         </Reveal>
