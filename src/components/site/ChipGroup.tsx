@@ -8,6 +8,7 @@ type Option = { id: string; label: string };
 /**
  * Single-select pill chips that behave as a radio group (CLAUDE.md → Accessibility):
  * one tab stop, arrow keys move and select, Home/End jump.
+ * A `value` matching no option leaves every chip unchecked (the first one keeps the tab stop).
  */
 export function ChipGroup({
   label,
@@ -28,7 +29,8 @@ export function ChipGroup({
   gap?: string;
 }) {
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
-  const index = Math.max(0, options.findIndex((o) => o.id === value));
+  const selected = options.findIndex((o) => o.id === value);
+  const index = Math.max(0, selected);
 
   const onKeyDown = (e: KeyboardEvent) => {
     const last = options.length - 1;
@@ -48,7 +50,7 @@ export function ChipGroup({
   return (
     <div role="radiogroup" aria-label={label} aria-labelledby={labelledBy} onKeyDown={onKeyDown} className={`flex flex-wrap ${gap}`}>
       {options.map((o, i) => {
-        const on = i === index;
+        const on = i === selected;
         return (
           <button
             key={o.id}
@@ -58,7 +60,7 @@ export function ChipGroup({
             type="button"
             role="radio"
             aria-checked={on}
-            tabIndex={on ? 0 : -1}
+            tabIndex={i === index ? 0 : -1}
             onClick={() => onChange(o.id)}
             className={`${s.chip} rounded-full border font-medium ${h} ${
               on ? "border-[var(--accent)] bg-[var(--accent)] text-[var(--on-accent)]" : "border-[var(--ink)] bg-[var(--pill-bg)] text-[var(--ink)]"

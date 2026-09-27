@@ -36,6 +36,26 @@ const FIELDS: Field[] = [
   { id: "c-phone", name: "phone", label: "Phone", optional: "(optional)", type: "tel", placeholder: "+91" },
 ];
 
+/** "Something else?" — a free-text answer under a chip question, for anything the chips don't cover. */
+function OtherAnswer({ id, value, onChange, placeholder }: { id: string; value: string; onChange: (v: string) => void; placeholder: string }) {
+  return (
+    <div className="mt-[20px] flex flex-col gap-[10px] md:max-w-[440px] lg:mt-[24px]">
+      <label htmlFor={id} className={LABEL}>
+        Something else? <span className="text-[var(--muted-2)]">Type it in</span>
+      </label>
+      <input
+        id={id}
+        type="text"
+        maxLength={60}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className={`${FIELD} h-[52px]`}
+      />
+    </div>
+  );
+}
+
 export function EnquiryForm() {
   const search = useSearch();
   const [picked, setPicked] = useState<{ fmt?: string; who?: string; when?: string; budget?: string }>({});
@@ -43,7 +63,16 @@ export function EnquiryForm() {
   const who = picked.who ?? fromQuery(search, "who", AUDIENCES) ?? AUDIENCES[0].id;
   const when = picked.when ?? WHENS[0].id;
   const budget = picked.budget ?? BUDGETS[3].id;
-  const pick = (key: keyof typeof picked) => (id: string) => setPicked((p) => ({ ...p, [key]: id }));
+  // Typed answers for the first two questions. While one has text it wins over the chips (which show
+  // unselected); picking a chip clears it again.
+  const [other, setOther] = useState({ fmt: "", who: "" });
+  const pick = (key: keyof typeof picked) => (id: string) => {
+    setPicked((p) => ({ ...p, [key]: id }));
+    if (key === "fmt" || key === "who") setOther((o) => ({ ...o, [key]: "" }));
+  };
+  const type = (key: keyof typeof other) => (v: string) => setOther((o) => ({ ...o, [key]: v }));
+  const fmtOther = other.fmt.trim();
+  const whoOther = other.who.trim();
 
   const f = FORMATS.find((x) => x.id === fmt)!;
   const a = AUDIENCES.find((x) => x.id === who)!;
@@ -51,8 +80,8 @@ export function EnquiryForm() {
   const b = BUDGETS.find((x) => x.id === budget)!;
 
   const { onSubmit, status, message, errors } = useEnquiryForm({
-    format: bare(f.phrase),
-    audience: bare(a.phrase),
+    format: fmtOther || bare(f.phrase),
+    audience: whoOther || bare(a.phrase),
     timing: w.label,
     budget: b.label,
     source: "Start a project",
@@ -67,25 +96,28 @@ export function EnquiryForm() {
       aria-label="Start a project"
       className="flex flex-col gap-[44px] rounded-[24px] bg-[var(--surface)] p-[24px] sm:p-[40px] lg:gap-[56px] lg:rounded-[32px] lg:p-[64px]"
     >
+      {/* Pills use 1em corners, not 999px: identical on one line, and a long typed answer wraps into a rounded box. */}
       <p className="m-0 text-[26px] leading-[1.45] font-extrabold tracking-[-0.03em] md:text-[34px] lg:text-[40px]" aria-live="polite">
         You need{" "}
-        <span className="inline-block rounded-full bg-[var(--accent)] px-[14px] text-[var(--on-accent)] [transform:rotate(-1.5deg)] lg:px-[20px]">
-          <Swap text={f.phrase} />
+        <span className="inline-block max-w-full rounded-[1em] bg-[var(--accent)] px-[14px] [overflow-wrap:anywhere] text-[var(--on-accent)] [transform:rotate(-1.5deg)] lg:px-[20px]">
+          <Swap text={fmtOther || f.phrase} id={fmtOther ? "typed" : undefined} />
         </span>{" "}
         for{" "}
-        <span className="inline-block rounded-full border-[3px] border-[var(--accent)] px-[14px] [transform:rotate(1.5deg)] lg:px-[20px]">
-          <Swap text={a.phrase} />
+        <span className="inline-block max-w-full rounded-[1em] border-[3px] border-[var(--accent)] px-[14px] [overflow-wrap:anywhere] [transform:rotate(1.5deg)] lg:px-[20px]">
+          <Swap text={whoOther || a.phrase} id={whoOther ? "typed" : undefined} />
         </span>
         , <span className={`${s.it} font-normal tracking-normal`}><Swap inline text={w.phrase} /></span>.
       </p>
 
       <fieldset className="m-0 border-0 p-0">
         <legend id="q-fmt" className={LEGEND}>01 · What are we making?</legend>
-        <ChipGroup labelledBy="q-fmt" options={FMT_OPTS} value={fmt} onChange={pick("fmt")} gap="gap-[12px]" />
+        <ChipGroup labelledBy="q-fmt" options={FMT_OPTS} value={fmtOther ? "" : fmt} onChange={pick("fmt")} gap="gap-[12px]" />
+        <OtherAnswer id="c-fmt-other" value={other.fmt} onChange={type("fmt")} placeholder="e.g. an animated explainer" />
       </fieldset>
       <fieldset className="m-0 border-0 p-0">
         <legend id="q-who" className={LEGEND}>02 · Who’s it for?</legend>
-        <ChipGroup labelledBy="q-who" options={WHO_OPTS} value={who} onChange={pick("who")} gap="gap-[12px]" />
+        <ChipGroup labelledBy="q-who" options={WHO_OPTS} value={whoOther ? "" : who} onChange={pick("who")} gap="gap-[12px]" />
+        <OtherAnswer id="c-who-other" value={other.who} onChange={type("who")} placeholder="e.g. a startup, an artist, a non-profit" />
       </fieldset>
       {/* One question per row (side by side, their chips wrapped onto three lines). */}
       <fieldset className="m-0 border-0 p-0">
