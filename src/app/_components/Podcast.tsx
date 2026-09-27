@@ -39,9 +39,10 @@ export function Podcast() {
               type="button"
               onClick={() => setPlaying(on ? -1 : i)}
               aria-pressed={on}
-              className={`${s.ep} flex flex-col gap-[18px] border-0 bg-transparent p-0 text-left text-[var(--ink)] ${e.tilt}`}
+              className={`${s.ep} flex w-full flex-col gap-[18px] border-0 bg-transparent p-0 text-left text-[var(--ink)] ${e.tilt}`}
             >
-              <div className="relative h-[240px] w-full overflow-hidden rounded-[20px] lg:h-[300px]" style={{ background: e.bg }}>
+              {/* Episode art is 16:9, like the YouTube thumbnail it will become. */}
+              <div className="relative aspect-video w-full overflow-hidden rounded-[20px]" style={{ background: e.bg }}>
                 <div className="absolute inset-0 flex items-center justify-center text-[12px] tracking-[0.2em] text-white uppercase">
                   [ EPISODE ART ]
                 </div>
