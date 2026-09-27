@@ -1,0 +1,31 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Main.dc.html": {"x": 0, "y": 0, "w": 1440, "h": 8000, "title": "Home", "expand": "fill", "is_interactive": true},
+    "Work.dc.html": {"x": 1600, "y": 0, "w": 1440, "h": 4130, "title": "01 · Work", "expand": "fill", "is_interactive": true},
+    "Project.dc.html": {"x": 3200, "y": 0, "w": 1440, "h": 4212, "title": "01b · Project (case-study template)", "expand": "fill", "is_interactive": true},
+    "Studio.dc.html": {"x": 4800, "y": 0, "w": 1440, "h": 6414, "title": "02 · Studio", "expand": "fill", "is_interactive": true},
+    "Originals.dc.html": {"x": 6400, "y": 0, "w": 1440, "h": 3800, "title": "03 · Originals", "expand": "fill", "is_interactive": true},
+    "People.dc.html": {"x": 8000, "y": 0, "w": 1440, "h": 3990, "title": "04 · People", "expand": "fill", "is_interactive": true},
+    "Contact.dc.html": {"x": 9600, "y": 0, "w": 1440, "h": 2444, "title": "06 · Start a project", "expand": "fill", "is_interactive": true},
+    "Thanks.dc.html": {"x": 0, "y": 8600, "w": 1440, "h": 1726, "title": "Thank you (after the form)", "expand": "fill", "is_interactive": true},
+    "NotFound.dc.html": {"x": 1600, "y": 8600, "w": 1440, "h": 1374, "title": "404 · Page not found", "expand": "fill", "is_interactive": true},
+    "Privacy.dc.html": {"x": 3200, "y": 8600, "w": 1440, "h": 4166, "title": "Privacy policy", "expand": "fill", "is_interactive": true},
+    "Terms.dc.html": {"x": 4800, "y": 8600, "w": 1440, "h": 3410, "title": "Terms of use", "expand": "fill", "is_interactive": true},
+    "SiteNav.dc.html": {"x": 6400, "y": 8600, "w": 1440, "h": 96, "title": "Component · Site nav (shared)"},
+    "SiteFooter.dc.html": {"x": 6400, "y": 8936, "w": 1440, "h": 424, "title": "Component · Site footer (shared)"}
+  },
+  "createdOnFiles": {"at": "2026-09-25T09:05:00Z", "v": 1},
+  "designSystems": [],
+  "launch": {"view": "canvas"},
+  "notes": {
+    "t1": {"x": 0, "y": -300, "text": "Freaky Mack Studios — website (Option A)", "kind": "title1", "maxW": 11040},
+    "t2": {"x": 0, "y": 8300, "text": "Supporting pages & shared components", "kind": "title1", "maxW": 7840},
+    "legal": {"x": 6400, "y": 9500, "w": 440, "text": "Privacy & Terms are drafts written for an Indian studio (Digital Personal Data Protection Act, 2023). Fill every [bracket] — legal entity, address, city, hosting/form/analytics tools, retention period, grievance officer — and have a lawyer review both before launch.", "fill": "orange"},
+    "nav": {"x": 7000, "y": 9500, "w": 440, "text": "Nav and footer are shared components: edit them once and every page updates. Home keeps its own copy of both.", "fill": "gray"}
+  },
+  "order": ["Main.dc.html", "Work.dc.html", "Project.dc.html", "Studio.dc.html", "Originals.dc.html", "People.dc.html", "Contact.dc.html", "Thanks.dc.html", "NotFound.dc.html", "Privacy.dc.html", "Terms.dc.html", "SiteNav.dc.html", "SiteFooter.dc.html"],
+  "pages": [],
+  "title": "Freaky Mack Studios — Website"
+}

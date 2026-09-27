@@ -1,77 +1,80 @@
-# freaky-mack-studios-website
+# Freaky Mack Studios — website
 
-Homepage for Freaky Mack Studios: the chosen **Option A · Story** design, built from `Design/boards/option-a-story.dc.html` (brief: `Design/BRIEF.md`). It comes in two themes, **Light** (the approved board) and **Dark** (black background, white text), plus one accent colour.
+The design is approved. This repo has the final designs (Option A, "Story") for every page of the Freaky Mack Studios website, ready to be built into a real site.
 
-Next.js (App Router) + Tailwind, built as a static export.
+**Start here:** open `design/screenshots/` to see every page, then read `CLAUDE.md` for the build instructions.
 
-## Run
+## The client
 
-```bash
-npm install
-npm run dev        # http://localhost:3000
-npm run build      # static export to out/
-npm run lint
+- **Freaky Mack Studios** began as six years of advertising filmmaking at Freaky Mack and is now a larger creative studio for commercial, narrative and digital storytelling.
+- **Final approver:** Izaan Khan, Founder & Creative Producer · freakymackstudios@gmail.com · +91 97115 42274.
+- **Past clients:** McDonald's, Google, Adidas Originals, Mercedes-Benz, Fila, PC Jewellers, Times of India.
+- **Services:** Ad films, Music videos, Fashion films, Event films, Documentaries, Short films / web series, Podcast / YouTube, Post-production.
+- **Goal:** show the work, bring in new enquiries, and strengthen online visibility.
+- **Audience:** brands, agencies, music labels, fashion brands, models and actors.
+- **Look:** minimal, premium, clean. Black & white with one accent (Cobalt `#1F3BFF`), and moderate, smooth motion.
+
+## What's in here
+
+```
+freakymack-website/
+├── README.md                 ← this file
+├── CLAUDE.md                 ← build instructions for Claude Code
+├── assets/brand/
+│   ├── fm-mark-white.png         ← blob mark, white on transparent (use CSS invert on white backgrounds)
+│   ├── fm-logo-white.png         ← full lockup, white on transparent
+│   └── fm-logo-black-original.png← client's original logo
+└── design/
+    ├── canvas.json           ← index of the design canvas (board titles and order)
+    ├── boards/               ← one .dc.html per page, the source of truth for layout and copy
+    └── screenshots/          ← full-page 1440px renders of every board
 ```
 
-## Themes and accent (client review)
+## Pages
 
-While `PITCH_MODE` is on, a small floating picker lets the client compare:
+| Board | Screenshot | Route | What it is |
+|---|---|---|---|
+| `Main.dc.html` | `01-Main.jpg` | `/` | Home: the full chapter-by-chapter story |
+| `Work.dc.html` | `02-Work.jpg` | `/work` | Portfolio with filter chips and a staggered two-column grid |
+| `Project.dc.html` | `03-Project.jpg` | `/work/[slug]` | Case-study template: video, credits, brief / idea / on screen, stills, next project |
+| `Studio.dc.html` | `04-Studio.jpg` | `/studio` | About: story, timeline, beliefs, services, process, clients |
+| `Originals.dc.html` | `05-Originals.jpg` | `/originals` | Podcast / YouTube: featured player, episode list, slate, "Pitch us" |
+| `People.dc.html` | `06-People.jpg` | `/people` | Founder, crew grid, collaborators, "Email your reel" |
+| `Contact.dc.html` | `07-Contact.jpg` | `/start-a-project` | Enquiry form: chip questions, live summary sentence, fields |
+| `Thanks.dc.html` | `08-Thanks.jpg` | `/thanks` | Shown after the form is sent |
+| `NotFound.dc.html` | `09-NotFound.jpg` | 404 | "Cut! This scene didn't make the edit." |
+| `Privacy.dc.html` | `10-Privacy.jpg` | `/privacy` | Privacy policy draft (India DPDP Act 2023) |
+| `Terms.dc.html` | `11-Terms.jpg` | `/terms` | Terms of use draft |
+| `SiteNav.dc.html` | `12-SiteNav.jpg` | component | Shared header used by every page except Home |
+| `SiteFooter.dc.html` | `13-SiteFooter.jpg` | component | Shared footer used by every page except Home |
 
-- **Theme:** Light or Dark.
-- **Accent:** Cobalt, Grey, Lime, Orange or Pink. The accent is used on buttons, badges and the "films" highlight.
-- **Ground** (Light only): three off-white backgrounds from the board.
+## What launches now and what comes later
 
-Each choice is written to the URL, so you can send a direct link to any variant:
-
-| Variant | Link |
+| Feature | When |
 |---|---|
-| Light · Cobalt (default) | `/` |
-| Dark · Cobalt | `/?theme=dark` |
-| Dark · Grey | `/?theme=dark&accent=grey` |
-| Light · Grey | `/?accent=grey` |
+| Showreel on the homepage (autoplay loop + "watch full reel") | Now |
+| Project pages (video, stills, credits) | Now |
+| Enquiry form (sent to email) | Now |
+| Podcast & YouTube section | Now |
+| Client logos & testimonials | Now |
+| Portfolio filters by category | Designed now; can ship later |
+| WhatsApp button, Instagram feed | Later |
+| CMS for the team to add projects | Later |
+| SEO & analytics | Later |
 
-Old pitch links (`/option-a/` … `/option-d/`) redirect to `/`.
+## Content still owed by the client
 
-### Locking in the final look
+Anything in `[square brackets]` in the designs is missing content, such as `[Project title]`, `[Client]`, `[Name]`, `[Role]`, `[YEAR]`, `[CITY]`, `[STUDIO ADDRESS]`, `[X] days` and the `[Range 1–3]` budget options. Keep these placeholders visible until real content arrives, and don't invent replacements.
 
-1. In `src/app/_components/theme.ts`, set `DEFAULT_THEME` (`"light"` or `"dark"`) and `DEFAULT_ACCENT` (`"cobalt"`, `"grey"`, `"lime"`, `"orange"` or `"pink"`). For Light, also set `DEFAULT_GROUND`.
-2. Turn the picker off. Either set the environment variable `NEXT_PUBLIC_PITCH_MODE=off` (on Vercel: Settings → Environment Variables, then redeploy), or make `PITCH_MODE` false in `src/shared/config.ts`.
+The client still needs to send:
 
-## Deploy on Vercel
+- Logo vectors.
+- A 10–15s homepage loop and the full reel link.
+- Project videos, 3–5 stills per project, and credits.
+- About text.
+- Team photos.
+- Client logos, and testimonials with permission.
+- Social handles.
+- Domain and hosting details.
 
-1. On vercel.com, log in with GitHub → **Add New… → Project** → import `utkarshsingh1102/freaky-mack-studios-website`. If it isn't listed, use **Adjust GitHub App Permissions** to give Vercel access.
-2. Keep the detected defaults: Framework **Next.js**, Root `./`, Build `next build`, Output left blank. Vercel serves the static export.
-3. Optional environment variables:
-   - `NEXT_PUBLIC_FORMSPREE_ENDPOINT`: your Formspree form URL, so enquiries arrive by email.
-   - `NEXT_PUBLIC_PITCH_MODE=off`: hides the theme picker once the look is locked in.
-4. Click **Deploy**. Every push to `main` redeploys automatically.
-
-Node 20.9 or newer is required (set in `package.json` → `engines`).
-
-## Where things live
-
-- `src/app/page.tsx` and `src/app/layout.tsx`: the homepage entry and fonts.
-- `src/app/_components/`: the page sections, `Home.tsx` (theme state) and `ThemePicker.tsx`. `theme.ts` holds the accents, grounds and defaults.
-- `src/app/home.module.css`: the Light/Dark colour tokens, hover states and animations.
-- `src/shared/`:
-  - the enquiry submit handler (`enquiry.ts`)
-  - the showreel loop and embed (`reel.tsx`)
-  - the logo imports (read from `Design/assets`)
-  - `config.ts`
-
-## Settings
-
-- **Enquiries:** set `NEXT_PUBLIC_FORMSPREE_ENDPOINT` (e.g. `https://formspree.io/f/xxxx`) so forms post to freakymackstudios@gmail.com. Without it, submitting opens a pre-filled email instead.
-- **Showreel:** fill `REEL.loopSrc` / `poster` / `fullEmbedUrl` in `src/shared/config.ts`. Until then the `[ … ]` placeholders stay visible.
-
-All `[PLACEHOLDER]` text is intentional. It marks content the client still owes (see the brief).
-
-## Checks
-
-With a server running (`npm run dev`, or `npx serve out -l 4000` plus `--base http://localhost:4000`):
-
-```bash
-node scripts/shoot.mjs --out shots --seg 1500              # Light and Dark at 1440 and 390: overflow and console-error check
-node scripts/shoot.mjs "/?theme=dark&accent=grey" --out shots   # any variant
-node scripts/interact.mjs                                  # interactions, theme picker, old-link redirect, WCAG contrast sweep in both themes
-```
+**Legal:** Privacy and Terms are drafts. Fill every bracket, including the legal entity, address, city, hosting / form / analytics tools, retention period and grievance officer. Have a lawyer review both before launch.

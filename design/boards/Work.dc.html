@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Freaky Mack Studios — Work</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Plus Jakarta Sans','Helvetica Neue',Arial,sans-serif;background:#ffffff;color:#0a0a0a;-webkit-font-smoothing:antialiased}
+a{color:#0a0a0a;text-decoration:none}a:hover{color:#000000}
+button{font-family:inherit;cursor:pointer}
+.fm-link{transition:opacity .25s ease}.fm-link:hover{opacity:.5}
+.fm-pill{transition:transform .3s cubic-bezier(.2,.7,.2,1),background .3s ease,color .3s ease}.fm-pill:hover{transform:translateY(-3px) rotate(-2deg)}
+.fm-chip{transition:background .25s ease,color .25s ease,transform .25s ease}.fm-chip:hover{transform:translateY(-2px)}
+.fm-card{transition:transform .45s cubic-bezier(.2,.7,.2,1)}.fm-card:hover{transform:rotate(0deg) translateY(-8px)!important}
+@keyframes fm-float{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-22px) rotate(4deg)}}
+.fm-blob{animation:fm-float 6s ease-in-out infinite}
+</style>
+</helmet>
+
+<div id="top" style="width: 1440px; height: 4130px; box-sizing: border-box; display: flex; flex-direction: column; background: #ffffff; color: #0a0a0a; overflow: hidden; position: relative">
+<dc-import name="SiteNav" active="work" hint-size="1440px,96px"></dc-import>
+
+<!-- HERO -->
+<section style="box-sizing: border-box; padding: 120px 96px 72px; display: flex; flex-direction: column; gap: 32px; flex-shrink: 0; position: relative">
+<img src="../../assets/brand/fm-mark-white.png" alt="" class="fm-blob" style="position: absolute; right: 150px; top: 110px; width: 150px; height: 100px; object-fit: contain; filter: invert(1)">
+<div style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 22px; letter-spacing: 0.08em; text-transform: uppercase; color: #6b6b6b">Chapter 01 — The work</div>
+<h1 style="margin: 0; font-weight: 800; letter-spacing: -0.03em; font-size: 88px; line-height: 0.98; text-transform: uppercase; max-width: 1000px; text-wrap: balance">Six years of saying <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: 0.01em; font-size: 96px; color: {{accent}}">yes</span> to brands.</h1>
+<p style="margin: 0; font-size: 16px; line-height: 1.7; letter-spacing: 0.06em; text-transform: uppercase; max-width: 640px; color: #3a3a3a">Ad films, music videos, fashion films, documentaries and the stories we tell for ourselves. Pick a format, open a film.</p>
+</section>
+
+<!-- FILTER -->
+<section aria-label="Filter by format" style="box-sizing: border-box; padding: 0 96px 72px; display: flex; flex-direction: column; gap: 20px; flex-shrink: 0">
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<sc-for list="{{filters}}" as="f" hint-placeholder-count="7">
+<button type="button" onClick="{{f.pick}}" class="fm-chip" style="{{f.style}}">{{f.label}}</button>
+</sc-for>
+</div>
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 20px; color: #6b6b6b">{{countLabel}}</span>
+</section>
+
+<!-- GRID (two staggered columns) -->
+<section style="box-sizing: border-box; padding: 0 96px 160px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 48px; align-items: start; flex-shrink: 0">
+<div style="display: flex; flex-direction: column; gap: 72px">
+<sc-for list="{{left}}" as="p" hint-placeholder-count="4">
+<a href="Project.dc.html" class="fm-card" style="{{p.cardStyle}}">
+<div style="height: 460px; border-radius: 24px; overflow: hidden; position: relative; background: {{p.bg}}">
+<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.8)">[ STILL ]</div>
+<span style="position: absolute; left: 20px; top: 20px; transform: rotate(-4deg); background: {{accent}}; color: {{onAccent}}; border-radius: 999px; padding: 7px 16px; font-size: 13px; font-weight: 600">{{p.cat}}</span>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 0 6px"><span style="font-size: 28px; font-weight: 600; letter-spacing: -0.02em">{{p.title}}</span><span style="font-size: 14px; color: #5c5c5c; white-space: nowrap">{{p.meta}}</span></div>
+</a>
+</sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 72px; padding-top: 140px">
+<sc-for list="{{right}}" as="p" hint-placeholder-count="4">
+<a href="Project.dc.html" class="fm-card" style="{{p.cardStyle}}">
+<div style="height: 460px; border-radius: 24px; overflow: hidden; position: relative; background: {{p.bg}}">
+<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.8)">[ STILL ]</div>
+<span style="position: absolute; left: 20px; top: 20px; transform: rotate(-4deg); background: {{accent}}; color: {{onAccent}}; border-radius: 999px; padding: 7px 16px; font-size: 13px; font-weight: 600">{{p.cat}}</span>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 0 6px"><span style="font-size: 28px; font-weight: 600; letter-spacing: -0.02em">{{p.title}}</span><span style="font-size: 14px; color: #5c5c5c; white-space: nowrap">{{p.meta}}</span></div>
+</a>
+</sc-for>
+</div>
+</section>
+
+<!-- CTA -->
+<section style="box-sizing: border-box; margin: 0 96px 140px; padding: 72px 80px; background: #f4f4f1; border-radius: 40px; display: flex; justify-content: space-between; align-items: center; gap: 48px; flex-shrink: 0">
+<div style="display: flex; flex-direction: column; gap: 14px"><span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 24px; color: #6b6b6b">Don’t see your format?</span><span style="font-weight: 800; letter-spacing: -0.03em; font-size: 48px; line-height: 1.05">If it can be filmed, we’ll film it.</span></div>
+<a href="Contact.dc.html" class="fm-pill" style="flex-shrink: 0; height: 60px; box-sizing: border-box; padding: 0 30px; display: flex; align-items: center; background: {{accent}}; color: {{onAccent}}; border-radius: 999px; font-size: 15px; font-weight: 600">Start a project</a>
+</section>
+
+<div style="margin-top: auto"><dc-import name="SiteFooter" hint-size="1440px,424px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#1F3BFF","options":["#1F3BFF","#0a0a0a"],"section":"Theme"},"onAccent":{"editor":"color","default":"#ffffff","options":["#ffffff","#0a0a0a"],"section":"Theme"},"$preview":{"width":1440,"height":4130}}'>
+class Component extends DCLogic {
+constructor(props) { super(props); this.state = { filter: 'All' }; }
+renderVals() {
+const s = this.state;
+const accent = this.props.accent ?? '#1F3BFF';
+const onAccent = this.props.onAccent ?? '#ffffff';
+const all = [
+{ title: '[Project title]', who: '[Client]', cat: 'Ad film', bg: 'linear-gradient(160deg,#3a3a3a,#111)' },
+{ title: '[Project title]', who: '[Artist]', cat: 'Music video', bg: 'linear-gradient(200deg,#5a5a58,#1a1a1a)' },
+{ title: '[Project title]', who: '[Brand]', cat: 'Fashion film', bg: 'linear-gradient(140deg,#2a2a2a,#6a6a66)' },
+{ title: '[Project title]', who: '[Subject]', cat: 'Documentary', bg: 'linear-gradient(220deg,#444,#0e0e0e)' },
+{ title: '[Project title]', who: '[Client]', cat: 'Event film', bg: 'linear-gradient(120deg,#777773,#222)' },
+{ title: '[Project title]', who: '[Client]', cat: 'Ad film', bg: 'linear-gradient(180deg,#303030,#8a8a86)' },
+{ title: '[Project title]', who: 'Freaky Mack Originals', cat: 'Short film', bg: 'linear-gradient(150deg,#1a1a1a,#5a5a58)' },
+{ title: '[Project title]', who: '[Artist]', cat: 'Music video', bg: 'linear-gradient(210deg,#6a6a66,#141414)' }
+];
+const cats = ['All', 'Ad film', 'Music video', 'Fashion film', 'Event film', 'Documentary', 'Short film'];
+const labels = { 'All': 'All work', 'Ad film': 'Ad films', 'Music video': 'Music videos', 'Fashion film': 'Fashion films', 'Event film': 'Event films', 'Documentary': 'Documentaries', 'Short film': 'Short films & series' };
+const chip = (on) => 'height: 46px; padding: 0 18px; border-radius: 999px; font-size: 15px; font-weight: 500; border: 1px solid ' + (on ? accent : '#0a0a0a') + '; background: ' + (on ? accent : '#ffffff') + '; color: ' + (on ? onAccent : '#0a0a0a');
+const filters = cats.map(c => ({ label: labels[c], pick: () => this.setState({ filter: c }), style: chip(s.filter === c) }));
+const shown = all.filter(p => s.filter === 'All' || p.cat === s.filter).map((p, i) => ({
+...p,
+meta: p.who + ' · [Year]',
+cardStyle: 'display: flex; flex-direction: column; gap: 18px; color: #0a0a0a; transform: rotate(' + ([-1.2, 1, -0.6, 1.4][i % 4]) + 'deg)'
+}));
+const left = shown.filter((p, i) => i % 2 === 0);
+const right = shown.filter((p, i) => i % 2 === 1);
+return { accent, onAccent, filters, left, right, countLabel: shown.length + (shown.length === 1 ? ' film' : ' films') + ' · [NN] in total' };
+}
+}
+</script>
+</body>
+</html>
