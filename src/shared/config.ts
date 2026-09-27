@@ -5,6 +5,9 @@
 export const PITCH_MODE = process.env.NEXT_PUBLIC_PITCH_MODE !== "off";
 
 /** Absolute site URL for metadata (Open Graph, sitemap). On Vercel the production domain is used automatically. */
+/** The blob mark as the mouse cursor (desktop only). Set false to go back to the normal cursor. */
+export const LOGO_CURSOR = true;
+
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
   (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");

@@ -87,6 +87,21 @@ check((await page.locator("#ch4").getByText("Now playing").count()) === 1, "epis
 await eps.nth(0).click();
 check((await eps.nth(1).getAttribute("aria-pressed")) === "false", "playing another episode stops the first");
 
+console.log("Logo cursor");
+await page.mouse.move(700, 300);
+await page.mouse.move(720, 320);
+const cur = page.locator("[data-logo-cursor]");
+check((await page.evaluate(() => document.documentElement.classList.contains("logo-cursor"))) && (await cur.count()) === 1, "mouse movement swaps in the logo cursor");
+const navLink = page.getByRole("link", { name: /Work/ }).first();
+const nb = await navLink.boundingBox();
+await page.mouse.move(nb.x + nb.width / 2, nb.y + nb.height / 2);
+check((await cur.getAttribute("data-logo-cursor")) === "reach", "cursor reaches over a link");
+await page.mouse.move(8, 400); // empty margin, so the press doesn't follow a link
+await page.mouse.down();
+check((await cur.getAttribute("data-logo-cursor")) === "grab", "cursor clenches while pressed");
+await page.mouse.up();
+check((await cur.getAttribute("data-logo-cursor")) === "idle", "cursor relaxes when released");
+
 console.log("Theme picker");
 const bg = () => root(page).evaluate((el) => getComputedStyle(el).backgroundColor);
 const fg = () => root(page).evaluate((el) => getComputedStyle(el).color);
@@ -295,10 +310,10 @@ console.log("Motion (homepage)");
   await mp.waitForTimeout(1400);
   const after = await people.evaluate((el) => getComputedStyle(el.closest("[data-reveal]")).opacity);
   check(before === "0" && after === "1", `below-the-fold heading reveals on scroll (opacity ${before} → ${after})`);
-  // Scroll-linked: the progress bar fills and the hero text drifts away.
-  const bar = await mp.evaluate(() => document.querySelector('[aria-hidden="true"].fixed').getBoundingClientRect().width);
+  // Scroll-linked: the hero text drifts away; there is no progress bar across the top.
+  const bar = await mp.evaluate(() => [...document.querySelectorAll("body *")].some((el) => { const s = getComputedStyle(el); const r = el.getBoundingClientRect(); return s.position === "fixed" && r.top === 0 && r.height <= 4 && r.width > 200; }));
   const heroY = await mp.evaluate(() => new DOMMatrix(getComputedStyle(document.querySelector("section#top > div.flex")).transform).m42);
-  check(bar > 400 && heroY > 20, `scroll progress bar fills (${Math.round(bar)}px) and hero text drifts (${Math.round(heroY)}px)`);
+  check(!bar && heroY > 20, `no top progress bar, and hero text drifts (${Math.round(heroY)}px)`);
   await ctx.close();
   // Without JavaScript nothing is left hidden.
   const nojs = await browser.newContext({ viewport: { width: 1440, height: 900 }, javaScriptEnabled: false });
