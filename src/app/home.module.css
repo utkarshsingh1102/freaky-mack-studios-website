@@ -39,7 +39,7 @@ html[data-theme="dark"] .logoOnInverse { filter: invert(1); }
 .face { transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1); }
 .face:hover { transform: rotate(-6deg) scale(1.05); }
 .reelCard { transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1); }
-.reelCard:hover { transform: rotate(0deg) scale(1.02); }
+.reelCard:hover { transform: scale(1.02); }
 
 @keyframes float {
   0%, 100% { transform: translateY(0) rotate(-8deg); }

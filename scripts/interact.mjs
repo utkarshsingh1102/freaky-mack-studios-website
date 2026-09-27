@@ -259,6 +259,25 @@ console.log("Motion (homepage)");
   await mp.waitForTimeout(1600);
   const back = await mark.boundingBox();
   check(Math.abs(back.x - home.x) < 2 && Math.abs(back.y - home.y) < 2, `blob springs back on release (off by ${Math.round(back.x - home.x)}, ${Math.round(back.y - home.y)})`);
+  // The showreel is straight, and grows in place while the page scrolls until it covers ~70% of the window.
+  const reel = mp.getByRole("button", { name: "Open the showreel" });
+  const tilt = await reel.evaluate((el) => getComputedStyle(el).transform);
+  const sizes = [];
+  for (const y of [300, 900, 1200, 1500, 1800]) {
+    await mp.evaluate((y) => window.scrollTo(0, y), y);
+    await mp.waitForTimeout(600);
+    const r = await reel.boundingBox();
+    sizes.push({ y, cover: (r.width * r.height) / (1440 * 900), centre: r.y + r.height / 2 });
+  }
+  const pinned = sizes.slice(1, 4);
+  check(tilt === "none", `showreel card is straight (${tilt})`);
+  check(
+    sizes[0].cover < 0.3 && pinned.every((s, i) => i === 0 || s.cover > pinned[i - 1].cover) && pinned.every((s) => Math.abs(s.centre - 450) < 4),
+    `showreel grows while held in the middle (${pinned.map((s) => Math.round(s.cover * 100) + "%").join(" → ")})`,
+  );
+  check(Math.abs(sizes[4].cover - 0.7) < 0.03 && sizes[4].centre < 450, `showreel reaches ~70% of the window, then the page scrolls on (${Math.round(sizes[4].cover * 100)}%)`);
+  await mp.evaluate(() => window.scrollTo(0, 0));
+  await mp.waitForTimeout(400);
   // Sections below the fold start hidden and reveal when scrolled to.
   const people = mp.locator("#ch5 h2");
   const before = await people.evaluate((el) => getComputedStyle(el.closest("[data-reveal]")).opacity);

@@ -17,7 +17,7 @@ const subscribe = (cb: () => void) => {
  * and the page without JavaScript, shows the static design), then true unless the visitor asks
  * for reduced motion.
  */
-function useScrollMotionAllowed() {
+export function useScrollMotionAllowed() {
   return useSyncExternalStore(subscribe, () => !window.matchMedia(QUERY).matches, () => false);
 }
 
