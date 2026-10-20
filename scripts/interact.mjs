@@ -91,13 +91,21 @@ const hoverWhenStill = async (loc) => {
   });
   await loc.hover();
 };
-// Hover a brand tag until its card is open: images loading higher up the page can still shift the layout and
+// Hover a brand tag until its own card is open: images loading higher up the page can still shift the layout and
 // slide the tag out from under the pointer, which (correctly) closes the card. Up to three tries.
+// Left where an earlier step put it, the pointer can sit on another brand once the page scrolls to the cloud, and
+// that brand's card is open. Hovering this tag then starts its card fading in as the other fades out, and the other
+// still reads opacity 1 for a moment, so wait for this tag's own card. Park the pointer off the cloud first, too:
+// the other card can cover this tag, and the hover then retries while it comes and goes.
 const hoverOpensCard = async (loc) => {
+  const pg = loc.page();
+  const card = await loc.getAttribute("aria-controls");
+  await pg.mouse.move(5, 5);
+  await pg.waitForFunction(() => !document.querySelector('[data-brand] [aria-expanded="true"]'), null, { timeout: 1500 }).catch(() => {});
   for (let i = 0; i < 3; i++) {
     await hoverWhenStill(loc);
-    const opened = await page
-      .waitForFunction(() => [...document.querySelectorAll("[id^='brand-card-']")].some((c) => getComputedStyle(c).opacity === "1"), null, { timeout: 1500 })
+    const opened = await pg
+      .waitForFunction((id) => getComputedStyle(document.getElementById(id)).opacity === "1", card, { timeout: 1500 })
       .then(() => true, () => false);
     if (opened) return;
   }
@@ -912,8 +920,7 @@ console.log("Motion (other pages)");
   await studioClients.scrollIntoViewIfNeeded();
   await sp.waitForTimeout(1200);
   check((await studioClients.getByText("Films made for").count()) === 1 && (await studioClients.locator("[data-brand]").count()) >= 20, "Studio uses the shared brand cloud");
-  await hoverWhenStill(studioClients.getByRole("button", { name: "McDonald’s", exact: true }));
-  await sp.waitForFunction(() => [...document.querySelectorAll("[id^='brand-card-']")].some((c) => getComputedStyle(c).opacity === "1"), null, { timeout: 3000 }).catch(() => {});
+  await hoverOpensCard(studioClients.getByRole("button", { name: "McDonald’s", exact: true }));
   const studioCard = await studioClients.getByRole("link", { name: /Watch .*McWings.* on YouTube/ }).evaluate((a) => ({
     op: getComputedStyle(a.closest("[id^='brand-card-']")).opacity,
     href: a.getAttribute("href"),
